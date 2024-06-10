@@ -14,25 +14,31 @@ import { useSearchParams } from 'next/navigation';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/shared/ui/input-otp';
 import { VerifyAccount, VerifyAccountSchema } from '../model/verify.schema';
 import { useMutation } from '@apollo/client';
-import { VERIFY_ACCOUNT } from '../graphql/verify.mutation';
 import FormError from '@/shared/ui/form-error';
+import { VerifyAccountDocument } from '@/graphql/generated/graphql';
 
 export function VerifyAccountForm() {
   const queryparams = useSearchParams();
   const email = queryparams.get('email') || '';
+
   const form = useForm<VerifyAccount>({
     resolver: zodResolver(VerifyAccountSchema),
     defaultValues: {
       code: '',
     },
   });
-  const [verify, { loading }] = useMutation(VERIFY_ACCOUNT);
+
+  const [verify, { loading }] = useMutation(VerifyAccountDocument, {
+    onCompleted: (data) => {
+      localStorage.setItem('access_token', data.verify_account.access_token);
+    },
+    onError: (error) => {
+      form.setError('root', { message: error?.message });
+    },
+  });
+
   function onSubmit(values: VerifyAccount) {
-    verify({ variables: { input: { code: values.code, email } } })
-      .then(({ data }) => {
-        localStorage.setItem('access_token', data.verify_account.access_token);
-      })
-      .catch((error) => form.setError('root', { message: error?.message }));
+    verify({ variables: { input: { code: values.code, email } } });
   }
 
   return (

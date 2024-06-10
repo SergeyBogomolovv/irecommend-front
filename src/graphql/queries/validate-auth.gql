@@ -1,0 +1,5 @@
+query Validate_auth($refreshToken: String) {
+  validate_auth(refreshToken: $refreshToken) {
+    authenticated
+  }
+}

@@ -14,8 +14,8 @@ import { Button } from '@nextui-org/button';
 import { Register, RegisterSchema } from '../model/register.schema';
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@apollo/client';
-import { REGISTER } from '../graphql/register.mutation';
 import FormError from '@/shared/ui/form-error';
+import { RegisterDocument } from '@/graphql/generated/graphql';
 
 export function RegisterForm() {
   const form = useForm<Register>({
@@ -29,7 +29,14 @@ export function RegisterForm() {
   });
   const router = useRouter();
 
-  const [register, { loading }] = useMutation(REGISTER);
+  const [register, { loading }] = useMutation(RegisterDocument, {
+    onCompleted: (data) => {
+      router.push(`/verify-account?email=${data.register.email}`);
+    },
+    onError: (error) => {
+      form.setError('root', { message: error?.message });
+    },
+  });
 
   function onSubmit(input: Register) {
     register({
@@ -40,11 +47,7 @@ export function RegisterForm() {
           password: input.password,
         },
       },
-    })
-      .then(() => {
-        router.push(`/verify-account?email=${input.email}`);
-      })
-      .catch((error) => form.setError('root', { message: error?.message }));
+    });
   }
 
   return (

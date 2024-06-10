@@ -12,9 +12,9 @@ import { useForm } from 'react-hook-form';
 import { Login, LoginSchema } from '../model/login-schema';
 import { Input } from '@nextui-org/input';
 import { useMutation } from '@apollo/client';
-import { LOGIN } from '../graphql/login.mutation';
 import FormError from '@/shared/ui/form-error';
 import { Button } from '@nextui-org/react';
+import { LoginDocument } from '@/graphql/generated/graphql';
 
 export function LoginForm() {
   const form = useForm<Login>({
@@ -25,19 +25,22 @@ export function LoginForm() {
     },
   });
 
-  const [login, { loading }] = useMutation(LOGIN);
+  const [login, { loading }] = useMutation(LoginDocument, {
+    onCompleted: (data) => {
+      localStorage.setItem('access_token', data?.login.access_token);
+    },
+    onError: (error) => {
+      form.setError('root', { message: error?.message });
+    },
+  });
 
   function onSubmit(input: Login) {
-    login({ variables: { input } })
-      .then(({ data }) => {
-        localStorage.setItem('access_token', data.login.access_token);
-      })
-      .catch((error) => form.setError('root', { message: error?.message }));
+    login({ variables: { input } });
   }
 
   return (
     <FormWrapper
-      header="Рады видеть вас снова!"
+      header="Амина, рады видеть вас снова!"
       description="Войдите в аккаунт, чтобы продолжить пользоваться IRecommend"
       footer="Еще не зарегистрированы?"
       footerHref="/register"

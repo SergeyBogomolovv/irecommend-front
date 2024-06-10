@@ -1,0 +1,5 @@
+mutation VerifyAccount($input: VerifyAccountInput!) {
+  verify_account(verifyAccountInput: $input) {
+    access_token
+  }
+}
