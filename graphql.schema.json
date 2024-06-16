@@ -1118,14 +1118,14 @@
             "description": null,
             "args": [
               {
-                "name": "passwordResetRequestInput",
+                "name": "email",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
                   "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "PasswordResetRequestInput",
+                    "kind": "SCALAR",
+                    "name": "String",
                     "ofType": null
                   }
                 },
@@ -1451,33 +1451,6 @@
           },
           {
             "name": "newPassword",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "PasswordResetRequestInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "email",
             "description": null,
             "type": {
               "kind": "NON_NULL",

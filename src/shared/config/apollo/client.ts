@@ -23,42 +23,47 @@ export const uploadLink = createUploadLink({
 });
 
 const getNewToken = async () => {
-  return client
-    .query({ query: RefreshDocument })
-    .then(({ data }) => data.refresh.access_token)
-    .catch(() => {});
+  try {
+    const { data } = await client.query({ query: RefreshDocument });
+    if (data.refresh.access_token)
+      localStorage.setItem('access_token', data.refresh.access_token);
+    return data.refresh.access_token;
+  } catch (error) {
+    return null;
+  }
 };
 
 const errorLink = onError(({ graphQLErrors, operation, forward }) => {
   if (graphQLErrors) {
     for (const err of graphQLErrors) {
       if (err.extensions.code === 'UNAUTHENTICATED') {
-        if (operation.getContext().isRetry) {
-          return;
-        }
-        operation.setContext({ isRetry: true });
-        return fromPromise(getNewToken())
-          .filter(Boolean)
-          .flatMap((access_token) => {
-            const oldHeaders = operation.getContext().headers;
-            if (access_token) {
-              localStorage.setItem('access_token', access_token);
+        return fromPromise(
+          getNewToken().then((newToken) => {
+            if (newToken) {
+              operation.setContext(({ headers = {} }) => ({
+                headers: {
+                  ...headers,
+                  authorization: `Bearer ${newToken}`,
+                  isRetry: true,
+                },
+              }));
+              return forward(operation);
+            } else {
+              return;
             }
-            operation.setContext({
-              headers: {
-                ...oldHeaders,
-                authorization: `Bearer ${access_token}`,
-              },
-            });
-            return forward(operation);
-          });
+          }),
+        ).flatMap(() => {
+          return forward(operation);
+        });
       }
     }
+  } else {
+    return;
   }
 });
 
 const client = new ApolloClient({
-  link: from([authLink, errorLink, uploadLink]),
+  link: from([errorLink, authLink, uploadLink]),
   cache: new InMemoryCache(),
   ssrMode: typeof window === 'undefined',
 });

@@ -13,9 +13,8 @@ import { Button } from '@nextui-org/button';
 import { useSearchParams } from 'next/navigation';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/shared/ui/input-otp';
 import { VerifyAccount, VerifyAccountSchema } from '../model/verify.schema';
-import { useMutation } from '@apollo/client';
 import FormError from '@/shared/ui/form-error';
-import { VerifyAccountDocument } from '@/graphql/generated/graphql';
+import { useVerify } from '../api/use-verify';
 
 export function VerifyAccountForm() {
   const queryparams = useSearchParams();
@@ -25,20 +24,13 @@ export function VerifyAccountForm() {
     resolver: zodResolver(VerifyAccountSchema),
     defaultValues: {
       code: '',
+      email,
     },
   });
 
-  const [verify, { loading }] = useMutation(VerifyAccountDocument, {
-    onCompleted: (data) => {
-      localStorage.setItem('access_token', data.verify_account.access_token);
-    },
-    onError: (error) => {
-      form.setError('root', { message: error?.message });
-    },
-  });
-
-  function onSubmit(values: VerifyAccount) {
-    verify({ variables: { input: { code: values.code, email } } });
+  const [verify, { loading }] = useVerify(form);
+  function onSubmit(input: VerifyAccount) {
+    verify({ variables: { input } });
   }
 
   return (

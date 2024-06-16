@@ -11,10 +11,10 @@ import FormWrapper from '@/shared/ui/forw-wrapper';
 import { useForm } from 'react-hook-form';
 import { Login, LoginSchema } from '../model/login-schema';
 import { Input } from '@nextui-org/input';
-import { useMutation } from '@apollo/client';
 import FormError from '@/shared/ui/form-error';
-import { Button } from '@nextui-org/react';
-import { LoginDocument } from '@/graphql/generated/graphql';
+import { Button, Link } from '@nextui-org/react';
+
+import { useLogin } from '../api/use-login';
 
 export function LoginForm() {
   const form = useForm<Login>({
@@ -25,14 +25,7 @@ export function LoginForm() {
     },
   });
 
-  const [login, { loading }] = useMutation(LoginDocument, {
-    onCompleted: (data) => {
-      localStorage.setItem('access_token', data?.login.access_token);
-    },
-    onError: (error) => {
-      form.setError('root', { message: error?.message });
-    },
-  });
+  const [login, { loading }] = useLogin(form);
 
   function onSubmit(input: Login) {
     login({ variables: { input } });
@@ -40,7 +33,7 @@ export function LoginForm() {
 
   return (
     <FormWrapper
-      header="Амина, рады видеть вас снова!"
+      header="Приветствуем, рады видеть вас снова!"
       description="Войдите в аккаунт, чтобы продолжить пользоваться IRecommend"
       footer="Еще не зарегистрированы?"
       footerHref="/register"
@@ -59,11 +52,12 @@ export function LoginForm() {
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="password"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="flex flex-col items-end">
                 <FormControl>
                   <Input label="Введите пароль" {...field} type="password" />
                 </FormControl>
@@ -80,6 +74,17 @@ export function LoginForm() {
             type="submit"
           >
             Вход
+          </Button>
+          <Button
+            href="/reset-password/request"
+            isDisabled={loading}
+            as={Link}
+            className="w-full"
+            color="danger"
+            size="sm"
+            type="button"
+          >
+            Забыли пароль?
           </Button>
         </form>
       </Form>

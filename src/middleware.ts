@@ -3,19 +3,21 @@ import { Validate_AuthDocument } from './graphql/generated/graphql';
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 
 const authRoutes = ['/login', '/register', '/verify-account'];
-const httpLink = new HttpLink({
-  uri: `${process.env.NEXT_PUBLIC_SERVER_URL}/graphql`,
-  credentials: 'include',
-});
+const privateRoutes = ['/profile'];
 
 const client = new ApolloClient({
-  link: httpLink,
+  link: new HttpLink({
+    uri: `${process.env.NEXT_PUBLIC_SERVER_URL}/graphql`,
+    credentials: 'include',
+  }),
   cache: new InMemoryCache(),
 });
 
 export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isOnAuthRoute = authRoutes.includes(pathname);
+  const isOnPrivateRoute = privateRoutes.includes(pathname);
+  if (!isOnAuthRoute && !isOnPrivateRoute) return;
   const refreshToken = request.cookies.get('refresh_token')?.value;
   const { authenticated } = (
     await client.query({
@@ -27,7 +29,7 @@ export default async function middleware(request: NextRequest) {
   if (isOnAuthRoute && authenticated) {
     return NextResponse.redirect(new URL('/', request.nextUrl));
   }
-  if (!isOnAuthRoute && !authenticated) {
+  if (isOnPrivateRoute && !authenticated) {
     return NextResponse.redirect(new URL('/login', request.nextUrl));
   }
 

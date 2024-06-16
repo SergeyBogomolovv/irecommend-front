@@ -12,10 +12,8 @@ import { useForm } from 'react-hook-form';
 import { Input } from '@nextui-org/input';
 import { Button } from '@nextui-org/button';
 import { Register, RegisterSchema } from '../model/register.schema';
-import { useRouter } from 'next/navigation';
-import { useMutation } from '@apollo/client';
 import FormError from '@/shared/ui/form-error';
-import { RegisterDocument } from '@/graphql/generated/graphql';
+import { useRegister } from '../api/use-register';
 
 export function RegisterForm() {
   const form = useForm<Register>({
@@ -27,16 +25,8 @@ export function RegisterForm() {
       passwordRepeat: '',
     },
   });
-  const router = useRouter();
 
-  const [register, { loading }] = useMutation(RegisterDocument, {
-    onCompleted: (data) => {
-      router.push(`/verify-account?email=${data.register.email}`);
-    },
-    onError: (error) => {
-      form.setError('root', { message: error?.message });
-    },
-  });
+  const [register, { loading }] = useRegister(form);
 
   function onSubmit(input: Register) {
     register({

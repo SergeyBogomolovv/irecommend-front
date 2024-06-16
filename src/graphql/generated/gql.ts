@@ -15,6 +15,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 const documents = {
     "mutation Login($input: LoginInput!) {\n  login(loginInput: $input) {\n    access_token\n  }\n}": types.LoginDocument,
     "mutation Logout {\n  logout {\n    message\n  }\n}": types.LogoutDocument,
+    "mutation Password_reset_request($email: String!) {\n  password_reset_request(email: $email) {\n    message\n    email\n  }\n}": types.Password_Reset_RequestDocument,
+    "mutation Password_reset($passwordResetInput: PasswordResetInput!) {\n  password_reset(passwordResetInput: $passwordResetInput) {\n    message\n  }\n}": types.Password_ResetDocument,
     "query Refresh {\n  refresh {\n    access_token\n  }\n}": types.RefreshDocument,
     "mutation Register($input: RegisterInput!) {\n  register(registerInput: $input) {\n    message\n    email\n  }\n}": types.RegisterDocument,
     "query Validate_auth($refreshToken: String) {\n  validate_auth(refreshToken: $refreshToken) {\n    authenticated\n  }\n}": types.Validate_AuthDocument,
@@ -44,6 +46,14 @@ export function graphql(source: "mutation Login($input: LoginInput!) {\n  login(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "mutation Logout {\n  logout {\n    message\n  }\n}"): (typeof documents)["mutation Logout {\n  logout {\n    message\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation Password_reset_request($email: String!) {\n  password_reset_request(email: $email) {\n    message\n    email\n  }\n}"): (typeof documents)["mutation Password_reset_request($email: String!) {\n  password_reset_request(email: $email) {\n    message\n    email\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation Password_reset($passwordResetInput: PasswordResetInput!) {\n  password_reset(passwordResetInput: $passwordResetInput) {\n    message\n  }\n}"): (typeof documents)["mutation Password_reset($passwordResetInput: PasswordResetInput!) {\n  password_reset(passwordResetInput: $passwordResetInput) {\n    message\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -11,10 +11,13 @@ import {
   Image,
   Skeleton,
   Button,
+  Link,
 } from '@nextui-org/react';
 
 export default function Home() {
-  const { data, loading, error } = useQuery(ViewerDocument);
+  const { data, loading, error } = useQuery(ViewerDocument, {
+    errorPolicy: 'all',
+  });
   const [logout] = useMutation(LogoutDocument, {
     onCompleted: () => {
       localStorage.removeItem('access_token');
@@ -58,6 +61,7 @@ export default function Home() {
           </CardBody>
           <Divider />
           <CardFooter>
+            <Link href="/profile">Профиль</Link>
             <Button onClick={logout}>Выход</Button>
           </CardFooter>
         </Card>
