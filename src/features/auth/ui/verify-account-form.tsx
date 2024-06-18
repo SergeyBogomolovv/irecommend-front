@@ -6,42 +6,24 @@ import {
   FormItem,
   FormMessage,
 } from '@/shared/ui/form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import FormWrapper from '@/shared/ui/forw-wrapper';
-import { useForm } from 'react-hook-form';
 import { Button } from '@nextui-org/button';
-import { useSearchParams } from 'next/navigation';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/shared/ui/input-otp';
-import { VerifyAccount, VerifyAccountSchema } from '../model/verify.schema';
 import FormError from '@/shared/ui/form-error';
-import { useVerify } from '../api/use-verify';
+import { useVerifyAccountForm } from '../model/use-verify-account-form';
+import { registerRoute } from '@/shared/constants/routes';
 
 export function VerifyAccountForm() {
-  const queryparams = useSearchParams();
-  const email = queryparams.get('email') || '';
-
-  const form = useForm<VerifyAccount>({
-    resolver: zodResolver(VerifyAccountSchema),
-    defaultValues: {
-      code: '',
-      email,
-    },
-  });
-
-  const [verify, { loading }] = useVerify(form);
-  function onSubmit(input: VerifyAccount) {
-    verify({ variables: { input } });
-  }
-
+  const { form, loading, handleSubmit } = useVerifyAccountForm();
   return (
     <FormWrapper
       header="Подтвердите ваш аккаунт"
       description="Проверьте вашу почту, на нее должен был прийти код подтверждения"
       footer="Назад к регистрации"
-      footerHref="/register"
+      footerHref={registerRoute}
     >
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <FormField
             control={form.control}
             name="code"

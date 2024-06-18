@@ -6,39 +6,14 @@ import {
   FormItem,
   FormMessage,
 } from '@/shared/ui/form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import FormWrapper from '@/shared/ui/forw-wrapper';
-import { useForm } from 'react-hook-form';
 import { Input } from '@nextui-org/input';
 import { Button } from '@nextui-org/button';
-import { Register, RegisterSchema } from '../model/register.schema';
 import FormError from '@/shared/ui/form-error';
-import { useRegister } from '../api/use-register';
+import { useRegisterForm } from '../model/use-register-form';
 
 export function RegisterForm() {
-  const form = useForm<Register>({
-    resolver: zodResolver(RegisterSchema),
-    defaultValues: {
-      name: '',
-      email: '',
-      password: '',
-      passwordRepeat: '',
-    },
-  });
-
-  const [register, { loading }] = useRegister(form);
-
-  function onSubmit(input: Register) {
-    register({
-      variables: {
-        input: {
-          email: input.email,
-          name: input.name,
-          password: input.password,
-        },
-      },
-    });
-  }
+  const { form, handleSubmit, loading } = useRegisterForm();
 
   return (
     <FormWrapper
@@ -48,7 +23,7 @@ export function RegisterForm() {
       footerHref="/login"
     >
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <FormField
             control={form.control}
             name="name"

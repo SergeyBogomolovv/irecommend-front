@@ -1,5 +1,8 @@
 'use client';
-import { LogoutDocument, ViewerDocument } from '@/graphql/generated/graphql';
+import {
+  LogoutDocument,
+  ViewerDocument,
+} from '@/shared/graphql/generated/graphql';
 import { useMutation } from '@apollo/client';
 import client from '../config/apollo/client';
 

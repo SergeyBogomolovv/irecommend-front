@@ -4,7 +4,7 @@ import { Divider } from '@nextui-org/divider';
 import ViewerInfo from '../ui/viewer-info';
 import Logo from '../ui/logo';
 import { Search } from '@/features/search';
-import { CreateRecommendation } from '@/features/create-recommendation';
+import { CreateRecommendation } from '@/features/recommendation/create-recommendation';
 
 export function Header() {
   return (

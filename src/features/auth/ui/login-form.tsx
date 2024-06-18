@@ -6,40 +6,25 @@ import {
   FormItem,
   FormMessage,
 } from '@/shared/ui/form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import FormWrapper from '@/shared/ui/forw-wrapper';
-import { useForm } from 'react-hook-form';
-import { Login, LoginSchema } from '../model/login-schema';
 import { Input } from '@nextui-org/input';
 import FormError from '@/shared/ui/form-error';
 import { Button, Link } from '@nextui-org/react';
-
-import { useLogin } from '../api/use-login';
+import { useLoginForm } from '../model/use-login-form';
+import { registerRoute } from '@/shared/constants/routes';
 
 export function LoginForm() {
-  const form = useForm<Login>({
-    resolver: zodResolver(LoginSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-  });
-
-  const [login, { loading }] = useLogin(form);
-
-  function onSubmit(input: Login) {
-    login({ variables: { input } });
-  }
+  const { loading, form, handleSubmit } = useLoginForm();
 
   return (
     <FormWrapper
       header="Приветствуем, рады видеть вас снова!"
       description="Войдите в аккаунт, чтобы продолжить пользоваться IRecommend"
       footer="Еще не зарегистрированы?"
-      footerHref="/register"
+      footerHref={registerRoute}
     >
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <FormField
             control={form.control}
             name="email"

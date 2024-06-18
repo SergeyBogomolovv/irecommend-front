@@ -1,6 +1,10 @@
 'use client';
 
-import { LogoutDocument, ViewerDocument } from '@/graphql/generated/graphql';
+import { accessTokenKey } from '@/shared/constants/tokens';
+import {
+  LogoutDocument,
+  ViewerDocument,
+} from '@/shared/graphql/generated/graphql';
 import { useMutation, useQuery } from '@apollo/client';
 import {
   Card,
@@ -20,7 +24,7 @@ export default function Home() {
   });
   const [logout] = useMutation(LogoutDocument, {
     onCompleted: () => {
-      localStorage.removeItem('access_token');
+      localStorage.removeItem(accessTokenKey);
     },
   });
 

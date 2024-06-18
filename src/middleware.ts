@@ -1,9 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Validate_AuthDocument } from './graphql/generated/graphql';
+import { Validate_AuthDocument } from './shared/graphql/generated/graphql';
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import {
+  loginRoute,
+  profileRoute,
+  registerRoute,
+  resetPasswordRequestRoute,
+  resetPasswordRoute,
+  verifyAccountRoute,
+} from './shared/constants/routes';
+import { refreshTokenKey } from './shared/constants/tokens';
 
-const authRoutes = ['/login', '/register', '/verify-account'];
-const privateRoutes = ['/profile'];
+const authRoutes = [
+  loginRoute,
+  registerRoute,
+  verifyAccountRoute,
+  resetPasswordRequestRoute,
+  resetPasswordRoute,
+];
+
+const privateRoutes = [profileRoute];
 
 const client = new ApolloClient({
   link: new HttpLink({
@@ -18,7 +34,7 @@ export default async function middleware(request: NextRequest) {
   const isOnAuthRoute = authRoutes.includes(pathname);
   const isOnPrivateRoute = privateRoutes.includes(pathname);
   if (!isOnAuthRoute && !isOnPrivateRoute) return;
-  const refreshToken = request.cookies.get('refresh_token')?.value;
+  const refreshToken = request.cookies.get(refreshTokenKey)?.value;
   const { authenticated } = (
     await client.query({
       query: Validate_AuthDocument,
@@ -30,7 +46,7 @@ export default async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.nextUrl));
   }
   if (isOnPrivateRoute && !authenticated) {
-    return NextResponse.redirect(new URL('/login', request.nextUrl));
+    return NextResponse.redirect(new URL(loginRoute, request.nextUrl));
   }
 
   return;

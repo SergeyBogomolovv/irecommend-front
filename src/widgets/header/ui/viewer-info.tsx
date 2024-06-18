@@ -1,7 +1,7 @@
 'use client';
 import { ViewerButton } from '@/features/viewer-button';
 import { Button, Link, NavbarItem } from '@nextui-org/react';
-import { ViewerDocument } from '@/graphql/generated/graphql';
+import { ViewerDocument } from '@/shared/graphql/generated/graphql';
 import { useQuery } from '@apollo/client';
 
 export default function ViewerInfo() {

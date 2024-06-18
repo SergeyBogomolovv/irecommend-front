@@ -1,5 +1,5 @@
 'use client';
-import { ViewerDocument } from '@/graphql/generated/graphql';
+import { ViewerDocument } from '@/shared/graphql/generated/graphql';
 import { useQuery } from '@apollo/client';
 
 export const useAuth = () => {

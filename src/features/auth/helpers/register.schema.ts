@@ -13,7 +13,7 @@ export const RegisterSchema = z
   })
   .refine((data) => data.password === data.passwordRepeat, {
     message: 'Пароли не совпадают',
-    path: ['passwordRepeat', 'password'],
+    path: ['root'],
   });
 
 export type Register = z.infer<typeof RegisterSchema>;
