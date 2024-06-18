@@ -1,5 +1,4 @@
 'use client';
-import { useLogout } from '@/shared/hooks/use-logout';
 import {
   Dropdown,
   DropdownTrigger,
@@ -13,6 +12,7 @@ import { FaUsers } from 'react-icons/fa';
 import { MdOutlineRecommend } from 'react-icons/md';
 import { IoIosSettings } from 'react-icons/io';
 import { IoLogOut } from 'react-icons/io5';
+import { useLogout } from '@/features/auth';
 
 interface Props {
   name?: string;
@@ -21,7 +21,7 @@ interface Props {
 }
 
 export function ViewerButton({ description, avatarProps, name }: Props) {
-  const [logout] = useLogout();
+  const { logout } = useLogout();
   return (
     <Dropdown placement="bottom-end">
       <DropdownTrigger>
@@ -62,11 +62,12 @@ export function ViewerButton({ description, avatarProps, name }: Props) {
         >
           Настройки
         </DropdownItem>
+
         <DropdownItem
           endContent={<IoLogOut className="size-5" />}
-          onAction={logout}
           key="logout"
           color="danger"
+          onClick={logout}
         >
           Выход
         </DropdownItem>

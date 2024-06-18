@@ -1,17 +1,14 @@
 'use client';
-
-import { ThemeProviderProps } from 'next-themes/dist/types';
 import { UIProvider } from './ui-provider';
 import { ApolloProvider } from './apollo-provider';
 
 export interface ProvidersProps {
   children: React.ReactNode;
-  themeProps?: ThemeProviderProps;
 }
 
-export function Providers({ children, themeProps }: ProvidersProps) {
+export function Providers({ children }: ProvidersProps) {
   return (
-    <UIProvider themeProps={themeProps}>
+    <UIProvider>
       <ApolloProvider>{children}</ApolloProvider>
     </UIProvider>
   );
