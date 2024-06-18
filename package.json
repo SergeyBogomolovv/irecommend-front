@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
     "@apollo/client": "^3.10.4",
@@ -29,11 +30,15 @@
     "react-dom": "^18",
     "react-hook-form": "^7.51.5",
     "react-icons": "^5.2.1",
+    "sonner": "^1.5.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "5.0.2",
+    "@graphql-codegen/client-preset": "4.2.6",
+    "@graphql-codegen/introspection": "4.0.3",
     "@types/apollo-upload-client": "^18.0.0",
     "@types/node": "^20",
     "@types/react": "^18",

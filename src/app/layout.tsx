@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Providers } from './_providers';
-import Header from '@/widgets/header/ui/header';
+import { Header } from '@/widgets/header';
+import { Toaster } from '@/shared/ui/sonner';
 
 export const metadata: Metadata = {
   title: 'IRecommend',
@@ -20,6 +21,7 @@ export default function RootLayout({
             <Header />
             {children}
           </main>
+          <Toaster />
         </Providers>
       </body>
     </html>

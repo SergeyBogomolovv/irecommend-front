@@ -1,9 +1,8 @@
-import { ApolloClient, InMemoryCache, from } from '@apollo/client';
-import { gql } from '@apollo/client';
+import { ApolloClient, InMemoryCache, from, fromPromise } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
-import { fromPromise } from '@apollo/client';
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs';
 import { setContext } from '@apollo/client/link/context';
+import { RefreshDocument } from '@/graphql/generated/graphql';
 
 export const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('access_token');
@@ -23,41 +22,48 @@ export const uploadLink = createUploadLink({
   credentials: 'include',
 });
 
-const REFRESH = gql`
-  query Refresh {
-    refresh {
-      access_token
-    }
+const getNewToken = async () => {
+  try {
+    const { data } = await client.query({ query: RefreshDocument });
+    if (data.refresh.access_token)
+      localStorage.setItem('access_token', data.refresh.access_token);
+    return data.refresh.access_token;
+  } catch (error) {
+    return null;
   }
-`;
+};
 
-export const refreshLink = onError(({ graphQLErrors, forward, operation }) => {
+const errorLink = onError(({ graphQLErrors, operation, forward }) => {
   if (graphQLErrors) {
     for (const err of graphQLErrors) {
       if (err.extensions.code === 'UNAUTHENTICATED') {
         return fromPromise(
-          client
-            .query({ query: REFRESH })
-            .then(({ data }) => {
-              localStorage.setItem('access_token', data.refresh.access_token);
-              return data.refresh.access_token;
-            })
-            .catch(() => {
-              localStorage.removeItem('access_token');
+          getNewToken().then((newToken) => {
+            if (newToken) {
+              operation.setContext(({ headers = {} }) => ({
+                headers: {
+                  ...headers,
+                  authorization: `Bearer ${newToken}`,
+                  isRetry: true,
+                },
+              }));
+              return forward(operation);
+            } else {
               return;
-            }),
-        )
-          .filter(Boolean)
-          .flatMap(() => {
-            return forward(operation);
-          });
+            }
+          }),
+        ).flatMap(() => {
+          return forward(operation);
+        });
       }
     }
+  } else {
+    return;
   }
 });
 
 const client = new ApolloClient({
-  link: from([authLink, refreshLink, uploadLink]),
+  link: from([errorLink, authLink, uploadLink]),
   cache: new InMemoryCache(),
   ssrMode: typeof window === 'undefined',
 });
