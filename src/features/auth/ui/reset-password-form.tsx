@@ -75,7 +75,7 @@ export function ResetPasswordForm() {
           />
           <FormError message={form.formState.errors.root?.message} />
           <Button
-            isDisabled={loading}
+            isLoading={loading}
             className="w-full"
             color="primary"
             size="lg"

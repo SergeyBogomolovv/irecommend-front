@@ -52,7 +52,7 @@ export function LoginForm() {
           />
           <FormError message={form.formState.errors.root?.message} />
           <Button
-            isDisabled={loading}
+            isLoading={loading}
             className="w-full"
             color="primary"
             size="lg"
@@ -62,7 +62,7 @@ export function LoginForm() {
           </Button>
           <Button
             href="/reset-password/request"
-            isDisabled={loading}
+            isLoading={loading}
             as={Link}
             className="w-full"
             color="danger"

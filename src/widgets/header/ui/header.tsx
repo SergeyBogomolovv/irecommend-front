@@ -1,27 +1,39 @@
-import { Navbar, NavbarContent, NavbarItem } from '@nextui-org/react';
-import { ThemeSwitch } from '@/features/theme-switch/ui/theme-switch';
-import { Divider } from '@nextui-org/divider';
+import {
+  Navbar,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenuToggle,
+} from '@nextui-org/react';
 import Logo from './logo';
-import { Search } from '@/features/search';
 import { Account } from './account';
+import { Search, ThemeSwitch } from '@/features/navbar';
+import MobileList from './mobile-list';
 
 export function Header() {
   return (
-    <>
-      <Navbar>
-        <NavbarContent justify="start">
+    <Navbar isBordered position="static">
+      <NavbarContent justify="start">
+        <NavbarItem>
           <Logo />
-          <NavbarItem>
-            <Search />
-          </NavbarItem>
-        </NavbarContent>
+        </NavbarItem>
+      </NavbarContent>
 
-        <NavbarContent justify="end">
+      <NavbarContent justify="end" className="sm:flex hidden">
+        <NavbarItem>
+          <Search />
+        </NavbarItem>
+      </NavbarContent>
+
+      <NavbarContent justify="end">
+        <NavbarItem>
           <ThemeSwitch />
-          <Account />
-        </NavbarContent>
-      </Navbar>
-      <Divider />
-    </>
+        </NavbarItem>
+        <Account />
+      </NavbarContent>
+
+      <MobileList />
+
+      <NavbarMenuToggle className="sm:hidden" />
+    </Navbar>
   );
 }
