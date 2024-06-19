@@ -5,6 +5,7 @@ query Viewer {
     verified
     profile {
       name
+      about
       logo
     }
   }

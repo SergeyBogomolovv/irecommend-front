@@ -4,7 +4,6 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-  AvatarProps,
   User,
 } from '@nextui-org/react';
 import { FaUserCircle } from 'react-icons/fa';
@@ -13,31 +12,37 @@ import { MdOutlineRecommend } from 'react-icons/md';
 import { IoIosSettings } from 'react-icons/io';
 import { IoLogOut } from 'react-icons/io5';
 import { useLogout } from '@/features/auth';
+import { profileRoute } from '@/shared/constants/routes';
+import { useViewer } from '@/entities/viewer';
+import { UserSkeleton } from '@/entities/user';
 
-interface Props {
-  name?: string;
-  description?: string | null;
-  avatarProps: AvatarProps;
-}
-
-export function ViewerButton({ description, avatarProps, name }: Props) {
+export function ViewerButton() {
   const { logout } = useLogout();
+  const { viewer, loading } = useViewer();
+
   return (
     <Dropdown placement="bottom-end">
-      <DropdownTrigger>
-        <User
-          as="button"
-          className="transition-transform"
-          name={name}
-          description={description}
-          avatarProps={avatarProps}
-        />
+      <DropdownTrigger disabled={loading}>
+        {loading ? (
+          <UserSkeleton />
+        ) : (
+          <User
+            as="button"
+            className="transition-transform"
+            name={viewer?.profile?.name}
+            description={viewer?.email}
+            avatarProps={{
+              src: viewer?.profile?.logo || '',
+              name: viewer?.profile?.name?.toLocaleUpperCase(),
+            }}
+          />
+        )}
       </DropdownTrigger>
       <DropdownMenu aria-label="Профиль" variant="flat">
         <DropdownItem
           endContent={<FaUserCircle className="size-5" />}
           key="profile"
-          href={'/profile'}
+          href={profileRoute}
         >
           Профиль
         </DropdownItem>
@@ -67,7 +72,7 @@ export function ViewerButton({ description, avatarProps, name }: Props) {
           endContent={<IoLogOut className="size-5" />}
           key="logout"
           color="danger"
-          onClick={logout}
+          onClick={() => logout()}
         >
           Выход
         </DropdownItem>

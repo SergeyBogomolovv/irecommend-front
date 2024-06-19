@@ -19,9 +19,8 @@ const documents = {
     "mutation Password_reset($passwordResetInput: PasswordResetInput!) {\n  password_reset(passwordResetInput: $passwordResetInput) {\n    message\n  }\n}": types.Password_ResetDocument,
     "query Refresh {\n  refresh {\n    access_token\n  }\n}": types.RefreshDocument,
     "mutation Register($input: RegisterInput!) {\n  register(registerInput: $input) {\n    message\n    email\n  }\n}": types.RegisterDocument,
-    "query Validate_auth($refreshToken: String) {\n  validate_auth(refreshToken: $refreshToken) {\n    authenticated\n  }\n}": types.Validate_AuthDocument,
     "mutation VerifyAccount($input: VerifyAccountInput!) {\n  verify_account(verifyAccountInput: $input) {\n    access_token\n  }\n}": types.VerifyAccountDocument,
-    "query Viewer {\n  profile {\n    id\n    email\n    verified\n    profile {\n      name\n      logo\n    }\n  }\n}": types.ViewerDocument,
+    "query Viewer {\n  profile {\n    id\n    email\n    verified\n    profile {\n      name\n      about\n      logo\n    }\n  }\n}": types.ViewerDocument,
 };
 
 /**
@@ -65,15 +64,11 @@ export function graphql(source: "mutation Register($input: RegisterInput!) {\n  
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query Validate_auth($refreshToken: String) {\n  validate_auth(refreshToken: $refreshToken) {\n    authenticated\n  }\n}"): (typeof documents)["query Validate_auth($refreshToken: String) {\n  validate_auth(refreshToken: $refreshToken) {\n    authenticated\n  }\n}"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
 export function graphql(source: "mutation VerifyAccount($input: VerifyAccountInput!) {\n  verify_account(verifyAccountInput: $input) {\n    access_token\n  }\n}"): (typeof documents)["mutation VerifyAccount($input: VerifyAccountInput!) {\n  verify_account(verifyAccountInput: $input) {\n    access_token\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query Viewer {\n  profile {\n    id\n    email\n    verified\n    profile {\n      name\n      logo\n    }\n  }\n}"): (typeof documents)["query Viewer {\n  profile {\n    id\n    email\n    verified\n    profile {\n      name\n      logo\n    }\n  }\n}"];
+export function graphql(source: "query Viewer {\n  profile {\n    id\n    email\n    verified\n    profile {\n      name\n      about\n      logo\n    }\n  }\n}"): (typeof documents)["query Viewer {\n  profile {\n    id\n    email\n    verified\n    profile {\n      name\n      about\n      logo\n    }\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

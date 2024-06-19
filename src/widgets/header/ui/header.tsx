@@ -1,10 +1,9 @@
 import { Navbar, NavbarContent, NavbarItem } from '@nextui-org/react';
 import { ThemeSwitch } from '@/features/theme-switch/ui/theme-switch';
 import { Divider } from '@nextui-org/divider';
-import ViewerInfo from '../ui/viewer-info';
-import Logo from '../ui/logo';
+import Logo from './logo';
 import { Search } from '@/features/search';
-import { CreateRecommendation } from '@/features/recommendation/create-recommendation';
+import { Account } from './account';
 
 export function Header() {
   return (
@@ -12,20 +11,14 @@ export function Header() {
       <Navbar>
         <NavbarContent justify="start">
           <Logo />
-          <NavbarItem className="hidden sm:flex">
+          <NavbarItem>
             <Search />
           </NavbarItem>
         </NavbarContent>
 
         <NavbarContent justify="end">
-          <NavbarItem>
-            <CreateRecommendation />
-          </NavbarItem>
-          <NavbarItem>
-            <ThemeSwitch />
-          </NavbarItem>
-
-          <ViewerInfo />
+          <ThemeSwitch />
+          <Account />
         </NavbarContent>
       </Navbar>
       <Divider />

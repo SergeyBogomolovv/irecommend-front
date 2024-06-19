@@ -31,6 +31,7 @@ export function useVerifyAccountForm() {
     onError: (error) => {
       form.setError('root', { message: error?.message });
     },
+    refetchQueries: ['Viewer'],
   });
 
   return {

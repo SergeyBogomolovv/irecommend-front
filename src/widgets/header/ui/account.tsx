@@ -1,23 +1,15 @@
 'use client';
+import { useViewer } from '@/entities/viewer';
 import { ViewerButton } from '@/features/viewer-button';
 import { Button, Link, NavbarItem } from '@nextui-org/react';
-import { ViewerDocument } from '@/shared/graphql/generated/graphql';
-import { useQuery } from '@apollo/client';
 
-export default function ViewerInfo() {
-  const { data } = useQuery(ViewerDocument);
+export function Account() {
+  const { error } = useViewer();
 
   return (
     <>
-      {data ? (
-        <ViewerButton
-          name={data.profile?.profile?.name}
-          description={data?.profile.email}
-          avatarProps={{
-            src: data.profile?.profile?.logo,
-            name: data.profile?.profile?.name.toLocaleUpperCase(),
-          }}
-        />
+      {!error ? (
+        <ViewerButton />
       ) : (
         <>
           <NavbarItem className="hidden lg:flex">

@@ -37,29 +37,23 @@ const getNewToken = async () => {
 const errorLink = onError(({ graphQLErrors, operation, forward }) => {
   if (graphQLErrors) {
     for (const err of graphQLErrors) {
-      if (err.extensions.code === 'UNAUTHENTICATED') {
-        return fromPromise(
-          getNewToken().then((newToken) => {
-            if (newToken) {
-              operation.setContext(({ headers = {} }) => ({
+      switch (err.extensions.code) {
+        case 'UNAUTHENTICATED':
+          if (operation.operationName === 'Refresh') return;
+          return fromPromise(
+            getNewToken().then((token) => {
+              operation.setContext({
                 headers: {
-                  ...headers,
-                  authorization: `Bearer ${newToken}`,
-                  isRetry: true,
+                  ...operation.getContext().headers,
+                  authorization: `Bearer ${token}`,
                 },
-              }));
-              return forward(operation);
-            } else {
-              return;
-            }
-          }),
-        ).flatMap(() => {
-          return forward(operation);
-        });
+              });
+            }),
+          ).flatMap(() => {
+            return forward(operation);
+          });
       }
     }
-  } else {
-    return;
   }
 });
 

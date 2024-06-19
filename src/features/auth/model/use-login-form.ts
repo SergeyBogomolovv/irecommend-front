@@ -27,6 +27,7 @@ export function useLoginForm() {
     onError: (error) => {
       form.setError('root', { message: error?.message });
     },
+    refetchQueries: ['Viewer'],
   });
 
   return {

@@ -8,6 +8,7 @@ export const useLogout = () => {
     onCompleted: () => {
       localStorage.removeItem(accessTokenKey);
     },
+    refetchQueries: ['Viewer'],
   });
   return { loading, logout };
 };
