@@ -1,0 +1,5 @@
+mutation Create_comment($content: String!, $recommendationId: String!) {
+  create_comment(content: $content, recommendationId: $recommendationId) {
+    message
+  }
+}

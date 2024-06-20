@@ -1,3 +1,9 @@
+import { RecommendationsList } from '@/widgets/recommendations-list';
+
 export default function Home() {
-  return <main>Home</main>;
+  return (
+    <main>
+      <RecommendationsList />
+    </main>
+  );
 }

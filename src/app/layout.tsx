@@ -3,6 +3,8 @@ import './globals.css';
 import { Providers } from './_providers';
 import { Header } from '@/widgets/header';
 import { Toaster } from '@/shared/ui/sonner';
+import { Links } from '@/widgets/links';
+import { CreateRecommendationButton } from '@/features/create-recommendation-button';
 
 export const metadata: Metadata = {
   title: 'IRecommend',
@@ -19,6 +21,8 @@ export default function RootLayout({
         <Providers>
           <main className="flex flex-col min-h-screen">
             <Header />
+            <Links />
+            <CreateRecommendationButton />
             {children}
           </main>
           <Toaster />

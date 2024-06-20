@@ -245,7 +245,7 @@ export type Profile = {
 export type Query = {
   __typename?: 'Query';
   get_recommendation_by_id: Recommendation;
-  get_recommendations_by_type: Array<Recommendation>;
+  last_recommendations: Array<Recommendation>;
   one_user: User;
   profile: User;
   refresh: AccessTokenResponse;
@@ -259,8 +259,8 @@ export type QueryGet_Recommendation_By_IdArgs = {
 };
 
 
-export type QueryGet_Recommendations_By_TypeArgs = {
-  type: RecommendationType;
+export type QueryLast_RecommendationsArgs = {
+  type?: InputMaybe<RecommendationType>;
 };
 
 
@@ -345,6 +345,21 @@ export type VerifyResponse = {
   message: Scalars['String']['output'];
 };
 
+export type Create_CommentMutationVariables = Exact<{
+  content: Scalars['String']['input'];
+  recommendationId: Scalars['String']['input'];
+}>;
+
+
+export type Create_CommentMutation = { __typename?: 'Mutation', create_comment: { __typename?: 'MessageResponse', message: string } };
+
+export type Last_RecommendationsQueryVariables = Exact<{
+  type?: InputMaybe<RecommendationType>;
+}>;
+
+
+export type Last_RecommendationsQuery = { __typename?: 'Query', last_recommendations: Array<{ __typename?: 'Recommendation', id: string, title: string, description: string, favoritesCount: number, type: RecommendationType, link?: string | null, created_at: any, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null, comments?: Array<{ __typename?: 'Comment', id: string, content: string, created_at: any, author?: { __typename?: 'User', id: string, profile?: { __typename?: 'Profile', name: string, logo?: string | null } | null } | null }> | null, author?: { __typename?: 'User', profile?: { __typename?: 'Profile', name: string, logo?: string | null } | null } | null }> };
+
 export type LoginMutationVariables = Exact<{
   input: LoginInput;
 }>;
@@ -396,6 +411,8 @@ export type ViewerQueryVariables = Exact<{ [key: string]: never; }>;
 export type ViewerQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, email?: string | null, verified: boolean, profile?: { __typename?: 'Profile', name: string, about?: string | null, logo?: string | null } | null } };
 
 
+export const Create_CommentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Create_comment"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"content"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"recommendationId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"create_comment"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"content"},"value":{"kind":"Variable","name":{"kind":"Name","value":"content"}}},{"kind":"Argument","name":{"kind":"Name","value":"recommendationId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"recommendationId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<Create_CommentMutation, Create_CommentMutationVariables>;
+export const Last_RecommendationsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Last_recommendations"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"type"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"RecommendationType"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"last_recommendations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"type"},"value":{"kind":"Variable","name":{"kind":"Name","value":"type"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"favoritesCount"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"images"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}}]}}]}}]}}]} as unknown as DocumentNode<Last_RecommendationsQuery, Last_RecommendationsQueryVariables>;
 export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"LoginInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"loginInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"access_token"}}]}}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
 export const LogoutDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Logout"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logout"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<LogoutMutation, LogoutMutationVariables>;
 export const Password_Reset_RequestDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Password_reset_request"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"password_reset_request"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<Password_Reset_RequestMutation, Password_Reset_RequestMutationVariables>;

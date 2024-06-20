@@ -1,0 +1,33 @@
+query Last_recommendations($type: RecommendationType) {
+  last_recommendations(type: $type) {
+    id
+    title
+    description
+    favoritesCount
+    type
+    link
+    created_at
+    images {
+      id
+      url
+    }
+    comments {
+      id
+      content
+      created_at
+      author {
+        id
+        profile {
+          name
+          logo
+        }
+      }
+    }
+    author {
+      profile {
+        name
+        logo
+      }
+    }
+  }
+}

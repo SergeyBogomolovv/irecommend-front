@@ -8,10 +8,12 @@ import {
 import { Divider, Link, NavbarMenu, NavbarMenuItem } from '@nextui-org/react';
 import { LogoutButton } from './logout-button';
 import { LinkButton } from './link-button';
-import { Search } from '@/features/navbar';
+import { Search } from '@/features/header';
 import { FaUserCircle, FaUsers } from 'react-icons/fa';
 import { MdOutlineRecommend } from 'react-icons/md';
 import { IoIosSettings } from 'react-icons/io';
+import { RecommendationLink } from '@/entities/recommendation';
+import { recommendationTypes } from '@/shared/constants/recommendations';
 
 export default function MobileList() {
   const { notAuthenticated } = useViewer();
@@ -20,6 +22,15 @@ export default function MobileList() {
       <NavbarMenuItem>
         <Search />
       </NavbarMenuItem>
+      <div className="w-full flex gap-4 items-center justify-center py-3 max-w-screen flex-wrap">
+        {recommendationTypes.map((recommendationType) => (
+          <RecommendationLink
+            key={recommendationType.type}
+            title={recommendationType.title}
+            type={recommendationType.type}
+          />
+        ))}
+      </div>
       <Divider />
       {notAuthenticated ? (
         <>

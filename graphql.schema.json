@@ -1596,20 +1596,16 @@
             "deprecationReason": null
           },
           {
-            "name": "get_recommendations_by_type",
+            "name": "last_recommendations",
             "description": null,
             "args": [
               {
                 "name": "type",
                 "description": null,
                 "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "RecommendationType",
-                    "ofType": null
-                  }
+                  "kind": "ENUM",
+                  "name": "RecommendationType",
+                  "ofType": null
                 },
                 "defaultValue": null,
                 "isDeprecated": false,

@@ -6,12 +6,12 @@ import {
 } from '@nextui-org/react';
 import Logo from './logo';
 import { Account } from './account';
-import { Search, ThemeSwitch } from '@/features/navbar';
+import { Search, ThemeSwitch } from '@/features/header';
 import MobileList from './mobile-list';
 
 export function Header() {
   return (
-    <Navbar isBordered position="static">
+    <Navbar isBordered position="sticky">
       <NavbarContent justify="start">
         <NavbarItem>
           <Logo />

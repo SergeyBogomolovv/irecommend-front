@@ -13,6 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "mutation Create_comment($content: String!, $recommendationId: String!) {\n  create_comment(content: $content, recommendationId: $recommendationId) {\n    message\n  }\n}": types.Create_CommentDocument,
+    "query Last_recommendations($type: RecommendationType) {\n  last_recommendations(type: $type) {\n    id\n    title\n    description\n    favoritesCount\n    type\n    link\n    created_at\n    images {\n      id\n      url\n    }\n    comments {\n      id\n      content\n      created_at\n      author {\n        id\n        profile {\n          name\n          logo\n        }\n      }\n    }\n    author {\n      profile {\n        name\n        logo\n      }\n    }\n  }\n}": types.Last_RecommendationsDocument,
     "mutation Login($input: LoginInput!) {\n  login(loginInput: $input) {\n    access_token\n  }\n}": types.LoginDocument,
     "mutation Logout {\n  logout {\n    message\n  }\n}": types.LogoutDocument,
     "mutation Password_reset_request($email: String!) {\n  password_reset_request(email: $email) {\n    message\n    email\n  }\n}": types.Password_Reset_RequestDocument,
@@ -37,6 +39,14 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation Create_comment($content: String!, $recommendationId: String!) {\n  create_comment(content: $content, recommendationId: $recommendationId) {\n    message\n  }\n}"): (typeof documents)["mutation Create_comment($content: String!, $recommendationId: String!) {\n  create_comment(content: $content, recommendationId: $recommendationId) {\n    message\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query Last_recommendations($type: RecommendationType) {\n  last_recommendations(type: $type) {\n    id\n    title\n    description\n    favoritesCount\n    type\n    link\n    created_at\n    images {\n      id\n      url\n    }\n    comments {\n      id\n      content\n      created_at\n      author {\n        id\n        profile {\n          name\n          logo\n        }\n      }\n    }\n    author {\n      profile {\n        name\n        logo\n      }\n    }\n  }\n}"): (typeof documents)["query Last_recommendations($type: RecommendationType) {\n  last_recommendations(type: $type) {\n    id\n    title\n    description\n    favoritesCount\n    type\n    link\n    created_at\n    images {\n      id\n      url\n    }\n    comments {\n      id\n      content\n      created_at\n      author {\n        id\n        profile {\n          name\n          logo\n        }\n      }\n    }\n    author {\n      profile {\n        name\n        logo\n      }\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -7,13 +7,13 @@ export function Trigger() {
   return (
     <DropdownTrigger disabled={loading}>
       {loading ? (
-        <div className="max-w-[220px] w-full flex items-center gap-3">
+        <div className="md:w-[160px] w-full flex items-center gap-3">
           <div>
-            <Skeleton className="flex rounded-full w-10 h-10" />
+            <Skeleton className="flex rounded-full size-10" />
           </div>
-          <div className="w-full flex flex-col gap-2">
-            <Skeleton className="h-2.5 w-3/5 rounded-lg" />
+          <div className="w-full md:flex hidden flex-col gap-2">
             <Skeleton className="h-2.5 w-4/5 rounded-lg" />
+            <Skeleton className="h-2.5 w-full rounded-lg" />
           </div>
         </div>
       ) : (

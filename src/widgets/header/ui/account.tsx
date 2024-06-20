@@ -1,6 +1,6 @@
 'use client';
 import { useViewer } from '@/entities/viewer';
-import { ViewerButton } from '@/features/navbar';
+import { ViewerButton } from '@/features/header';
 import { loginRoute, registerRoute } from '@/shared/constants/routes';
 import { Button, Link, NavbarItem } from '@nextui-org/react';
 
