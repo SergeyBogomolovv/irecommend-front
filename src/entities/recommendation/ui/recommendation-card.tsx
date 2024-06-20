@@ -17,8 +17,8 @@ export function RecommendationCard({ loading, recommendation }: Props) {
       <CardHeader className="pb-1 pt-2 px-4 flex-col items-start">
         <div className="flex justify-between items-center w-full mb-3">
           <User
-            name={recommendation.author?.profile?.name}
-            avatar={recommendation.author?.profile?.logo}
+            name={recommendation.author.profile.name}
+            avatar={recommendation.author.profile.logo}
             description={formatDate(recommendation.created_at)}
             loading={loading}
           />

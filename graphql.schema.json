@@ -98,9 +98,13 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "User",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "User",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -147,6 +151,22 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "recommendationId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               }
             },
@@ -376,9 +396,29 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "User",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "User",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "recipientId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -388,9 +428,29 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "User",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "User",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "senderId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1480,9 +1540,13 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1492,15 +1556,19 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "LIST",
+              "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "NON_NULL",
+                "kind": "LIST",
                 "name": null,
                 "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Contact",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Contact",
+                    "ofType": null
+                  }
                 }
               }
             },
@@ -1795,9 +1863,13 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "User",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "User",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1807,15 +1879,19 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "LIST",
+              "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "NON_NULL",
+                "kind": "LIST",
                 "name": null,
                 "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Comment",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Comment",
+                    "ofType": null
+                  }
                 }
               }
             },
@@ -1891,15 +1967,19 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "LIST",
+              "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "NON_NULL",
+                "kind": "LIST",
                 "name": null,
                 "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Image",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Image",
+                    "ofType": null
+                  }
                 }
               }
             },
@@ -2208,15 +2288,19 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "LIST",
+              "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "NON_NULL",
+                "kind": "LIST",
                 "name": null,
                 "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Recommendation",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Recommendation",
+                    "ofType": null
+                  }
                 }
               }
             },
@@ -2228,15 +2312,19 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "LIST",
+              "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "NON_NULL",
+                "kind": "LIST",
                 "name": null,
                 "ofType": {
-                  "kind": "OBJECT",
-                  "name": "User",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "User",
+                    "ofType": null
+                  }
                 }
               }
             },
@@ -2276,9 +2364,13 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "Profile",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Profile",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -2288,15 +2380,19 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "LIST",
+              "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "NON_NULL",
+                "kind": "LIST",
                 "name": null,
                 "ofType": {
-                  "kind": "OBJECT",
-                  "name": "FriendRequest",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "FriendRequest",
+                    "ofType": null
+                  }
                 }
               }
             },
@@ -2308,15 +2404,19 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "LIST",
+              "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "NON_NULL",
+                "kind": "LIST",
                 "name": null,
                 "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Recommendation",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Recommendation",
+                    "ofType": null
+                  }
                 }
               }
             },
@@ -2328,15 +2428,19 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "LIST",
+              "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "NON_NULL",
+                "kind": "LIST",
                 "name": null,
                 "ofType": {
-                  "kind": "OBJECT",
-                  "name": "FriendRequest",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "FriendRequest",
+                    "ofType": null
+                  }
                 }
               }
             },

@@ -12,14 +12,14 @@ export function Comment({ comment }: Props) {
   return (
     <div className="flex gap-x-2 items-start">
       <Avatar className="size-10">
-        <AvatarImage src={comment.author?.profile?.logo || ''} />
+        <AvatarImage src={comment.author.profile.logo || ''} />
         <AvatarFallback>
           <FaUser className="size-6" />
         </AvatarFallback>
       </Avatar>
       <div className="flex-col">
         <div className="flex gap-x-2 items-center">
-          <p className="text-sm">{comment.author?.profile?.name}</p>
+          <p className="text-sm">{comment.author.profile.name}</p>
           <Divider orientation="vertical" className="h-3" />
           <p className="text-xs text-default-400">
             {formatDate(comment.created_at)}

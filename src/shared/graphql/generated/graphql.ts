@@ -32,10 +32,11 @@ export type AddContactDto = {
 
 export type Comment = {
   __typename?: 'Comment';
-  author?: Maybe<User>;
+  author: User;
   content: Scalars['String']['output'];
   created_at: Scalars['DateTime']['output'];
   id: Scalars['ID']['output'];
+  recommendationId: Scalars['String']['output'];
 };
 
 export type Contact = {
@@ -63,8 +64,10 @@ export type FriendRequest = {
   __typename?: 'FriendRequest';
   created_at: Scalars['DateTime']['output'];
   id: Scalars['ID']['output'];
-  recipient?: Maybe<User>;
-  sender?: Maybe<User>;
+  recipient: User;
+  recipientId: Scalars['String']['output'];
+  sender: User;
+  senderId: Scalars['String']['output'];
 };
 
 export type Image = {
@@ -235,8 +238,8 @@ export type PasswordResetInput = {
 
 export type Profile = {
   __typename?: 'Profile';
-  about?: Maybe<Scalars['String']['output']>;
-  contacts?: Maybe<Array<Contact>>;
+  about: Scalars['String']['output'];
+  contacts: Array<Contact>;
   id: Scalars['ID']['output'];
   logo?: Maybe<Scalars['String']['output']>;
   name: Scalars['String']['output'];
@@ -280,13 +283,13 @@ export type QuerySearch_UsersArgs = {
 
 export type Recommendation = {
   __typename?: 'Recommendation';
-  author?: Maybe<User>;
-  comments?: Maybe<Array<Comment>>;
+  author: User;
+  comments: Array<Comment>;
   created_at: Scalars['DateTime']['output'];
   description: Scalars['String']['output'];
   favoritesCount: Scalars['Int']['output'];
   id: Scalars['ID']['output'];
-  images?: Maybe<Array<Image>>;
+  images: Array<Image>;
   link?: Maybe<Scalars['String']['output']>;
   title: Scalars['String']['output'];
   type: RecommendationType;
@@ -323,14 +326,14 @@ export type User = {
   __typename?: 'User';
   created_at: Scalars['DateTime']['output'];
   email?: Maybe<Scalars['String']['output']>;
-  favorites?: Maybe<Array<Recommendation>>;
-  friends?: Maybe<Array<User>>;
+  favorites: Array<Recommendation>;
+  friends: Array<User>;
   id: Scalars['ID']['output'];
   password?: Maybe<Scalars['String']['output']>;
-  profile?: Maybe<Profile>;
-  receivedFriendRequests?: Maybe<Array<FriendRequest>>;
-  recommendations?: Maybe<Array<Recommendation>>;
-  sendedFriendRequests?: Maybe<Array<FriendRequest>>;
+  profile: Profile;
+  receivedFriendRequests: Array<FriendRequest>;
+  recommendations: Array<Recommendation>;
+  sendedFriendRequests: Array<FriendRequest>;
   verified: Scalars['Boolean']['output'];
 };
 
@@ -358,7 +361,7 @@ export type Last_RecommendationsQueryVariables = Exact<{
 }>;
 
 
-export type Last_RecommendationsQuery = { __typename?: 'Query', last_recommendations: Array<{ __typename?: 'Recommendation', id: string, title: string, description: string, favoritesCount: number, type: RecommendationType, link?: string | null, created_at: any, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null, comments?: Array<{ __typename?: 'Comment', id: string, content: string, created_at: any, author?: { __typename?: 'User', id: string, profile?: { __typename?: 'Profile', name: string, logo?: string | null } | null } | null }> | null, author?: { __typename?: 'User', profile?: { __typename?: 'Profile', name: string, logo?: string | null } | null } | null }> };
+export type Last_RecommendationsQuery = { __typename?: 'Query', last_recommendations: Array<{ __typename?: 'Recommendation', id: string, title: string, description: string, favoritesCount: number, type: RecommendationType, link?: string | null, created_at: any, images: Array<{ __typename?: 'Image', id: string, url: string }>, comments: Array<{ __typename?: 'Comment', id: string, content: string, created_at: any, author: { __typename?: 'User', id: string, profile: { __typename?: 'Profile', name: string, logo?: string | null } } }>, author: { __typename?: 'User', profile: { __typename?: 'Profile', name: string, logo?: string | null } } }> };
 
 export type LoginMutationVariables = Exact<{
   input: LoginInput;
@@ -408,7 +411,7 @@ export type VerifyAccountMutation = { __typename?: 'Mutation', verify_account: {
 export type ViewerQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ViewerQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, email?: string | null, verified: boolean, profile?: { __typename?: 'Profile', name: string, about?: string | null, logo?: string | null } | null } };
+export type ViewerQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, email?: string | null, verified: boolean, profile: { __typename?: 'Profile', name: string, about: string, logo?: string | null } } };
 
 
 export const Create_CommentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Create_comment"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"content"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"recommendationId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"create_comment"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"content"},"value":{"kind":"Variable","name":{"kind":"Name","value":"content"}}},{"kind":"Argument","name":{"kind":"Name","value":"recommendationId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"recommendationId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<Create_CommentMutation, Create_CommentMutationVariables>;

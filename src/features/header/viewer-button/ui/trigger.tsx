@@ -20,18 +20,18 @@ export function Trigger() {
         <div className="transition-transform">
           <Avatar
             as="button"
-            src={viewer?.profile?.logo || ''}
-            name={viewer?.profile?.name?.toLocaleUpperCase()}
+            src={viewer?.profile.logo || ''}
+            name={viewer?.profile.name.toLocaleUpperCase()}
             className="sm:flex hidden md:hidden"
           />
           <User
             as="button"
             className="md:flex hidden"
-            name={viewer?.profile?.name}
+            name={viewer?.profile.name}
             description={viewer?.email}
             avatarProps={{
-              src: viewer?.profile?.logo || '',
-              name: viewer?.profile?.name?.toLocaleUpperCase(),
+              src: viewer?.profile.logo || '',
+              name: viewer?.profile.name?.toLocaleUpperCase(),
             }}
           />
         </div>

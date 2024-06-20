@@ -1,6 +1,5 @@
 import { Carousel, CarouselContent, CarouselItem } from '@/shared/ui/carousel';
 import { Image } from '@nextui-org/react';
-import { Maybe } from 'graphql/jsutils/Maybe';
 
 interface IImage {
   url: string;
@@ -8,14 +7,14 @@ interface IImage {
 }
 
 interface Props {
-  images: Maybe<IImage[]> | undefined;
+  images: IImage[];
 }
 
 const ImagesCarousel = ({ images }: Props) => {
   return (
     <Carousel className="relative">
       <CarouselContent>
-        {images?.map((image) => (
+        {images.map((image) => (
           <CarouselItem key={image?.id}>
             <Image
               key={image?.id}

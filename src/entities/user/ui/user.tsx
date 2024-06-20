@@ -1,11 +1,11 @@
 import { User as UserCard } from '@nextui-org/react';
 import { UserSkeleton } from './skeleton';
-import { MaybeNot } from '@/shared/lib/types';
+import { Maybe } from 'graphql/jsutils/Maybe';
 
 interface Props {
-  name: MaybeNot<string>;
-  avatar: MaybeNot<string>;
-  description: MaybeNot<string>;
+  name: string;
+  avatar: Maybe<string>;
+  description: string;
   loading?: boolean;
 }
 
