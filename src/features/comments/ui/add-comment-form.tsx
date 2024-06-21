@@ -36,8 +36,8 @@ export const AddCommentForm = ({ recommendationId }: Props) => {
         <Button isIconOnly variant="flat" isLoading={loading} type="submit">
           <IoSend className="size-5" />
         </Button>
-        <FormError message={form.formState.errors.root?.message} />
       </form>
+      <FormError message={form.formState.errors.root?.message} />
     </Form>
   );
 };

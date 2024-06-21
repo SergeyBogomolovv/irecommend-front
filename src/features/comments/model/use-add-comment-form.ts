@@ -15,9 +15,9 @@ export function useAddCommentSchema(recommendationId: string) {
   });
 
   const [login, { loading }] = useMutation(Create_CommentDocument, {
-    onCompleted: (data) => {
+    onCompleted: () => {
       form.reset();
-      toast.success(data.create_comment.message);
+      toast.success('Комментарий добавлен');
     },
     onError: (error) => {
       form.setError('root', { message: error?.message });

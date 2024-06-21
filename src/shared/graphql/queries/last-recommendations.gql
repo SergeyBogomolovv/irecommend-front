@@ -1,5 +1,5 @@
-query Last_recommendations($type: RecommendationType) {
-  last_recommendations(type: $type) {
+query Last_recommendations($type: RecommendationType, $page: Int, $limit: Int) {
+  last_recommendations(type: $type, page: $page, limit: $limit) {
     id
     title
     description
