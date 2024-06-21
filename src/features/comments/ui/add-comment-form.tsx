@@ -23,7 +23,12 @@ export const AddCommentForm = ({ recommendationId }: Props) => {
           render={({ field }) => (
             <FormItem className="w-full">
               <FormControl>
-                <Input label="Добавить комментарий" size="sm" {...field} />
+                <Input
+                  isDisabled={loading}
+                  label="Добавить комментарий"
+                  size="sm"
+                  {...field}
+                />
               </FormControl>
             </FormItem>
           )}

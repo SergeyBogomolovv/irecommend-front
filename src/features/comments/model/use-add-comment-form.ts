@@ -16,11 +16,13 @@ export function useAddCommentSchema(recommendationId: string) {
 
   const [login, { loading }] = useMutation(Create_CommentDocument, {
     onCompleted: (data) => {
+      form.reset();
       toast.success(data.create_comment.message);
     },
     onError: (error) => {
       form.setError('root', { message: error?.message });
     },
+    refetchQueries: ['Last_recommendations'],
   });
 
   return {
