@@ -22,7 +22,7 @@ export function RecommendationCard({ loading, recommendation }: Props) {
             description={formatDate(recommendation.created_at)}
             loading={loading}
           />
-          <FavoriteButton recommendation={recommendation} loading={loading} />
+          <FavoriteButton recommendation={recommendation} />
         </div>
         <h4 className="font-bold text-large">{recommendation.title}</h4>
         <small className="text-default-500">{recommendation.description}</small>

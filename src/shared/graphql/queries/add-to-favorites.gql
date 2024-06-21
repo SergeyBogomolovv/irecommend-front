@@ -1,0 +1,5 @@
+mutation Add_to_favorites($recommendationId: String!) {
+  add_to_favorites(id: $recommendationId) {
+    message
+  }
+}

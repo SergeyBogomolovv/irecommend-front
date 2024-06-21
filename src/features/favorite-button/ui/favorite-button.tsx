@@ -1,17 +1,27 @@
+'use client';
 import { Recommendation } from '@/shared/graphql/generated/graphql';
 import { Button, Tooltip } from '@nextui-org/react';
 import { IoIosHeartEmpty } from 'react-icons/io';
+import { useAddToFavorites } from '../model/use-add-to-favorites';
 
 interface Props {
   recommendation: Recommendation;
-  loading?: boolean;
 }
 
-export const FavoriteButton = ({ recommendation, loading }: Props) => {
+export const FavoriteButton = ({ recommendation }: Props) => {
+  const { action, loading, isInFavorites } = useAddToFavorites(
+    recommendation.id,
+  );
   return (
-    <Tooltip showArrow content="Добавить в избранное" delay={500}>
+    <Tooltip
+      showArrow
+      content={isInFavorites ? 'Удалить из избранного' : 'Добавить в избранное'}
+      delay={500}
+    >
       <Button
-        color="danger"
+        onClick={() => action()}
+        color={isInFavorites ? 'danger' : 'default'}
+        disabled={loading}
         aria-label="Like"
         size="sm"
         radius="full"
