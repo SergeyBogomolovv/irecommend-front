@@ -1,5 +1,10 @@
 import { VerifyAccountForm } from '@/features/auth';
+import { Suspense } from 'react';
 
 export default function VerifyAccountPage() {
-  return <VerifyAccountForm />;
+  return (
+    <Suspense>
+      <VerifyAccountForm />
+    </Suspense>
+  );
 }
