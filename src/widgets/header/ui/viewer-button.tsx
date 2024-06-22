@@ -7,7 +7,7 @@ import { IoIosSettings } from 'react-icons/io';
 import { IoLogOut } from 'react-icons/io5';
 import { useLogout } from '@/features/auth';
 import { profileRoute } from '@/shared/constants/routes';
-import { Trigger } from './trigger';
+import { Trigger } from './viewer-button-trigger';
 
 export function ViewerButton() {
   const { logout } = useLogout();

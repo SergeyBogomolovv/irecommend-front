@@ -6,8 +6,9 @@ import {
 } from '@nextui-org/react';
 import Logo from './logo';
 import { Account } from './account';
-import { Search, ThemeSwitch } from '@/features/header';
 import MobileList from './mobile-list';
+import { ThemeSwitch } from './theme-switch';
+import { Search } from '@/features/search';
 
 export function Header() {
   return (

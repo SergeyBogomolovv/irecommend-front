@@ -4,7 +4,7 @@ import { formatDate } from '@/shared/lib/format-date';
 import { FavoriteButton } from '@/features/favorite-button';
 import { Comment, Recommendation } from '@/shared/graphql/generated/graphql';
 import ImagesCarousel from './images-carousel';
-import { CommentsList } from '@/features/comments';
+import { CommentsList } from '@/features/comments-list';
 
 interface Props {
   loading?: boolean;

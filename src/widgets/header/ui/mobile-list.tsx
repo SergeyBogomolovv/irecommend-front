@@ -5,15 +5,20 @@ import {
   profileRoute,
   registerRoute,
 } from '@/shared/constants/routes';
-import { Divider, Link, NavbarMenu, NavbarMenuItem } from '@nextui-org/react';
+import {
+  Button,
+  Divider,
+  Link,
+  NavbarMenu,
+  NavbarMenuItem,
+} from '@nextui-org/react';
 import { LogoutButton } from './logout-button';
-import { LinkButton } from './link-button';
-import { Search } from '@/features/header';
 import { FaUserCircle, FaUsers } from 'react-icons/fa';
 import { MdOutlineRecommend } from 'react-icons/md';
 import { IoIosSettings } from 'react-icons/io';
 import { RecommendationLink } from '@/entities/recommendation';
 import { recommendationTypes } from '@/shared/constants/recommendations';
+import { Search } from '@/features/search';
 
 export default function MobileList() {
   const { notAuthenticated } = useViewer();
@@ -35,10 +40,26 @@ export default function MobileList() {
       {notAuthenticated ? (
         <>
           <NavbarMenuItem>
-            <LinkButton href={loginRoute}>Вход</LinkButton>
+            <Button
+              as={Link}
+              href={loginRoute}
+              className="w-full"
+              color="primary"
+              variant="flat"
+            >
+              Вход
+            </Button>
           </NavbarMenuItem>
           <NavbarMenuItem>
-            <LinkButton href={registerRoute}>Регистрация</LinkButton>
+            <Button
+              as={Link}
+              href={registerRoute}
+              className="w-full"
+              color="primary"
+              variant="flat"
+            >
+              Регистрация
+            </Button>
           </NavbarMenuItem>
         </>
       ) : (
