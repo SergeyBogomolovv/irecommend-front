@@ -1,0 +1,5 @@
+mutation Remove_from_favorites($recommendationId: String!) {
+  remove_from_favorites(id: $recommendationId) {
+    message
+  }
+}

@@ -1,1 +1,1 @@
-export { Header } from './model/header';
+export { Header } from './ui/header';

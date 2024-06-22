@@ -1,0 +1,12 @@
+query Viewer {
+  profile {
+    id
+    email
+    verified
+    profile {
+      name
+      about
+      logo
+    }
+  }
+}

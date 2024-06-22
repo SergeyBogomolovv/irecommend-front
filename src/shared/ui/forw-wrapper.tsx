@@ -17,11 +17,7 @@ export default function FormWrapper({
   footerHref,
 }: Props) {
   return (
-    <Card
-      isBlurred
-      className="border-none bg-background/60 dark:bg-default-100/50 max-w-[600px] w-full"
-      shadow="none"
-    >
+    <Card isBlurred className="border-none max-w-[600px] w-full" shadow="none">
       <CardHeader className="flex flex-col gap-2 items-start">
         <h2 className="text-3xl font-semibold">{header}</h2>
         <p className="text-muted-foreground text-sm">{description}</p>

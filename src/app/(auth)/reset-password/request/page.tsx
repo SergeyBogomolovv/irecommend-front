@@ -1,4 +1,4 @@
-import { ResetPasswordRequestForm } from '@/widgets/auth/reset-password';
+import { ResetPasswordRequestForm } from '@/features/auth';
 
 export default function ResetPasswordRequestPage() {
   return <ResetPasswordRequestForm />;

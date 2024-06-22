@@ -2,10 +2,11 @@ import { ApolloClient, InMemoryCache, from, fromPromise } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs';
 import { setContext } from '@apollo/client/link/context';
-import { RefreshDocument } from '@/graphql/generated/graphql';
+import { RefreshDocument } from '@/shared/graphql/generated/graphql';
+import { accessTokenKey } from '@/shared/constants/tokens';
 
 export const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('access_token');
+  const token = localStorage.getItem(accessTokenKey);
   return {
     headers: {
       ...headers,
@@ -26,7 +27,7 @@ const getNewToken = async () => {
   try {
     const { data } = await client.query({ query: RefreshDocument });
     if (data.refresh.access_token)
-      localStorage.setItem('access_token', data.refresh.access_token);
+      localStorage.setItem(accessTokenKey, data.refresh.access_token);
     return data.refresh.access_token;
   } catch (error) {
     return null;
@@ -36,29 +37,23 @@ const getNewToken = async () => {
 const errorLink = onError(({ graphQLErrors, operation, forward }) => {
   if (graphQLErrors) {
     for (const err of graphQLErrors) {
-      if (err.extensions.code === 'UNAUTHENTICATED') {
-        return fromPromise(
-          getNewToken().then((newToken) => {
-            if (newToken) {
-              operation.setContext(({ headers = {} }) => ({
+      switch (err.extensions.code) {
+        case 'UNAUTHENTICATED':
+          if (operation.operationName === 'Refresh') return;
+          return fromPromise(
+            getNewToken().then((token) => {
+              operation.setContext({
                 headers: {
-                  ...headers,
-                  authorization: `Bearer ${newToken}`,
-                  isRetry: true,
+                  ...operation.getContext().headers,
+                  authorization: `Bearer ${token}`,
                 },
-              }));
-              return forward(operation);
-            } else {
-              return;
-            }
-          }),
-        ).flatMap(() => {
-          return forward(operation);
-        });
+              });
+            }),
+          ).flatMap(() => {
+            return forward(operation);
+          });
       }
     }
-  } else {
-    return;
   }
 });
 
