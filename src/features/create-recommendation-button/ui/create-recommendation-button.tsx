@@ -1,5 +1,5 @@
 import { Button, Tooltip } from '@nextui-org/react';
-import { TbMessage2Plus } from 'react-icons/tb';
+import { CiBookmarkPlus } from 'react-icons/ci';
 
 export function CreateRecommendationButton() {
   return (
@@ -17,9 +17,12 @@ export function CreateRecommendationButton() {
         isIconOnly
         radius="full"
         size="lg"
-        className="fixed bottom-0 z-[11] right-0 mb-4 mr-4 sm:mb-6 md:mb-8 sm:mr-6 md:mr-8 bg-gradient-to-tr from-sky-500 to-blue-800 text-white shadow-md border-1"
+        type="submit"
+        color="primary"
+        variant="shadow"
+        className="size-16 fixed bottom-0 z-[11] right-0 mb-4 mr-4 sm:mb-6 md:mb-8 sm:mr-6 md:mr-8"
       >
-        <TbMessage2Plus className="size-8" />
+        <CiBookmarkPlus className="size-8" />
       </Button>
     </Tooltip>
   );

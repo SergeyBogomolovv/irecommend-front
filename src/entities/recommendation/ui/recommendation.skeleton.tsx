@@ -3,7 +3,7 @@ import { Card, CardHeader, CardBody, Skeleton } from '@nextui-org/react';
 
 export const RecommendationSkeleton = () => {
   return (
-    <Card className="py-2 sm:w-[524px]">
+    <Card className="py-2">
       <CardHeader className="pb-1 pt-2 px-4 flex-col items-start">
         <div className="flex justify-between items-center w-full mb-3">
           <UserSkeleton />
