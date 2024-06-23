@@ -4,6 +4,7 @@ import { Providers } from './_providers';
 import { Header } from '@/widgets/header';
 import { Toaster } from '@/shared/ui/sonner';
 import { CreateRecommendationButton } from '@/features/create-recommendation-button';
+import ScrollToTop from '@/shared/ui/scroll-to-top';
 
 export const metadata: Metadata = {
   title: 'IRecommend',
@@ -21,9 +22,10 @@ export default function RootLayout({
           <main className="flex flex-col min-h-screen">
             <Header />
             {children}
-            <CreateRecommendationButton />
           </main>
+          <CreateRecommendationButton />
           <Toaster />
+          <ScrollToTop />
         </Providers>
       </body>
     </html>

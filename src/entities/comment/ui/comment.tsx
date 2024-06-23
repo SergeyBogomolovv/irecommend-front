@@ -1,4 +1,4 @@
-import { Comment as IComment } from '@/shared/graphql/generated/graphql';
+import { Comment as IComment } from '@/shared/graphql/graphql';
 import { formatDate } from '@/shared/lib/format-date';
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import { Divider } from '@nextui-org/react';

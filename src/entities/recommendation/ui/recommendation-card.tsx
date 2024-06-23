@@ -2,7 +2,7 @@ import { Card, CardHeader, CardBody, CardFooter } from '@nextui-org/react';
 import { User } from '@/entities/user';
 import { formatDate } from '@/shared/lib/format-date';
 import { FavoriteButton } from '@/features/favorite-button';
-import { Comment, Recommendation } from '@/shared/graphql/generated/graphql';
+import { Comment, Recommendation } from '@/shared/graphql/graphql';
 import ImagesCarousel from './images-carousel';
 import { CommentsList } from '@/features/comments-list';
 

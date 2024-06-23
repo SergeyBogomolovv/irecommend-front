@@ -18,7 +18,7 @@ export function LoginForm() {
 
   return (
     <FormWrapper
-      header="Приветствуем, рады видеть вас снова!"
+      header="Рады видеть вас снова!"
       description="Войдите в аккаунт, чтобы продолжить пользоваться IRecommend"
       footer="Еще не зарегистрированы?"
       footerHref={registerRoute}
