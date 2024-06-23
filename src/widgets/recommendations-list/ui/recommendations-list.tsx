@@ -4,12 +4,13 @@ import {
   RecommendationSkeleton,
 } from '@/entities/recommendation';
 import { useGetRecommendations } from '../model/use-get-recommendations';
+import { ScrollShadow } from '@nextui-org/react';
 
 export function RecommendationsList() {
   const { recommendations, loading } = useGetRecommendations();
 
   return (
-    <div className="flex flex-col mt-10 gap-6 container flex-wrap w-full items-center justify-items-center">
+    <ScrollShadow className="flex flex-col sm:gap-y-6 gap-y-2 items-center justify-items-center sm:w-[524px]">
       {loading ? (
         <>
           <RecommendationSkeleton />
@@ -26,6 +27,6 @@ export function RecommendationsList() {
           ))}
         </>
       )}
-    </div>
+    </ScrollShadow>
   );
 }
