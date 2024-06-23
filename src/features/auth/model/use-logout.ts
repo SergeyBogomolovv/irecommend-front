@@ -1,6 +1,6 @@
 'use client';
 import { accessTokenKey } from '@/shared/constants/tokens';
-import { LogoutDocument } from '@/shared/graphql/generated/graphql';
+import { LogoutDocument } from '@/shared/graphql/graphql';
 import { useMutation } from '@apollo/client';
 
 export const useLogout = () => {

@@ -1,5 +1,4 @@
 'use client';
-import { LoginDocument } from '@/shared/graphql/generated/graphql';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
@@ -7,6 +6,7 @@ import { Login, LoginSchema } from '../helpers/login-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { profileRoute } from '@/shared/constants/routes';
 import { accessTokenKey } from '@/shared/constants/tokens';
+import { LoginDocument } from '@/shared/graphql/graphql';
 
 export function useLoginForm() {
   const router = useRouter();

@@ -2,8 +2,8 @@ import { ApolloClient, InMemoryCache, from, fromPromise } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs';
 import { setContext } from '@apollo/client/link/context';
-import { RefreshDocument } from '@/shared/graphql/generated/graphql';
 import { accessTokenKey } from '@/shared/constants/tokens';
+import { RefreshDocument } from '@/shared/graphql/graphql';
 
 export const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem(accessTokenKey);

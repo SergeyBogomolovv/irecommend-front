@@ -2,7 +2,7 @@ import {
   Add_To_FavoritesDocument,
   Remove_From_FavoritesDocument,
   ViewersFavoritesDocument,
-} from '@/shared/graphql/generated/graphql';
+} from '@/shared/graphql/graphql';
 import { useMutation, useQuery } from '@apollo/client';
 import { toast } from 'sonner';
 

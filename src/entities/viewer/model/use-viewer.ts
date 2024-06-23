@@ -1,5 +1,5 @@
 'use client';
-import { ViewerDocument } from '@/shared/graphql/generated/graphql';
+import { ViewerDocument } from '@/shared/graphql/graphql';
 import { NetworkStatus, useQuery } from '@apollo/client';
 
 export function useViewer() {
