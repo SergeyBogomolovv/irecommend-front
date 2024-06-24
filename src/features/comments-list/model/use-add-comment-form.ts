@@ -6,7 +6,7 @@ import { AddComment, AddCommentSchema } from '../helpers/add-comment-schema';
 import { toast } from 'sonner';
 import { Create_CommentDocument } from '@/shared/graphql/graphql';
 
-export function useAddCommentSchema(recommendationId: string) {
+export function useAddCommentForm(recommendationId: string) {
   const form = useForm<AddComment>({
     resolver: zodResolver(AddCommentSchema),
     defaultValues: {
@@ -14,7 +14,7 @@ export function useAddCommentSchema(recommendationId: string) {
     },
   });
 
-  const [login, { loading }] = useMutation(Create_CommentDocument, {
+  const [addComment, { loading }] = useMutation(Create_CommentDocument, {
     onCompleted: () => {
       form.reset();
       toast.success('Комментарий добавлен');
@@ -29,7 +29,7 @@ export function useAddCommentSchema(recommendationId: string) {
     form,
     loading,
     handleSubmit: form.handleSubmit((input) =>
-      login({ variables: { recommendationId, content: input.content } }),
+      addComment({ variables: { recommendationId, content: input.content } }),
     ),
   };
 }

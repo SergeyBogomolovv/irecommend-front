@@ -1,6 +1,6 @@
 'use client';
 import { Form, FormControl, FormField, FormItem } from '@/shared/ui/form';
-import { useAddCommentSchema } from '../model/use-add-comment-form';
+import { useAddCommentForm } from '../model/use-add-comment-form';
 import FormError from '@/shared/ui/form-error';
 import { Button, Input } from '@nextui-org/react';
 import { IoSend } from 'react-icons/io5';
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const AddCommentForm = ({ recommendationId }: Props) => {
-  const { handleSubmit, form, loading } = useAddCommentSchema(recommendationId);
+  const { handleSubmit, form, loading } = useAddCommentForm(recommendationId);
   return (
     <Form {...form}>
       <form
