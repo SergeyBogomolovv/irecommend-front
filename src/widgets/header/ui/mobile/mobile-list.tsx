@@ -16,9 +16,9 @@ import { LogoutButton } from './logout-button';
 import { FaUserCircle, FaUsers } from 'react-icons/fa';
 import { MdOutlineRecommend } from 'react-icons/md';
 import { IoIosSettings } from 'react-icons/io';
-import { RecommendationLink } from '@/entities/recommendation';
 import { recommendationTypes } from '@/shared/constants/recommendations';
 import { Search } from '@/features/search';
+import { RecommendationLink } from '@/shared/ui/recommendation-link';
 
 export default function MobileList() {
   const { notAuthenticated } = useViewer();

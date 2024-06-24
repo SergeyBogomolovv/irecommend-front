@@ -1,4 +1,4 @@
-import { Links } from '@/widgets/links';
+import { Links } from '@/shared/ui/links';
 
 export default function MainLayout({
   children,
@@ -6,7 +6,7 @@ export default function MainLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="container gap-y-4 flex flex-col items-center justify-center">
+    <div className="sm:container px-2 gap-y-6 pt-3 flex flex-col items-center justify-center">
       <Links />
       {children}
     </div>

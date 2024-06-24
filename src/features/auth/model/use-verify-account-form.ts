@@ -1,5 +1,4 @@
 'use client';
-import { VerifyAccountDocument } from '@/shared/graphql/generated/graphql';
 import { useMutation } from '@apollo/client';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
@@ -7,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { accessTokenKey } from '@/shared/constants/tokens';
 import { VerifyAccount, VerifyAccountSchema } from '../helpers/verify.schema';
 import { profileRoute } from '@/shared/constants/routes';
+import { VerifyAccountDocument } from '@/shared/graphql/graphql';
 
 export function useVerifyAccountForm() {
   const queryparams = useSearchParams();

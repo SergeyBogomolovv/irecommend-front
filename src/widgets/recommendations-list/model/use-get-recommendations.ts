@@ -4,7 +4,7 @@ import {
   Last_RecommendationsDocument,
   Recommendation,
   RecommendationType as IRecommendationType,
-} from '@/shared/graphql/generated/graphql';
+} from '@/shared/graphql/graphql';
 import { useQuery } from '@apollo/client';
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';

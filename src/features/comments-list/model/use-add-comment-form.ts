@@ -1,10 +1,10 @@
 'use client';
-import { Create_CommentDocument } from '@/shared/graphql/generated/graphql';
 import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AddComment, AddCommentSchema } from '../helpers/add-comment-schema';
 import { toast } from 'sonner';
+import { Create_CommentDocument } from '@/shared/graphql/graphql';
 
 export function useAddCommentSchema(recommendationId: string) {
   const form = useForm<AddComment>({

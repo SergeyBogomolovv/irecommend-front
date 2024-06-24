@@ -1,5 +1,4 @@
 'use client';
-import { Password_Reset_RequestDocument } from '@/shared/graphql/generated/graphql';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
@@ -9,6 +8,7 @@ import {
   ResetPasswordRequest,
   ResetPasswordRequestSchema,
 } from '../helpers/reset-password-request.schema';
+import { Password_Reset_RequestDocument } from '@/shared/graphql/graphql';
 
 export function useResetPasswordRequestForm() {
   const router = useRouter();
@@ -19,7 +19,6 @@ export function useResetPasswordRequestForm() {
       email: '',
     },
   });
-
   const [resetPassword, { loading }] = useMutation(
     Password_Reset_RequestDocument,
     {

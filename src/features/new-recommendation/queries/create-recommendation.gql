@@ -1,0 +1,8 @@
+mutation Create_recommendation(
+  $payload: CreateRecommendationInput!
+  $images: [Upload!]
+) {
+  create_recommendation(payload: $payload, images: $images) {
+    message
+  }
+}

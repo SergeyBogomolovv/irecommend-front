@@ -1,15 +1,22 @@
 'use client';
+import { useIsSSR } from '@react-aria/ssr';
+import { useTheme } from 'next-themes';
 import { Button } from '@nextui-org/react';
 import { MdOutlineWbSunny } from 'react-icons/md';
 import { IoMoonOutline } from 'react-icons/io5';
-import { useThemeSwitch } from '../model/use-theme-switch';
 
 export function ThemeSwitch() {
-  const { isLigthTheme, onClick } = useThemeSwitch();
+  const { theme, setTheme } = useTheme();
+  const isSSR = useIsSSR();
+
+  const onClick = () => {
+    theme === 'light' ? setTheme('dark') : setTheme('light');
+  };
+  const isSelected = theme === 'light' || isSSR;
 
   return (
     <Button onClick={onClick} isIconOnly variant="light">
-      {isLigthTheme ? (
+      {!isSelected || isSSR ? (
         <MdOutlineWbSunny size={22} />
       ) : (
         <IoMoonOutline size={22} />
