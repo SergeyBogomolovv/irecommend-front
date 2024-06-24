@@ -3,8 +3,8 @@ import './globals.css';
 import { Providers } from './_providers';
 import { Header } from '@/widgets/header';
 import { Toaster } from '@/shared/ui/sonner';
-import { CreateRecommendationButton } from '@/features/create-recommendation-button';
 import ScrollToTop from '@/shared/ui/scroll-to-top';
+import { NewRecommendation } from '@/features/new-recommendation';
 
 export const metadata: Metadata = {
   title: 'IRecommend',
@@ -17,13 +17,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <link rel="icon" href="/logo.svg" />
       <body>
         <Providers>
           <main className="flex flex-col min-h-screen">
             <Header />
             {children}
           </main>
-          <CreateRecommendationButton />
+          <NewRecommendation />
           <Toaster />
           <ScrollToTop />
         </Providers>

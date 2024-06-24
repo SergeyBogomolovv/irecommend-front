@@ -7,7 +7,7 @@ import {
   Link,
 } from '@nextui-org/react';
 import Image from 'next/image';
-import { Account } from './desctop/account';
+import { Account } from './desktop/account';
 import MobileList from './mobile/mobile-list';
 import { Search } from '@/features/search';
 import { ThemeSwitch } from '@/shared/ui/theme-switch';

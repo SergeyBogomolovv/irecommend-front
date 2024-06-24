@@ -40,9 +40,9 @@ const ScrollToTop = () => {
             size="lg"
             type="submit"
             variant="flat"
-            className="size-16 fixed bottom-0 z-[11] left-0 mb-6 ml-6 md:mb-8 md:ml-8 hidden sm:flex"
+            className="size-12 fixed bottom-0 z-[11] left-0 mb-6 ml-6 md:mb-8 md:ml-8 hidden sm:flex"
           >
-            <IoIosArrowUp className="size-8" />
+            <IoIosArrowUp className="size-6" />
           </Button>
         </Tooltip>
       )}
