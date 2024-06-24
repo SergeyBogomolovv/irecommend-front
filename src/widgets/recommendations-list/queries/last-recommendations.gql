@@ -1,33 +1,36 @@
-query Last_recommendations($type: RecommendationType, $page: Int, $limit: Int) {
-  last_recommendations(type: $type, page: $page, limit: $limit) {
-    id
-    title
-    description
-    favoritesCount
-    type
-    link
-    created_at
-    images {
+query Last_recommendations($type: RecommendationType, $page: Int) {
+  last_recommendations(type: $type, page: $page) {
+    recommendations {
       id
-      url
-    }
-    comments {
-      id
-      content
+      title
+      description
+      favoritesCount
+      type
+      link
       created_at
-      author {
+      images {
         id
+        url
+      }
+      comments {
+        id
+        content
+        created_at
+        author {
+          id
+          profile {
+            name
+            logo
+          }
+        }
+      }
+      author {
         profile {
           name
           logo
         }
       }
     }
-    author {
-      profile {
-        name
-        logo
-      }
-    }
+    pagesCount
   }
 }
