@@ -30,12 +30,14 @@ export function RecommendationsList({ type }: Props) {
           ))}
         </>
       )}
-      <Pagination
-        onChange={onPageChange}
-        showControls
-        total={pagesCount || 1}
-        initialPage={1}
-      />
+      {!!pagesCount && pagesCount > 1 && (
+        <Pagination
+          onChange={onPageChange}
+          showControls
+          total={pagesCount}
+          initialPage={1}
+        />
+      )}
     </div>
   );
 }
