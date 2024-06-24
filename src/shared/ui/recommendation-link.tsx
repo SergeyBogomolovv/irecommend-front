@@ -9,8 +9,9 @@ interface Props {
 export function RecommendationLink({ title, type }: Props) {
   return (
     <Chip
+      className="cursor-pointer"
       as={Link}
-      href={`/?recommendations=${type}`}
+      href={`/${type}`}
       variant="shadow"
       color="primary"
     >

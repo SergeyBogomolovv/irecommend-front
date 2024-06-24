@@ -19,8 +19,9 @@ import {
   FormItem,
   FormMessage,
 } from '@/shared/ui/form';
-import { recommendationTypes } from '../model/recommendation-types';
 import ImagesCarousel from '@/shared/ui/images-carousel';
+import { recommendationTypes } from '@/shared/constants/recommendations';
+import { GoPaperclip } from 'react-icons/go';
 
 export function NewRecommendation() {
   const {
@@ -56,11 +57,6 @@ export function NewRecommendation() {
                   </ModalHeader>
                   <ModalBody>
                     <ImagesCarousel images={previewImages} />
-                    <Button onClick={onAddImageClick} type="button">
-                      {!previewImages.length
-                        ? 'Добавить изображения'
-                        : 'Изменить изображения'}
-                    </Button>
                     <FormField
                       disabled={loading}
                       control={form.control}
@@ -113,14 +109,10 @@ export function NewRecommendation() {
                       render={({ field }) => (
                         <FormItem>
                           <FormControl>
-                            <Select
-                              {...field}
-                              label="Тип"
-                              placeholder="Выберите тип"
-                            >
+                            <Select {...field} placeholder="Выберите тип">
                               {recommendationTypes.map((type) => (
                                 <SelectItem key={type.type}>
-                                  {type.label}
+                                  {type.title}
                                 </SelectItem>
                               ))}
                             </Select>
@@ -128,19 +120,29 @@ export function NewRecommendation() {
                         </FormItem>
                       )}
                     />
-                    <FormField
-                      disabled={loading}
-                      control={form.control}
-                      name="link"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormControl>
-                            <Input placeholder="Ссылка" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                    <div className="flex gap-x-2">
+                      <Button
+                        onClick={onAddImageClick}
+                        type="button"
+                        variant="light"
+                        isIconOnly
+                      >
+                        <GoPaperclip className="size-6" />
+                      </Button>
+                      <FormField
+                        disabled={loading}
+                        control={form.control}
+                        name="link"
+                        render={({ field }) => (
+                          <FormItem className="w-full">
+                            <FormControl>
+                              <Input placeholder="Ссылка" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
                   </ModalBody>
                   <ModalFooter>
                     <Button

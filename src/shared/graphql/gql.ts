@@ -21,12 +21,14 @@ const documents = {
     "query Refresh {\n  refresh {\n    access_token\n  }\n}": types.RefreshDocument,
     "mutation Register($input: RegisterInput!) {\n  register(registerInput: $input) {\n    message\n    email\n  }\n}": types.RegisterDocument,
     "mutation VerifyAccount($input: VerifyAccountInput!) {\n  verify_account(verifyAccountInput: $input) {\n    access_token\n  }\n}": types.VerifyAccountDocument,
+    "mutation Delete_comment($id: String!) {\n  delete_comment(id: $id) {\n    message\n  }\n}": types.Delete_CommentDocument,
+    "mutation Edit_comment($content: String!, $id: String!) {\n  edit_comment(content: $content, id: $id) {\n    message\n  }\n}": types.Edit_CommentDocument,
     "mutation Create_comment($content: String!, $recommendationId: String!) {\n  create_comment(content: $content, recommendationId: $recommendationId) {\n    id\n    content\n    recommendationId\n    created_at\n  }\n}": types.Create_CommentDocument,
     "mutation Add_to_favorites($recommendationId: String!) {\n  add_to_favorites(id: $recommendationId) {\n    message\n  }\n}": types.Add_To_FavoritesDocument,
     "query ViewersFavorites {\n  profile {\n    favorites {\n      id\n    }\n  }\n}": types.ViewersFavoritesDocument,
     "mutation Remove_from_favorites($recommendationId: String!) {\n  remove_from_favorites(id: $recommendationId) {\n    message\n  }\n}": types.Remove_From_FavoritesDocument,
-    "mutation Create_recommendation($payload: CreateRecommendationInput!, $images: [Upload!]!) {\n  create_recommendation(payload: $payload, images: $images) {\n    message\n  }\n}": types.Create_RecommendationDocument,
-    "query Last_recommendations($type: RecommendationType, $page: Int, $limit: Int) {\n  last_recommendations(type: $type, page: $page, limit: $limit) {\n    id\n    title\n    description\n    favoritesCount\n    type\n    link\n    created_at\n    images {\n      id\n      url\n    }\n    comments {\n      id\n      content\n      created_at\n      author {\n        id\n        profile {\n          name\n          logo\n        }\n      }\n    }\n    author {\n      profile {\n        name\n        logo\n      }\n    }\n  }\n}": types.Last_RecommendationsDocument,
+    "mutation Create_recommendation($payload: CreateRecommendationInput!, $images: [Upload!]) {\n  create_recommendation(payload: $payload, images: $images) {\n    message\n  }\n}": types.Create_RecommendationDocument,
+    "query Last_recommendations($type: RecommendationType, $page: Int) {\n  last_recommendations(type: $type, page: $page) {\n    recommendations {\n      id\n      title\n      description\n      favoritesCount\n      type\n      link\n      created_at\n      images {\n        id\n        url\n      }\n      comments {\n        id\n        content\n        created_at\n        author {\n          id\n          profile {\n            name\n            logo\n          }\n        }\n      }\n      author {\n        profile {\n          name\n          logo\n        }\n      }\n    }\n    pagesCount\n  }\n}": types.Last_RecommendationsDocument,
 };
 
 /**
@@ -78,6 +80,14 @@ export function graphql(source: "mutation VerifyAccount($input: VerifyAccountInp
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "mutation Delete_comment($id: String!) {\n  delete_comment(id: $id) {\n    message\n  }\n}"): (typeof documents)["mutation Delete_comment($id: String!) {\n  delete_comment(id: $id) {\n    message\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation Edit_comment($content: String!, $id: String!) {\n  edit_comment(content: $content, id: $id) {\n    message\n  }\n}"): (typeof documents)["mutation Edit_comment($content: String!, $id: String!) {\n  edit_comment(content: $content, id: $id) {\n    message\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "mutation Create_comment($content: String!, $recommendationId: String!) {\n  create_comment(content: $content, recommendationId: $recommendationId) {\n    id\n    content\n    recommendationId\n    created_at\n  }\n}"): (typeof documents)["mutation Create_comment($content: String!, $recommendationId: String!) {\n  create_comment(content: $content, recommendationId: $recommendationId) {\n    id\n    content\n    recommendationId\n    created_at\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -94,11 +104,11 @@ export function graphql(source: "mutation Remove_from_favorites($recommendationI
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "mutation Create_recommendation($payload: CreateRecommendationInput!, $images: [Upload!]!) {\n  create_recommendation(payload: $payload, images: $images) {\n    message\n  }\n}"): (typeof documents)["mutation Create_recommendation($payload: CreateRecommendationInput!, $images: [Upload!]!) {\n  create_recommendation(payload: $payload, images: $images) {\n    message\n  }\n}"];
+export function graphql(source: "mutation Create_recommendation($payload: CreateRecommendationInput!, $images: [Upload!]) {\n  create_recommendation(payload: $payload, images: $images) {\n    message\n  }\n}"): (typeof documents)["mutation Create_recommendation($payload: CreateRecommendationInput!, $images: [Upload!]) {\n  create_recommendation(payload: $payload, images: $images) {\n    message\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query Last_recommendations($type: RecommendationType, $page: Int, $limit: Int) {\n  last_recommendations(type: $type, page: $page, limit: $limit) {\n    id\n    title\n    description\n    favoritesCount\n    type\n    link\n    created_at\n    images {\n      id\n      url\n    }\n    comments {\n      id\n      content\n      created_at\n      author {\n        id\n        profile {\n          name\n          logo\n        }\n      }\n    }\n    author {\n      profile {\n        name\n        logo\n      }\n    }\n  }\n}"): (typeof documents)["query Last_recommendations($type: RecommendationType, $page: Int, $limit: Int) {\n  last_recommendations(type: $type, page: $page, limit: $limit) {\n    id\n    title\n    description\n    favoritesCount\n    type\n    link\n    created_at\n    images {\n      id\n      url\n    }\n    comments {\n      id\n      content\n      created_at\n      author {\n        id\n        profile {\n          name\n          logo\n        }\n      }\n    }\n    author {\n      profile {\n        name\n        logo\n      }\n    }\n  }\n}"];
+export function graphql(source: "query Last_recommendations($type: RecommendationType, $page: Int) {\n  last_recommendations(type: $type, page: $page) {\n    recommendations {\n      id\n      title\n      description\n      favoritesCount\n      type\n      link\n      created_at\n      images {\n        id\n        url\n      }\n      comments {\n        id\n        content\n        created_at\n        author {\n          id\n          profile {\n            name\n            logo\n          }\n        }\n      }\n      author {\n        profile {\n          name\n          logo\n        }\n      }\n    }\n    pagesCount\n  }\n}"): (typeof documents)["query Last_recommendations($type: RecommendationType, $page: Int) {\n  last_recommendations(type: $type, page: $page) {\n    recommendations {\n      id\n      title\n      description\n      favoritesCount\n      type\n      link\n      created_at\n      images {\n        id\n        url\n      }\n      comments {\n        id\n        content\n        created_at\n        author {\n          id\n          profile {\n            name\n            logo\n          }\n        }\n      }\n      author {\n        profile {\n          name\n          logo\n        }\n      }\n    }\n    pagesCount\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

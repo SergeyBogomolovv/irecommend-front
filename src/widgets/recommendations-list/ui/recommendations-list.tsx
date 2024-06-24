@@ -4,13 +4,16 @@ import {
   RecommendationSkeleton,
 } from '@/entities/recommendation';
 import { useGetRecommendations } from '../model/use-get-recommendations';
-import { ScrollShadow } from '@nextui-org/react';
-
-export function RecommendationsList() {
-  const { recommendations, loading } = useGetRecommendations();
+import { Pagination } from '@nextui-org/react';
+interface Props {
+  type?: string;
+}
+export function RecommendationsList({ type }: Props) {
+  const { recommendations, loading, onPageChange, pagesCount } =
+    useGetRecommendations(type);
 
   return (
-    <ScrollShadow className="flex flex-col sm:gap-y-6 gap-y-2 items-center justify-items-center sm:w-[524px]">
+    <div className="flex flex-col sm:gap-y-6 gap-y-2 items-center justify-items-center sm:w-[524px]">
       {loading ? (
         <>
           <RecommendationSkeleton />
@@ -27,6 +30,14 @@ export function RecommendationsList() {
           ))}
         </>
       )}
-    </ScrollShadow>
+      {!!pagesCount && pagesCount > 1 && (
+        <Pagination
+          onChange={onPageChange}
+          showControls
+          total={pagesCount}
+          initialPage={1}
+        />
+      )}
+    </div>
   );
 }
