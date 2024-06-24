@@ -19,8 +19,8 @@ import {
   FormItem,
   FormMessage,
 } from '@/shared/ui/form';
-import { recommendationTypes } from '../model/recommendation-types';
 import ImagesCarousel from '@/shared/ui/images-carousel';
+import { recommendationTypes } from '@/shared/constants/recommendations';
 
 export function NewRecommendation() {
   const {
@@ -120,7 +120,7 @@ export function NewRecommendation() {
                             >
                               {recommendationTypes.map((type) => (
                                 <SelectItem key={type.type}>
-                                  {type.label}
+                                  {type.title}
                                 </SelectItem>
                               ))}
                             </Select>
