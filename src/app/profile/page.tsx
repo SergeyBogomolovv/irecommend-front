@@ -1,3 +1,2 @@
-export default function ProfilePage() {
-  return <div>Profile</div>;
-}
+import { ProfilePage } from '@/pages/viewer';
+export default ProfilePage;

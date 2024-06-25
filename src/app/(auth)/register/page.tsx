@@ -1,5 +1,3 @@
-import { RegisterForm } from '@/features/auth';
+import { RegisterPage } from '@/pages/auth';
 
-export default function RegisterPage() {
-  return <RegisterForm />;
-}
+export default RegisterPage;
