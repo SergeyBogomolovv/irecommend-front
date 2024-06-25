@@ -1,10 +1,3 @@
-import { VerifyAccountForm } from '@/features/auth';
-import { Suspense } from 'react';
+import { VerifyAccountPage } from '@/pages/auth';
 
-export default function VerifyAccountPage() {
-  return (
-    <Suspense>
-      <VerifyAccountForm />
-    </Suspense>
-  );
-}
+export default VerifyAccountPage;

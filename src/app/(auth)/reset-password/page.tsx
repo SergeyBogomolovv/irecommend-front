@@ -1,10 +1,3 @@
-import { ResetPasswordForm } from '@/features/auth';
-import { Suspense } from 'react';
+import { ResetPasswordPage } from '@/pages/auth';
 
-export default function ResetPasswordPage() {
-  return (
-    <Suspense>
-      <ResetPasswordForm />
-    </Suspense>
-  );
-}
+export default ResetPasswordPage;
