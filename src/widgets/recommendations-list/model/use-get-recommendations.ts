@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 
 export const useGetRecommendations = (type?: string) => {
   const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams);
+  const params = new URLSearchParams(searchParams || '');
   const pathname = usePathname();
   const { replace } = useRouter();
 
@@ -26,7 +26,7 @@ export const useGetRecommendations = (type?: string) => {
 
   useEffect(() => {
     const isType = type && type in RecommendationType;
-    const page = Number(searchParams.get('page'));
+    const page = Number(searchParams?.get('page'));
     if (isType) {
       page
         ? refetch({ type: type as IRecommendationType, page })

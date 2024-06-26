@@ -1,2 +1,2 @@
-export { RecommendationCard } from './ui/recommendation-card';
+export { Recommendation } from './ui/recommendation';
 export { RecommendationSkeleton } from './ui/recommendation.skeleton';

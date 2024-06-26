@@ -1,7 +1,6 @@
-import { Comment as IComment } from '@/shared/graphql/generated/graphql';
-import { AddCommentForm } from './add-comment-form';
-import { Comment } from '@/entities/comment';
+import { Comment as IComment } from '@/shared/graphql/graphql';
 import { Divider } from '@nextui-org/react';
+import { AddCommentForm, Comment } from '@/features/comment';
 
 interface Props {
   comments: IComment[];
@@ -9,6 +8,7 @@ interface Props {
 }
 
 export const CommentsList = ({ comments, recommendationId }: Props) => {
+  // TODO: add pagination and separate query
   return (
     <div className="space-y-4 w-full">
       <AddCommentForm recommendationId={recommendationId} />

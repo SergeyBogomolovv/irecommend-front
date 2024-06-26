@@ -1,10 +1,8 @@
 'use client';
-import {
-  RecommendationCard,
-  RecommendationSkeleton,
-} from '@/entities/recommendation';
+import { RecommendationSkeleton } from '@/entities/recommendation';
 import { useGetRecommendations } from '../model/use-get-recommendations';
 import { Pagination } from '@nextui-org/react';
+import { RecommendationCard } from '@/widgets/recommendation';
 interface Props {
   type?: string;
 }

@@ -1,12 +1,12 @@
 'use client';
-import { CommentActions } from '@/features/comment-actions';
-import { EditCommentForm } from '@/features/comment-actions/ui/edit-comment-form';
 import { Comment as IComment } from '@/shared/graphql/graphql';
 import { formatDate } from '@/shared/lib/format-date';
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import { Divider } from '@nextui-org/react';
 import { useState } from 'react';
 import { FaUser } from 'react-icons/fa';
+import { CommentActions } from './comment-actions';
+import { EditCommentForm } from './edit-comment-form';
 
 interface Props {
   comment: IComment;
