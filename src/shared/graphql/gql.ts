@@ -14,6 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "query Viewer {\n  profile {\n    id\n    email\n    verified\n    profile {\n      name\n      about\n      logo\n    }\n  }\n}": types.ViewerDocument,
+    "mutation Add_contact($payload: AddContactDto!) {\n  add_contact(payload: $payload) {\n    message\n  }\n}": types.Add_ContactDocument,
     "mutation Login($input: LoginInput!) {\n  login(loginInput: $input) {\n    access_token\n  }\n}": types.LoginDocument,
     "mutation Logout {\n  logout {\n    message\n  }\n}": types.LogoutDocument,
     "mutation Password_reset_request($email: String!) {\n  password_reset_request(email: $email) {\n    message\n    email\n  }\n}": types.Password_Reset_RequestDocument,
@@ -53,6 +54,10 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query Viewer {\n  profile {\n    id\n    email\n    verified\n    profile {\n      name\n      about\n      logo\n    }\n  }\n}"): (typeof documents)["query Viewer {\n  profile {\n    id\n    email\n    verified\n    profile {\n      name\n      about\n      logo\n    }\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation Add_contact($payload: AddContactDto!) {\n  add_contact(payload: $payload) {\n    message\n  }\n}"): (typeof documents)["mutation Add_contact($payload: AddContactDto!) {\n  add_contact(payload: $payload) {\n    message\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

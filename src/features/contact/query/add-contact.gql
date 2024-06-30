@@ -1,0 +1,5 @@
+mutation Add_contact($payload: AddContactDto!) {
+  add_contact(payload: $payload) {
+    message
+  }
+}

@@ -1,5 +1,5 @@
 'use client';
-import { Contact } from '@/features/contact';
+import { AddContact, Contact } from '@/features/contact';
 import { ProfileAvatar } from '@/features/profile-avatar';
 import { ProfileDocument } from '@/shared/graphql/graphql';
 import InfoBadge from '@/shared/ui/info-badge';
@@ -14,7 +14,6 @@ import {
   Skeleton,
 } from '@nextui-org/react';
 import { format } from 'date-fns';
-import { Plus } from 'lucide-react';
 import { LiaUserEditSolid } from 'react-icons/lia';
 
 export const ProfileCard = () => {
@@ -62,19 +61,28 @@ export const ProfileCard = () => {
       <CardBody className="flex flex-col gap-3">
         <div className="flex items-end justify-between">
           <h3 className="text-lg font-semibold">Контакты</h3>
-          <Button variant="flat" isIconOnly size="sm">
-            <Plus />
-          </Button>
+          <AddContact />
         </div>
         <div className="flex gap-2 flex-wrap">
-          {data?.profile.profile.contacts.map((contact) => (
-            <Contact
-              key={contact.id}
-              id={contact.id}
-              type={contact.type}
-              href={contact.url}
-            />
-          ))}
+          {loading ? (
+            <>
+              <Skeleton className="rounded-full h-6 w-32" />
+              <Skeleton className="rounded-full h-6 w-32" />
+              <Skeleton className="rounded-full h-6 w-32" />
+              <Skeleton className="rounded-full h-6 w-32" />
+            </>
+          ) : (
+            <>
+              {data?.profile.profile.contacts.map((contact) => (
+                <Contact
+                  key={contact.id}
+                  id={contact.id}
+                  type={contact.type}
+                  href={contact.url}
+                />
+              ))}
+            </>
+          )}
         </div>
       </CardBody>
       <Divider />
