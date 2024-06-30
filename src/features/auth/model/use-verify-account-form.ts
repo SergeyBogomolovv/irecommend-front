@@ -10,7 +10,7 @@ import { VerifyAccountDocument } from '@/shared/graphql/graphql';
 
 export function useVerifyAccountForm() {
   const queryparams = useSearchParams();
-  const email = queryparams.get('email') || '';
+  const email = queryparams?.get('email') || '';
 
   const router = useRouter();
 

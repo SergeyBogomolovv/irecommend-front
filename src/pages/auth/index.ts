@@ -1,6 +1,6 @@
-export { AuthLoading } from './loading';
-export { LoginPage } from './login';
-export { RegisterPage } from './register';
-export { ResetPasswordPage } from './reset-password';
-export { ResetPasswordRequestPage } from './reset-password-request';
-export { VerifyAccountPage } from './verify-account';
+export { default as AuthLoading } from './loading';
+export { default as LoginPage } from './login';
+export { default as RegisterPage } from './register';
+export { default as ResetPasswordPage } from './reset-password';
+export { default as ResetPasswordRequestPage } from './reset-password-request';
+export { default as VerifyAccountPage } from './verify-account';

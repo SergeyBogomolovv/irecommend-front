@@ -15,7 +15,7 @@ export function useResetPasswordForm() {
   const router = useRouter();
   const queryparams = useSearchParams();
 
-  const email = queryparams.get('email') || '';
+  const email = queryparams?.get('email') || '';
   const form = useForm<ResetPassword>({
     resolver: zodResolver(ResetPasswordSchema),
     defaultValues: {

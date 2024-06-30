@@ -1,5 +1,5 @@
 'use client';
-import { Recommendation } from '@/shared/graphql/generated/graphql';
+import { Recommendation } from '@/shared/graphql/graphql';
 import { Button, Tooltip } from '@nextui-org/react';
 import { IoIosHeartEmpty } from 'react-icons/io';
 import { useAddToFavorites } from '../model/use-add-to-favorites';

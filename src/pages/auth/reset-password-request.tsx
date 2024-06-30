@@ -1,5 +1,5 @@
 import { ResetPasswordRequestForm } from '@/features/auth';
 
-export function ResetPasswordRequestPage() {
+export default function ResetPasswordRequestPage() {
   return <ResetPasswordRequestForm />;
 }
