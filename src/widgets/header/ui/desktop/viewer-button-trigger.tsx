@@ -31,7 +31,8 @@ export function Trigger() {
             description={viewer?.email}
             avatarProps={{
               src: viewer?.profile.logo || '',
-              name: viewer?.profile.name?.toLocaleUpperCase(),
+              name: viewer?.profile.name?.toLocaleUpperCase()[0],
+              className: 'text-2xl',
             }}
           />
         </div>

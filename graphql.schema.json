@@ -1405,13 +1405,9 @@
                 "name": "payload",
                 "description": null,
                 "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "UpdateProfileDto",
-                    "ofType": null
-                  }
+                  "kind": "INPUT_OBJECT",
+                  "name": "UpdateProfileDto",
+                  "ofType": null
                 },
                 "defaultValue": null,
                 "isDeprecated": false,
