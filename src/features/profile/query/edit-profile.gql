@@ -1,0 +1,5 @@
+mutation Edit_profile($payload: UpdateProfileDto) {
+  update_profile(payload: $payload) {
+    id
+  }
+}

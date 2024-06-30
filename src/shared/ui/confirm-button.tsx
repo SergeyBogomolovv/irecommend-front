@@ -15,8 +15,8 @@ interface Props {
   title: string;
   description: string;
   onComplete: () => any;
-  confirmLabel: string;
   label: string;
+  loading?: boolean;
 }
 
 export function ConfirmButton({
@@ -24,14 +24,14 @@ export function ConfirmButton({
   description,
   onComplete,
   label,
-  confirmLabel,
+  loading,
 }: Props) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
     <>
       <Button className="w-full" color="danger" onPress={onOpen}>
-        {confirmLabel}
+        {title}
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
@@ -46,6 +46,7 @@ export function ConfirmButton({
                   Отмена
                 </Button>
                 <Button
+                  isLoading={loading}
                   variant="light"
                   color="danger"
                   onPress={() => {
