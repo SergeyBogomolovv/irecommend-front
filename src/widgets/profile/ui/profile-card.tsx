@@ -1,7 +1,9 @@
 'use client';
+import { useLogout } from '@/features/auth';
 import { AddContact, Contact } from '@/features/contact';
-import { ProfileAvatar } from '@/features/profile-avatar';
+import { ProfileAvatar } from '@/features/profile';
 import { ProfileDocument } from '@/shared/graphql/graphql';
+import { ConfirmButton } from '@/shared/ui/confirm-button';
 import InfoBadge from '@/shared/ui/info-badge';
 import { useQuery } from '@apollo/client';
 import {
@@ -17,6 +19,7 @@ import { format } from 'date-fns';
 import { LiaUserEditSolid } from 'react-icons/lia';
 
 export const ProfileCard = () => {
+  const { logout, loading: logoutLoading } = useLogout();
   const { data, loading } = useQuery(ProfileDocument);
   return (
     <Card className="max-w-[550px] w-full relative">
@@ -87,10 +90,20 @@ export const ProfileCard = () => {
       </CardBody>
       <Divider />
       <CardFooter className="flex flex-col gap-y-2">
-        <Button className="w-full">Выйти</Button>
-        <Button className="w-full" color="danger">
-          Удалить аккаунт
+        <Button
+          isLoading={logoutLoading}
+          onClick={() => logout()}
+          className="w-full"
+        >
+          Выйти
         </Button>
+        <ConfirmButton
+          title="Удалить аккаунт"
+          description="Вы действительно хотите свой удалить аккаунт? Это действие нельзя будет отменить!"
+          onComplete={() => logout()}
+          label="Подтверждаю"
+          confirmLabel="Удалить аккаунт"
+        />
       </CardFooter>
     </Card>
   );
