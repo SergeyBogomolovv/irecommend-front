@@ -2,10 +2,7 @@ import { Card, CardHeader, CardBody, CardFooter } from '@nextui-org/react';
 import { User } from '@/entities/user';
 import { formatDate } from '@/shared/lib/format-date';
 import { FavoriteButton } from '@/features/favorite-button';
-import {
-  Comment,
-  Recommendation as IRecommendation,
-} from '@/shared/graphql/graphql';
+import { Recommendation as IRecommendation } from '@/shared/graphql/graphql';
 import ImagesCarousel from '@/shared/ui/images-carousel';
 import { Recommendation } from '@/entities/recommendation';
 import { CommentsList } from '@/widgets/comments';
@@ -42,10 +39,7 @@ export function RecommendationCard({ loading, recommendation }: Props) {
         </CardBody>
       )}
       <CardFooter>
-        <CommentsList
-          recommendationId={recommendation.id}
-          comments={recommendation.comments as Comment[]}
-        />
+        <CommentsList recommendationId={recommendation.id} />
       </CardFooter>
     </Card>
   );

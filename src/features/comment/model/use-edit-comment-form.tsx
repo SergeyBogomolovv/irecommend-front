@@ -26,7 +26,7 @@ export function useEditCommentForm(
     onError: (error) => {
       form.setError('root', { message: error?.message });
     },
-    refetchQueries: ['Last_recommendations'],
+    refetchQueries: ['Get_comments'],
   });
 
   return {

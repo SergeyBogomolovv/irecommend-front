@@ -12,18 +12,6 @@ query Last_recommendations($type: RecommendationType, $page: Int) {
         id
         url
       }
-      comments {
-        id
-        content
-        created_at
-        author {
-          id
-          profile {
-            name
-            logo
-          }
-        }
-      }
       author {
         profile {
           name

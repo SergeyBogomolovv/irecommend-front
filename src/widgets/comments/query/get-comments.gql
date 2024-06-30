@@ -1,0 +1,17 @@
+query Get_comments($recommendationId: String!, $count: Int) {
+  get_comments(recommendationId: $recommendationId, count: $count) {
+    totalCount
+    comments {
+      id
+      content
+      created_at
+      author {
+        id
+        profile {
+          name
+          logo
+        }
+      }
+    }
+  }
+}

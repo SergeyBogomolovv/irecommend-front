@@ -12,7 +12,7 @@ export const useDeleteComment = (id: string) => {
     onError: () => {
       toast.error('Ошибка при удалении комментария');
     },
-    refetchQueries: ['Last_recommendations'],
+    refetchQueries: ['Get_comments'],
     variables: { id },
   });
   return { deleteComment, loading };
