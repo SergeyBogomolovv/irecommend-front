@@ -1,0 +1,18 @@
+query Profile {
+  profile {
+    id
+    created_at
+    email
+    password
+    profile {
+      name
+      about
+      logo
+      contacts {
+        id
+        url
+        type
+      }
+    }
+  }
+}

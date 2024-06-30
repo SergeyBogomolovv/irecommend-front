@@ -1,0 +1,5 @@
+mutation Delete_contact($id: String!) {
+  remove_contact(contactId: $id) {
+    message
+  }
+}

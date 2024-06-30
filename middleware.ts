@@ -6,8 +6,8 @@ import {
   resetPasswordRequestRoute,
   resetPasswordRoute,
   verifyAccountRoute,
-} from './shared/constants/routes';
-import { refreshTokenKey } from './shared/constants/tokens';
+} from './src/shared/constants/routes';
+import { refreshTokenKey } from './src/shared/constants/tokens';
 
 const authRoutes = [
   loginRoute,
