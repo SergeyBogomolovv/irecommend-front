@@ -17,7 +17,10 @@ export function Comment({ comment }: Props) {
   return (
     <div className="flex gap-x-2 items-start">
       <Avatar className="size-10">
-        <AvatarImage src={comment.author.profile.logo || ''} />
+        <AvatarImage
+          src={comment.author.profile.logo || ''}
+          className="aspect-square object-cover"
+        />
         <AvatarFallback>
           <FaUser className="size-6" />
         </AvatarFallback>
