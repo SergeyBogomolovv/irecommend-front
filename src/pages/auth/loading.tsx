@@ -1,6 +1,6 @@
 import { Skeleton } from '@nextui-org/react';
 
-export const AuthLoading = () => {
+const AuthLoading = () => {
   return (
     <main className="w-full flex flex-col items-center justify-center">
       <div className="max-w-[550px] w-full flex flex-col gap-y-4">
@@ -13,3 +13,4 @@ export const AuthLoading = () => {
     </main>
   );
 };
+export default AuthLoading;

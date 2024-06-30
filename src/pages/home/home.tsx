@@ -7,7 +7,7 @@ interface Params {
   };
 }
 
-export function HomePage({ params }: Params) {
+export default function HomePage({ params }: Params) {
   return (
     <Suspense>
       <RecommendationsList type={params.type} />
