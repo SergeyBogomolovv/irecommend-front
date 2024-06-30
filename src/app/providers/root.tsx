@@ -1,6 +1,6 @@
 'use client';
-import { UIProvider } from './ui-provider';
-import { ApolloProvider } from './apollo-provider';
+import { UIProvider } from './ui';
+import { ApolloProvider } from './apollo';
 
 export interface ProvidersProps {
   children: React.ReactNode;

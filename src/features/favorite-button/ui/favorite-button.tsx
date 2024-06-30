@@ -3,6 +3,7 @@ import { Recommendation } from '@/shared/graphql/graphql';
 import { Button, Tooltip } from '@nextui-org/react';
 import { IoIosHeartEmpty } from 'react-icons/io';
 import { useAddToFavorites } from '../model/use-add-to-favorites';
+import { useViewer } from '@/entities/viewer';
 
 interface Props {
   recommendation: Recommendation;
@@ -12,6 +13,7 @@ export const FavoriteButton = ({ recommendation }: Props) => {
   const { action, loading, isInFavorites } = useAddToFavorites(
     recommendation.id,
   );
+  const { viewer } = useViewer();
   return (
     <Tooltip
       showArrow
@@ -19,6 +21,7 @@ export const FavoriteButton = ({ recommendation }: Props) => {
       delay={500}
     >
       <Button
+        isDisabled={!viewer}
         onClick={() => action()}
         color={isInFavorites ? 'danger' : 'default'}
         disabled={loading}
