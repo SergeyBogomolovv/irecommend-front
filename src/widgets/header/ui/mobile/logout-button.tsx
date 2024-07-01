@@ -10,7 +10,6 @@ export function LogoutButton() {
       isLoading={loading}
       className="w-full"
       color="danger"
-      variant="flat"
     >
       Выйти из аккаунта
     </Button>

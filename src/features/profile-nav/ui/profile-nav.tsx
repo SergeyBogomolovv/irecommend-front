@@ -9,7 +9,7 @@ export function ProfileNav() {
     <Breadcrumbs
       size="md"
       classNames={{
-        list: 'gap-3 mx-auto',
+        list: 'gap-3 font-mono mx-auto',
       }}
       itemClasses={{
         item: [

@@ -1,12 +1,15 @@
 'use client';
 import { Dropdown, DropdownMenu, DropdownItem } from '@nextui-org/react';
 import { FaUserCircle } from 'react-icons/fa';
-import { FaUsers } from 'react-icons/fa';
 import { MdOutlineRecommend } from 'react-icons/md';
-import { IoIosSettings } from 'react-icons/io';
+import { MdFavorite } from 'react-icons/md';
 import { IoLogOut } from 'react-icons/io5';
 import { useLogout } from '@/features/auth';
-import { profileRoute } from '@/shared/constants/routes';
+import {
+  favoritesRoute,
+  profileRoute,
+  viewersRecommendationsRoute,
+} from '@/shared/constants/routes';
 import { Trigger } from './viewer-button-trigger';
 
 export function ViewerButton() {
@@ -24,27 +27,19 @@ export function ViewerButton() {
           Профиль
         </DropdownItem>
         <DropdownItem
-          endContent={<FaUsers className="size-5" />}
-          key="friends"
-          href={'/profile/friends'}
+          endContent={<MdFavorite className="size-5" />}
+          key="favorites"
+          href={favoritesRoute}
         >
-          Друзья
+          Избранное
         </DropdownItem>
         <DropdownItem
           endContent={<MdOutlineRecommend className="size-5" />}
           key="my-recommendations"
-          href={'/profile/recommendations'}
+          href={viewersRecommendationsRoute}
         >
           Рекомендации
         </DropdownItem>
-        <DropdownItem
-          endContent={<IoIosSettings className="size-5" />}
-          key="settings"
-          href={'/profile/settings'}
-        >
-          Настройки
-        </DropdownItem>
-
         <DropdownItem
           endContent={<IoLogOut className="size-5" />}
           key="logout"

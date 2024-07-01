@@ -26,19 +26,19 @@ export const ProfileCard = () => {
       ) : (
         <EditProfile profile={data?.profile.profile as Profile} />
       )}
-      <CardHeader className="flex flex-col gap-2">
+      <CardHeader className="flex flex-col gap-2 pattern-opacity-100 pattern-sky-500 dark:pattern-sky-900 pattern-bg-black pattern-wavy md:pattern-size-16">
         <ProfileAvatar
           name={data?.profile.profile.name || ''}
           src={data?.profile.profile.logo || ''}
         />
         <div className="flex flex-col gap-2 items-center">
           <Skeleton isLoaded={!loading} className="rounded-lg">
-            <h3 className="text-lg font-semibold text-center">
+            <h3 className="text-lg font-semibold text-center text-white text-shadow shadow-black">
               {data?.profile.profile.name || 'Name skeleton'}
             </h3>
           </Skeleton>
           <Skeleton isLoaded={!loading} className="rounded-lg">
-            <p className="text-small text-default-500">
+            <p className="text-small p-2 rounded-lg text-white text-shadow shadow-black font-mono">
               {data?.profile.profile.about || 'Тут пока ничего нет'}
             </p>
           </Skeleton>

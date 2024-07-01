@@ -12,7 +12,7 @@ export function TriggerButton({ onOpen }: Props) {
         onPress={onOpen}
         isIconOnly
         variant="light"
-        className="absolute top-4 right-4 z-[11]"
+        className="absolute top-4 right-4 z-[11] text-white"
       >
         <LiaUserEditSolid className="size-6" />
       </Button>
