@@ -12,8 +12,10 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from '@/shared/ui/form';
 import { TriggerButton } from './trigger-button';
@@ -59,6 +61,7 @@ export const EditProfile = ({ profile }: Props) => {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
+                          <FormLabel>Отображаемое имя</FormLabel>
                           <FormControl>
                             <Input required placeholder="Имя" {...field} />
                           </FormControl>
@@ -72,9 +75,19 @@ export const EditProfile = ({ profile }: Props) => {
                       name="about"
                       render={({ field }) => (
                         <FormItem>
+                          <FormLabel>Расскажите о себе</FormLabel>
                           <FormControl>
-                            <Textarea placeholder="О себе" {...field} />
+                            <Textarea
+                              disableAnimation
+                              placeholder="О себе"
+                              {...field}
+                            />
                           </FormControl>
+                          <FormDescription>
+                            Любые подробности, например: возраст, род занятий
+                            или город. Пример: 23 года, дизайнер из
+                            Санкт-Петербурга.
+                          </FormDescription>
                         </FormItem>
                       )}
                     />

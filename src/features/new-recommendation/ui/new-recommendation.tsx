@@ -9,14 +9,17 @@ import {
   Input,
   Select,
   SelectItem,
+  Textarea,
 } from '@nextui-org/react';
 import { TriggerButton } from './trigger-button';
 import { useCreateRecommendationForm } from '../model/use-create-recommendation-form';
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from '@/shared/ui/form';
 import ImagesCarousel from '@/shared/ui/images-carousel';
@@ -81,8 +84,13 @@ export function NewRecommendation() {
                       name="title"
                       render={({ field }) => (
                         <FormItem>
+                          <FormLabel>Название</FormLabel>
                           <FormControl>
-                            <Input required placeholder="Название" {...field} />
+                            <Input
+                              required
+                              placeholder="Виктор Гюго, Человек который смеется."
+                              {...field}
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -95,9 +103,19 @@ export function NewRecommendation() {
                       name="description"
                       render={({ field }) => (
                         <FormItem>
+                          <FormLabel>Описание</FormLabel>
                           <FormControl>
-                            <Input required placeholder="Описание" {...field} />
+                            <Textarea
+                              disableAnimation
+                              required
+                              placeholder="Мне очень понравилась эта книга, порекомендую ее любителям классики."
+                              {...field}
+                            />
                           </FormControl>
+                          <FormDescription>
+                            Расскажите, что понравилось, кому порекомендуете, а
+                            кому нет и так далее.
+                          </FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -108,13 +126,19 @@ export function NewRecommendation() {
                       name="type"
                       render={({ field }) => (
                         <FormItem>
+                          <FormLabel>Тип</FormLabel>
                           <FormControl>
-                            <Select {...field} placeholder="Выберите тип">
-                              {recommendationTypes.map((type) => (
-                                <SelectItem key={type.type}>
-                                  {type.title}
-                                </SelectItem>
-                              ))}
+                            <Select {...field} placeholder="Выберите...">
+                              {recommendationTypes.map(
+                                ({ type, title, icon: Icon }) => (
+                                  <SelectItem
+                                    startContent={<Icon className="size-4" />}
+                                    key={type}
+                                  >
+                                    {title}
+                                  </SelectItem>
+                                ),
+                              )}
                             </Select>
                           </FormControl>
                         </FormItem>

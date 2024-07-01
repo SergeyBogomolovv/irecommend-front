@@ -84,11 +84,16 @@ export const AddContact = () => {
                           <FormLabel>Соцсеть</FormLabel>
                           <FormControl>
                             <Select {...field} placeholder="Выберите...">
-                              {contactTypes.map((type) => (
-                                <SelectItem key={type.type}>
-                                  {type.title}
-                                </SelectItem>
-                              ))}
+                              {contactTypes.map(
+                                ({ type, title, icon: Icon }) => (
+                                  <SelectItem
+                                    startContent={<Icon className="size-4" />}
+                                    key={type}
+                                  >
+                                    {title}
+                                  </SelectItem>
+                                ),
+                              )}
                             </Select>
                           </FormControl>
                         </FormItem>
