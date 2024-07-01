@@ -1,9 +1,8 @@
 'use client';
-import { RecommendationType } from '@/shared/constants/recommendations';
 import {
   Last_RecommendationsDocument,
   Recommendation,
-  RecommendationType as IRecommendationType,
+  RecommendationType,
 } from '@/shared/graphql/graphql';
 import { useQuery } from '@apollo/client';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -25,12 +24,11 @@ export const useGetRecommendations = (type?: string) => {
   );
 
   useEffect(() => {
-    const isType = type && type in RecommendationType;
     const page = Number(searchParams?.get('page'));
-    if (isType) {
+    if (type) {
       page
-        ? refetch({ type: type as IRecommendationType, page })
-        : refetch({ type: type as IRecommendationType });
+        ? refetch({ type: type as RecommendationType, page })
+        : refetch({ type: type as RecommendationType });
     } else {
       page ? refetch({ page }) : refetch();
     }

@@ -17,7 +17,7 @@ export const useAddContactForm = () => {
   const form = useForm<AddContact>({
     resolver: zodResolver(AddContactSchema),
     defaultValues: {
-      url: '',
+      nickname: '',
     },
   });
 

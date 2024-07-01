@@ -2,7 +2,7 @@ import { Contacts } from '@/shared/graphql/graphql';
 import { z } from 'zod';
 
 export const AddContactSchema = z.object({
-  url: z.string().url({ message: 'Ссылка невалидна' }).or(z.literal('')),
+  nickname: z.string(),
   type: z.nativeEnum(Contacts),
 });
 

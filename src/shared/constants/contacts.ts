@@ -1,18 +1,13 @@
-export enum ContactType {
-  TELEGRAM = 'TELEGRAM',
-  VK = 'VK',
-  INSTAGRAM = 'INSTAGRAM',
-  DISCORD = 'DISCORD',
-}
+import { Contacts } from '../graphql/graphql';
 
 interface IContactType {
   title: string;
-  type: ContactType;
+  type: Contacts;
 }
 
 export const contactTypes: IContactType[] = [
-  { title: 'ВКонтакте', type: ContactType.VK },
-  { title: 'Discord', type: ContactType.DISCORD },
-  { title: 'Instagram', type: ContactType.INSTAGRAM },
-  { title: 'Телеграм', type: ContactType.TELEGRAM },
+  { title: 'ВКонтакте', type: Contacts.Vk },
+  { title: 'Discord', type: Contacts.Discord },
+  { title: 'Instagram', type: Contacts.Instagram },
+  { title: 'Телеграм', type: Contacts.Telegram },
 ];

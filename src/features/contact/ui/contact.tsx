@@ -1,5 +1,5 @@
 import { Button, Chip, Link, Tooltip } from '@nextui-org/react';
-import { Contacts } from '../../../shared/graphql/graphql';
+import { Contacts, Maybe } from '@/shared/graphql/graphql';
 import { FaDiscord } from 'react-icons/fa';
 import { FaInstagram } from 'react-icons/fa';
 import { FaTelegram } from 'react-icons/fa';
@@ -8,7 +8,8 @@ import { useDeleteContact } from '../model/use-delete-contact';
 
 interface Props {
   type: Contacts;
-  href: string;
+  href?: Maybe<string>;
+  nickname: string;
   id: string;
 }
 
@@ -35,33 +36,28 @@ const contacts = {
   },
 };
 
-export const Contact = ({ type, href, id }: Props) => {
+export const Contact = ({ type, href, id, nickname }: Props) => {
   const Icon = contacts[type].icon;
   const { deleteContact, loading } = useDeleteContact(id);
 
   return (
     <Tooltip showArrow content={href}>
-      <Link isExternal href={href}>
-        <Chip
-          as={Button}
-          isLoading={loading}
-          onClose={() => deleteContact()}
-          lang={href}
-          classNames={{ content: 'flex items-center gap-x-1' }}
-          color={
-            contacts[type].color as
-              | 'default'
-              | 'primary'
-              | 'secondary'
-              | 'success'
-              | 'warning'
-              | 'danger'
-          }
-        >
-          <Icon className="size-5" />
-          {contacts[type].label}
-        </Chip>
-      </Link>
+      <Chip
+        as={Button}
+        isLoading={loading}
+        onClose={() => deleteContact()}
+        classNames={{ content: 'flex items-center gap-x-1' }}
+        color={contacts[type].color as any}
+      >
+        <Icon className="size-5" />
+        {type === Contacts.Discord ? (
+          <p>{nickname}</p>
+        ) : (
+          <Link isExternal href={href || ''} color="secondary">
+            {nickname}
+          </Link>
+        )}
+      </Chip>
     </Tooltip>
   );
 };

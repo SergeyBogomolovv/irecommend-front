@@ -31,6 +31,7 @@ export const AddContact = () => {
     loading,
     form,
   } = useAddContactForm();
+
   return (
     <>
       <TriggerButton onOpen={onOpen} />
@@ -52,11 +53,15 @@ export const AddContact = () => {
                     <FormField
                       disabled={loading}
                       control={form.control}
-                      name="url"
+                      name="nickname"
                       render={({ field }) => (
                         <FormItem>
                           <FormControl>
-                            <Input required placeholder="Ссылка" {...field} />
+                            <Input
+                              isRequired
+                              placeholder="Ваш ник"
+                              {...field}
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>

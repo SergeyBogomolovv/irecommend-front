@@ -1,12 +1,4 @@
-export enum RecommendationType {
-  MOVIE = 'MOVIE',
-  MUSIC = 'MUSIC',
-  ANIME = 'ANIME',
-  BOOK = 'BOOK',
-  HOBBY = 'HOBBY',
-  TODO = 'TODO',
-  SERIES = 'SERIES',
-}
+import { RecommendationType } from '../graphql/graphql';
 
 interface IRecommendationType {
   title: string;
@@ -14,11 +6,11 @@ interface IRecommendationType {
 }
 
 export const recommendationTypes: IRecommendationType[] = [
-  { title: 'Фильмы', type: RecommendationType.MOVIE },
-  { title: 'Сериалы', type: RecommendationType.SERIES },
-  { title: 'Музыка', type: RecommendationType.MUSIC },
-  { title: 'Аниме', type: RecommendationType.ANIME },
-  { title: 'Книги', type: RecommendationType.BOOK },
-  { title: 'Хобби', type: RecommendationType.HOBBY },
-  { title: 'Идеи чем заняться', type: RecommendationType.TODO },
+  { title: 'Фильмы', type: RecommendationType.Movie },
+  { title: 'Сериалы', type: RecommendationType.Series },
+  { title: 'Музыка', type: RecommendationType.Music },
+  { title: 'Аниме', type: RecommendationType.Anime },
+  { title: 'Книги', type: RecommendationType.Book },
+  { title: 'Хобби', type: RecommendationType.Hobby },
+  { title: 'Идеи чем заняться', type: RecommendationType.Todo },
 ];

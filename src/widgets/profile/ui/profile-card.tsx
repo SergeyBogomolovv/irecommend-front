@@ -76,7 +76,8 @@ export const ProfileCard = () => {
                   key={contact.id}
                   id={contact.id}
                   type={contact.type}
-                  href={contact.url}
+                  href={contact?.url}
+                  nickname={contact.nickname}
                 />
               ))}
             </>
