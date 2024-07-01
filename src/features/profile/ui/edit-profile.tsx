@@ -8,12 +8,15 @@ import {
   Button,
   Input,
   Textarea,
+  ScrollShadow,
 } from '@nextui-org/react';
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from '@/shared/ui/form';
 import { TriggerButton } from './trigger-button';
@@ -52,46 +55,59 @@ export const EditProfile = ({ profile }: Props) => {
                   <ModalHeader className="flex flex-col gap-1">
                     Мой профиль
                   </ModalHeader>
-                  <ModalBody>
-                    <FormField
-                      disabled={loading}
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormControl>
-                            <Input required placeholder="Имя" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      disabled={loading}
-                      control={form.control}
-                      name="about"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormControl>
-                            <Textarea placeholder="О себе" {...field} />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button
-                      type="button"
-                      color="danger"
-                      variant="light"
-                      onPress={onReject}
-                    >
-                      Отмена
-                    </Button>
-                    <Button isLoading={loading} type="submit" color="primary">
-                      Готово
-                    </Button>
-                  </ModalFooter>
+                  <ScrollShadow className="max-h-[700px]">
+                    <ModalBody>
+                      <FormField
+                        disabled={loading}
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Отображаемое имя</FormLabel>
+                            <FormControl>
+                              <Input required placeholder="Имя" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        disabled={loading}
+                        control={form.control}
+                        name="about"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Расскажите о себе</FormLabel>
+                            <FormControl>
+                              <Textarea
+                                disableAnimation
+                                placeholder="О себе"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormDescription>
+                              Любые подробности, например: возраст, род занятий
+                              или город. Пример: 23 года, дизайнер из
+                              Санкт-Петербурга.
+                            </FormDescription>
+                          </FormItem>
+                        )}
+                      />
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button
+                        type="button"
+                        color="danger"
+                        variant="light"
+                        onPress={onReject}
+                      >
+                        Отмена
+                      </Button>
+                      <Button isLoading={loading} type="submit" color="primary">
+                        Готово
+                      </Button>
+                    </ModalFooter>
+                  </ScrollShadow>
                 </form>
               </Form>
             </>

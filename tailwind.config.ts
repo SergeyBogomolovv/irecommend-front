@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 import { nextui } from '@nextui-org/react';
+import plugin from 'tailwindcss/plugin';
 
 const config = {
   darkMode: 'class',
@@ -13,6 +14,28 @@ const config = {
   ],
   prefix: '',
   theme: {
+    patterns: {
+      opacities: {
+        100: '1',
+        80: '.80',
+        60: '.60',
+        40: '.40',
+        20: '.20',
+        10: '.10',
+        5: '.05',
+      },
+      sizes: {
+        1: '0.25rem',
+        2: '0.5rem',
+        4: '1rem',
+        6: '1.5rem',
+        8: '2rem',
+        16: '4rem',
+        20: '5rem',
+        24: '6rem',
+        32: '8rem',
+      },
+    },
     container: {
       center: true,
       padding: '2rem',
@@ -21,6 +44,11 @@ const config = {
       },
     },
     extend: {
+      textShadow: {
+        sm: '0 1px 2px var(--tw-shadow-color)',
+        DEFAULT: '0 2px 4px var(--tw-shadow-color)',
+        lg: '0 8px 16px var(--tw-shadow-color)',
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -72,7 +100,21 @@ const config = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate'), nextui()],
+  plugins: [
+    require('tailwindcss-animate'),
+    nextui(),
+    require('tailwindcss-bg-patterns'),
+    plugin(function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          'text-shadow': (value) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme('textShadow') },
+      );
+    }),
+  ],
 } satisfies Config;
 
 export default config;

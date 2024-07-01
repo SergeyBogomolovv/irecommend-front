@@ -23,12 +23,16 @@ export const useEditProfileForm = (profile: Profile) => {
   });
 
   const [editProfile, { loading }] = useMutation(Edit_ProfileDocument, {
-    onCompleted: () => {
+    onCompleted: (data) => {
       toast.success('Информация обновлена');
-      form.reset();
+      form.reset({
+        name: data.update_profile.profile.name,
+        about: data.update_profile.profile?.about || '',
+      });
       onClose();
     },
     onError: () => {
+      form.reset();
       toast.error('Ошибка при обновлении информации');
     },
     refetchQueries: ['Profile'],

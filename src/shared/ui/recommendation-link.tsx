@@ -1,5 +1,5 @@
-import { RecommendationType } from '@/shared/constants/recommendations';
 import { Chip, Link } from '@nextui-org/react';
+import { RecommendationType } from '../graphql/graphql';
 
 interface Props {
   type: RecommendationType;

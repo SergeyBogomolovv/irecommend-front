@@ -1,67 +1,39 @@
 import { Button, Chip, Link, Tooltip } from '@nextui-org/react';
-import { Contacts } from '../../../shared/graphql/graphql';
-import { FaDiscord } from 'react-icons/fa';
-import { FaInstagram } from 'react-icons/fa';
-import { FaTelegram } from 'react-icons/fa';
-import { SlSocialVkontakte } from 'react-icons/sl';
+import { Contacts, Maybe } from '@/shared/graphql/graphql';
 import { useDeleteContact } from '../model/use-delete-contact';
+import { contactTypes } from '@/shared/constants/contacts';
+import { useCopy } from '../model/use-copy';
 
 interface Props {
   type: Contacts;
-  href: string;
+  href?: Maybe<string>;
+  nickname: string;
   id: string;
 }
 
-const contacts = {
-  [Contacts.Discord]: {
-    label: 'Discord',
-    icon: FaDiscord,
-    color: 'default',
-  },
-  [Contacts.Instagram]: {
-    label: 'Instagram',
-    icon: FaInstagram,
-    color: 'danger',
-  },
-  [Contacts.Telegram]: {
-    label: 'Телеграм',
-    icon: FaTelegram,
-    color: 'primary',
-  },
-  [Contacts.Vk]: {
-    label: 'ВКонтакте',
-    icon: SlSocialVkontakte,
-    color: 'primary',
-  },
-};
-
-export const Contact = ({ type, href, id }: Props) => {
-  const Icon = contacts[type].icon;
+export const Contact = ({ type, href, id, nickname }: Props) => {
+  const contact = contactTypes.find((contact) => contact.type === type)!;
+  const Icon = contact?.icon;
   const { deleteContact, loading } = useDeleteContact(id);
-
+  const copy = useCopy(nickname);
   return (
-    <Tooltip showArrow content={href}>
-      <Link isExternal href={href}>
-        <Chip
-          as={Button}
-          isLoading={loading}
-          onClose={() => deleteContact()}
-          lang={href}
-          classNames={{ content: 'flex items-center gap-x-1' }}
-          color={
-            contacts[type].color as
-              | 'default'
-              | 'primary'
-              | 'secondary'
-              | 'success'
-              | 'warning'
-              | 'danger'
-          }
-        >
-          <Icon className="size-5" />
-          {contacts[type].label}
-        </Chip>
-      </Link>
+    <Tooltip showArrow content={href || 'Скопировать'}>
+      <Chip
+        as={Button}
+        isLoading={loading}
+        onClose={() => deleteContact()}
+        classNames={{ content: 'flex items-center gap-x-1' }}
+        color={contact?.color}
+      >
+        <Icon className="size-5" />
+        {type === Contacts.Discord ? (
+          <p onClick={() => copy()}>{nickname}</p>
+        ) : (
+          <Link isExternal href={href || '/'} color="foreground" size="sm">
+            {nickname}
+          </Link>
+        )}
+      </Chip>
     </Tooltip>
   );
 };

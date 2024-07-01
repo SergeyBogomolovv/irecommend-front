@@ -13,8 +13,10 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from '@/shared/ui/form';
 import { contactTypes } from '@/shared/constants/contacts';
@@ -31,6 +33,7 @@ export const AddContact = () => {
     loading,
     form,
   } = useAddContactForm();
+
   return (
     <>
       <TriggerButton onOpen={onOpen} />
@@ -52,12 +55,22 @@ export const AddContact = () => {
                     <FormField
                       disabled={loading}
                       control={form.control}
-                      name="url"
+                      name="nickname"
                       render={({ field }) => (
                         <FormItem>
+                          <FormLabel>Никнейм</FormLabel>
                           <FormControl>
-                            <Input required placeholder="Ссылка" {...field} />
+                            <Input
+                              isRequired
+                              placeholder="nickname"
+                              {...field}
+                            />
                           </FormControl>
+                          <FormDescription>
+                            Напишите ваш уникальный никнейм - с ним создаться
+                            ссылка по которой другие пользователи смогут
+                            перейти.
+                          </FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -68,13 +81,19 @@ export const AddContact = () => {
                       name="type"
                       render={({ field }) => (
                         <FormItem>
+                          <FormLabel>Соцсеть</FormLabel>
                           <FormControl>
-                            <Select {...field} placeholder="Выберите тип">
-                              {contactTypes.map((type) => (
-                                <SelectItem key={type.type}>
-                                  {type.title}
-                                </SelectItem>
-                              ))}
+                            <Select {...field} placeholder="Выберите...">
+                              {contactTypes.map(
+                                ({ type, title, icon: Icon }) => (
+                                  <SelectItem
+                                    startContent={<Icon className="size-4" />}
+                                    key={type}
+                                  >
+                                    {title}
+                                  </SelectItem>
+                                ),
+                              )}
                             </Select>
                           </FormControl>
                         </FormItem>

@@ -1,9 +1,11 @@
 'use client';
 import { useViewer } from '@/entities/viewer';
 import {
+  favoritesRoute,
   loginRoute,
   profileRoute,
   registerRoute,
+  viewersRecommendationsRoute,
 } from '@/shared/constants/routes';
 import {
   Button,
@@ -13,9 +15,8 @@ import {
   NavbarMenuItem,
 } from '@nextui-org/react';
 import { LogoutButton } from './logout-button';
-import { FaUserCircle, FaUsers } from 'react-icons/fa';
-import { MdOutlineRecommend } from 'react-icons/md';
-import { IoIosSettings } from 'react-icons/io';
+import { FaUserCircle } from 'react-icons/fa';
+import { MdFavorite, MdOutlineRecommend } from 'react-icons/md';
 import { recommendationTypes } from '@/shared/constants/recommendations';
 import { Search } from '@/features/search';
 import { RecommendationLink } from '@/shared/ui/recommendation-link';
@@ -45,7 +46,6 @@ export default function MobileList() {
               href={loginRoute}
               className="w-full"
               color="primary"
-              variant="flat"
             >
               Вход
             </Button>
@@ -56,7 +56,6 @@ export default function MobileList() {
               href={registerRoute}
               className="w-full"
               color="primary"
-              variant="flat"
             >
               Регистрация
             </Button>
@@ -71,21 +70,19 @@ export default function MobileList() {
             </Link>
           </NavbarMenuItem>
           <NavbarMenuItem>
-            <Link href={profileRoute} color="foreground" size="lg">
-              <FaUsers className="size-5 mr-2" />
-              Друзья
+            <Link href={favoritesRoute} color="foreground" size="lg">
+              <MdFavorite className="size-5 mr-2" />
+              Избранное
             </Link>
           </NavbarMenuItem>
           <NavbarMenuItem>
-            <Link href={profileRoute} color="foreground" size="lg">
+            <Link
+              href={viewersRecommendationsRoute}
+              color="foreground"
+              size="lg"
+            >
               <MdOutlineRecommend className="size-5 mr-2" />
               Рекомендации
-            </Link>
-          </NavbarMenuItem>
-          <NavbarMenuItem>
-            <Link href={profileRoute} color="foreground" size="lg">
-              <IoIosSettings className="size-5 mr-2" />
-              Настройки
             </Link>
           </NavbarMenuItem>
           <Divider />
