@@ -13,8 +13,8 @@ export const ModalImage = ({ src }: Props) => {
         onClick={onOpen}
         src={src}
         className="object-cover rounded-xl w-full h-full cursor-pointer aspect-auto"
-        width={1000}
-        height={1000}
+        width={500}
+        height={500}
       />
       <Modal
         backdrop="blur"
