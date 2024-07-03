@@ -1,4 +1,4 @@
-import { RecommendationsList } from '@/widgets/recommendations-list';
+import { Feed } from '@/widgets/feed';
 import { Suspense } from 'react';
 
 interface Params {
@@ -10,7 +10,7 @@ interface Params {
 export default function HomePage({ params }: Params) {
   return (
     <Suspense>
-      <RecommendationsList type={params.type} />
+      <Feed type={params.type} />
     </Suspense>
   );
 }

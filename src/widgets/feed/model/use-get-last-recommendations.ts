@@ -8,7 +8,7 @@ import { useQuery } from '@apollo/client';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
-export const useGetRecommendations = (type?: string) => {
+export const useGetLastRecommendations = (type?: string) => {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams || '');
   const pathname = usePathname();
