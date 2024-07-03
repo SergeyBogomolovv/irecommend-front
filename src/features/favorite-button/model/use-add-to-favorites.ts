@@ -20,7 +20,11 @@ export const useAddToFavorites = (recommendationId: string) => {
     Add_To_FavoritesDocument,
     {
       variables: { recommendationId },
-      refetchQueries: ['Last_recommendations', 'ViewersFavorites'],
+      refetchQueries: [
+        'Last_recommendations',
+        'ViewersFavorites',
+        'Favorites_recommendations',
+      ],
       onError: () => {
         toast.error('Не получилось добавить в избранное');
       },
@@ -31,7 +35,11 @@ export const useAddToFavorites = (recommendationId: string) => {
     Remove_From_FavoritesDocument,
     {
       variables: { recommendationId },
-      refetchQueries: ['Last_recommendations', 'ViewersFavorites'],
+      refetchQueries: [
+        'Last_recommendations',
+        'ViewersFavorites',
+        'Favorites_recommendations',
+      ],
       onError: () => {
         toast.error('Не получилось удалить из избранного');
       },
