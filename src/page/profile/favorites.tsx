@@ -1,3 +1,5 @@
+import { Favorites } from '@/widgets/feed';
+
 export default function ProfileFavoritesPage() {
-  return <main></main>;
+  return <Favorites />;
 }

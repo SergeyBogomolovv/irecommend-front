@@ -1,0 +1,24 @@
+query Favorites_recommendations($page: Int) {
+  favorites_recommendations(page: $page) {
+    recommendations {
+      id
+      title
+      description
+      favoritesCount
+      type
+      link
+      created_at
+      images {
+        id
+        url
+      }
+      author {
+        profile {
+          name
+          logo
+        }
+      }
+    }
+    pagesCount
+  }
+}

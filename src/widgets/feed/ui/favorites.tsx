@@ -1,13 +1,10 @@
 'use client';
-import { useGetLastRecommendations } from '../model/use-get-last-recommendations';
+import { useGetFavorites } from '../model/use-get-favorites';
 import FeedContainer from './feed-container';
-interface Props {
-  type?: string;
-}
 
-export function Feed({ type }: Props) {
+export function Favorites() {
   const { recommendations, loading, onPageChange, pagesCount } =
-    useGetLastRecommendations(type);
+    useGetFavorites();
 
   return (
     <FeedContainer

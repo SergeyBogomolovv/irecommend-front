@@ -1,5 +1,5 @@
 import { RecommendationSkeleton } from '@/entities/recommendation';
-import { Recommendation } from '../graphql/graphql';
+import { Recommendation } from '../../../shared/graphql/graphql';
 import { RecommendationCard } from '@/widgets/recommendation';
 import { Pagination } from '@nextui-org/react';
 
@@ -26,12 +26,18 @@ const FeedContainer = ({
         </>
       ) : (
         <>
-          {recommendations.map((recommendation) => (
-            <RecommendationCard
-              key={recommendation.id}
-              recommendation={recommendation}
-            />
-          ))}
+          {recommendations.length > 0 ? (
+            <>
+              {recommendations.map((recommendation) => (
+                <RecommendationCard
+                  key={recommendation.id}
+                  recommendation={recommendation}
+                />
+              ))}
+            </>
+          ) : (
+            <>Тут пока ничего нет</>
+          )}
         </>
       )}
       {!!pagesCount && pagesCount > 1 && (
