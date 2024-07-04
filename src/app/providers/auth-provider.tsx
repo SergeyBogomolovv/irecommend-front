@@ -10,7 +10,9 @@ import {
   verifyAccountRoute,
   viewersRecommendationsRoute,
 } from '@/shared/constants/routes';
+
 import { usePathname, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 const authRoutes = [
   loginRoute,
@@ -36,11 +38,16 @@ export default function AuthProvider({ children }: Props) {
   const isOnAuthRoute = authRoutes.includes(pathname);
   const isOnPrivateRoute = privateRoutes.includes(pathname);
   const { notAuthenticated } = useViewer();
+  const cannotBeOnAuth = isOnAuthRoute && !notAuthenticated;
+  const cannotBeOnPrivate = notAuthenticated && isOnPrivateRoute;
 
-  if (notAuthenticated && isOnPrivateRoute) {
-    router.push('/login');
-  } else if (isOnAuthRoute && !notAuthenticated) {
-    router.push('/');
-  }
-  return <main>{children}</main>;
+  useEffect(() => {
+    if (cannotBeOnPrivate) {
+      router.push('/login');
+    } else if (cannotBeOnAuth) {
+      router.push('/');
+    }
+  }, [pathname, router, notAuthenticated]);
+
+  return <>{!cannotBeOnAuth && !cannotBeOnPrivate && <>{children}</>}</>;
 }
