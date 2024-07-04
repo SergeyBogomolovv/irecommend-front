@@ -1,3 +1,4 @@
+'use client';
 import { useViewer } from '@/entities/viewer';
 import {
   favoritesRoute,
@@ -37,10 +38,9 @@ export default function AuthProvider({ children }: Props) {
   const { notAuthenticated } = useViewer();
 
   if (notAuthenticated && isOnPrivateRoute) {
-    return router.push('/login');
+    router.push('/login');
   } else if (isOnAuthRoute && !notAuthenticated) {
-    return router.back();
-  } else {
-    return <main>{children}</main>;
+    router.push('/');
   }
+  return <main>{children}</main>;
 }
