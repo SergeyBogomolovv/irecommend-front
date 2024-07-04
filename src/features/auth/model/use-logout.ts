@@ -12,7 +12,7 @@ export const useLogout = () => {
       localStorage.removeItem(accessTokenKey);
       router.push(loginRoute);
     },
-    refetchQueries: ['Viewer'],
+    refetchQueries: ['Viewer', 'Profile'],
   });
   return { loading, logout };
 };
