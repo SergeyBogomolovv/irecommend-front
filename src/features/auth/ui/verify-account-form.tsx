@@ -17,6 +17,7 @@ export function VerifyAccountForm() {
   const { form, loading, handleSubmit } = useVerifyAccountForm();
   return (
     <FormWrapper
+      imageSrc="./confirm-account.svg"
       header="Подтвердите ваш аккаунт"
       description="Проверьте вашу почту, на нее должен был прийти код подтверждения"
       footer="Назад к регистрации"

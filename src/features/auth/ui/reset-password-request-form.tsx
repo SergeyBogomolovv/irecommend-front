@@ -18,6 +18,7 @@ export function ResetPasswordRequestForm() {
 
   return (
     <FormWrapper
+      imageSrc="/forgot-password.svg"
       header="Забыли пароль?"
       description="Введите почту, с которой вы регистрировались, на нее вам придет письмо с кодом подтверждения."
       footer="Вернуться ко входу"

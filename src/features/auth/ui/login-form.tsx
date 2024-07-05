@@ -18,6 +18,7 @@ export function LoginForm() {
 
   return (
     <FormWrapper
+      imageSrc="/login.svg"
       header="Рады видеть вас снова!"
       description="Войдите в аккаунт, чтобы продолжить пользоваться IRecommend"
       footer="Еще не зарегистрированы?"

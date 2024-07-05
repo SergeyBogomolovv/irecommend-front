@@ -22,14 +22,14 @@ export const Contact = ({ type, href, id, nickname }: Props) => {
         as={Button}
         isLoading={loading}
         onClose={() => deleteContact()}
-        classNames={{ content: 'flex items-center gap-x-1' }}
+        classNames={{ content: 'flex items-center gap-x-1 text-white' }}
         color={contact?.color}
       >
-        <Icon className="size-5" />
+        <Icon className="size-5 text-white" />
         {type === Contacts.Discord ? (
           <p onClick={() => copy()}>{nickname}</p>
         ) : (
-          <Link isExternal href={href || '/'} color="foreground" size="sm">
+          <Link isExternal href={href || '/'} className="text-white" size="sm">
             {nickname}
           </Link>
         )}

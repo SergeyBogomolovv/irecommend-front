@@ -37,17 +37,19 @@ export default function AuthProvider({ children }: Props) {
   const router = useRouter();
   const isOnAuthRoute = authRoutes.includes(pathname);
   const isOnPrivateRoute = privateRoutes.includes(pathname);
-  const { notAuthenticated } = useViewer();
+  const { notAuthenticated, loading } = useViewer();
   const cannotBeOnAuth = isOnAuthRoute && !notAuthenticated;
   const cannotBeOnPrivate = notAuthenticated && isOnPrivateRoute;
 
   useEffect(() => {
-    if (cannotBeOnPrivate) {
-      router.push('/login');
-    } else if (cannotBeOnAuth) {
-      router.push('/');
+    if (!loading) {
+      if (cannotBeOnPrivate) {
+        router.push('/login');
+      } else if (cannotBeOnAuth) {
+        router.push('/');
+      }
     }
-  }, [pathname, router, notAuthenticated]);
+  }, [pathname, notAuthenticated]);
 
   return <>{!cannotBeOnAuth && !cannotBeOnPrivate && <>{children}</>}</>;
 }

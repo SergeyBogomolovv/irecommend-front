@@ -20,6 +20,7 @@ export function ResetPasswordForm() {
 
   return (
     <FormWrapper
+      imageSrc="new-password.svg"
       header="Придумайте новый пароль."
       description="Код сброса пароля пришел вам на почту"
       footer="Вернуться ко входу"

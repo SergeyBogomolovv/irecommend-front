@@ -14,5 +14,8 @@ export const useLogout = () => {
     },
     refetchQueries: ['Viewer', 'Profile'],
   });
-  return { loading, logout };
+  return {
+    loading,
+    logout,
+  };
 };

@@ -6,9 +6,9 @@ export default function MainLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="px-2 gap-y-6 pt-3 flex flex-col items-center justify-center">
+    <section className="px-2 gap-y-6 pt-3 flex flex-col items-center justify-center">
       <Links />
       {children}
-    </div>
+    </section>
   );
 }

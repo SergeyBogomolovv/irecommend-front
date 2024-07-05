@@ -17,6 +17,7 @@ export function RegisterForm() {
 
   return (
     <FormWrapper
+      imageSrc="/sign-up.svg"
       header="Добро пожаловать!"
       description="Зарегистрируйтесь, чтобы начать пользоваться IRecommend"
       footer="У вас уже есть аккаунт?"

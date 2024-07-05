@@ -8,6 +8,7 @@ interface Props {
   loading?: boolean;
   onPageChange: (page: number) => void;
   pagesCount?: number;
+  emptyRender?: React.ReactNode;
 }
 
 const FeedContainer = ({
@@ -15,6 +16,7 @@ const FeedContainer = ({
   loading,
   onPageChange,
   pagesCount,
+  emptyRender,
 }: Props) => {
   return (
     <div className="flex flex-col sm:gap-y-6 gap-y-2 items-center justify-items-center sm:w-[524px]">
@@ -36,7 +38,7 @@ const FeedContainer = ({
               ))}
             </>
           ) : (
-            <>Тут пока ничего нет</>
+            <>{emptyRender}</>
           )}
         </>
       )}
