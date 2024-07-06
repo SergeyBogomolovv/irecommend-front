@@ -1,7 +1,7 @@
 'use client';
 import { UIProvider } from './ui';
 import { ApolloProvider } from './apollo';
-import AuthProvider from './auth-provider';
+import AuthGuard from './auth-guard';
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -11,7 +11,7 @@ export function Providers({ children }: ProvidersProps) {
   return (
     <UIProvider>
       <ApolloProvider>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthGuard>{children}</AuthGuard>
       </ApolloProvider>
     </UIProvider>
   );

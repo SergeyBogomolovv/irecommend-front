@@ -32,7 +32,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export default function AuthProvider({ children }: Props) {
+export default function AuthGuard({ children }: Props) {
   const pathname = usePathname();
   const router = useRouter();
   const isOnAuthRoute = authRoutes.includes(pathname);
