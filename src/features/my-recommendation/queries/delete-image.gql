@@ -1,0 +1,5 @@
+mutation Delete_image_from_recommendation($imageId: String!) {
+  delete_image_from_recommendation(imageId: $imageId) {
+    message
+  }
+}

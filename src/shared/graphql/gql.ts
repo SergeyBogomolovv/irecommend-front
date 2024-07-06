@@ -29,6 +29,11 @@ const documents = {
     "mutation Add_to_favorites($recommendationId: String!) {\n  add_to_favorites(id: $recommendationId) {\n    message\n  }\n}": types.Add_To_FavoritesDocument,
     "query ViewersFavorites {\n  profile {\n    favorites {\n      id\n    }\n  }\n}": types.ViewersFavoritesDocument,
     "mutation Remove_from_favorites($recommendationId: String!) {\n  remove_from_favorites(id: $recommendationId) {\n    message\n  }\n}": types.Remove_From_FavoritesDocument,
+    "mutation Add_images_to_recommendation($id: String!, $images: [Upload!]!) {\n  add_images_to_recommendation(id: $id, images: $images) {\n    message\n  }\n}": types.Add_Images_To_RecommendationDocument,
+    "mutation Delete_image_from_recommendation($imageId: String!) {\n  delete_image_from_recommendation(imageId: $imageId) {\n    message\n  }\n}": types.Delete_Image_From_RecommendationDocument,
+    "mutation Delete_recommendation($id: String!) {\n  delete_recommendation(id: $id) {\n    message\n  }\n}": types.Delete_RecommendationDocument,
+    "query MyRecommendations {\n  profile {\n    recommendations {\n      id\n      title\n      description\n      favoritesCount\n      type\n      link\n      images {\n        id\n        url\n      }\n      created_at\n    }\n  }\n}": types.MyRecommendationsDocument,
+    "mutation Update_recommendation($id: String!, $payload: UpdateRecommendationInput!) {\n  update_recommendation(id: $id, payload: $payload) {\n    message\n  }\n}": types.Update_RecommendationDocument,
     "mutation Create_recommendation($payload: CreateRecommendationInput!, $images: [Upload!]) {\n  create_recommendation(payload: $payload, images: $images) {\n    message\n  }\n}": types.Create_RecommendationDocument,
     "mutation Edit_profile($payload: UpdateProfileDto) {\n  update_profile(payload: $payload) {\n    profile {\n      name\n      about\n    }\n  }\n}": types.Edit_ProfileDocument,
     "mutation Update_avatar($image: Upload) {\n  update_profile(image: $image) {\n    id\n  }\n}": types.Update_AvatarDocument,
@@ -116,6 +121,26 @@ export function graphql(source: "query ViewersFavorites {\n  profile {\n    favo
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "mutation Remove_from_favorites($recommendationId: String!) {\n  remove_from_favorites(id: $recommendationId) {\n    message\n  }\n}"): (typeof documents)["mutation Remove_from_favorites($recommendationId: String!) {\n  remove_from_favorites(id: $recommendationId) {\n    message\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation Add_images_to_recommendation($id: String!, $images: [Upload!]!) {\n  add_images_to_recommendation(id: $id, images: $images) {\n    message\n  }\n}"): (typeof documents)["mutation Add_images_to_recommendation($id: String!, $images: [Upload!]!) {\n  add_images_to_recommendation(id: $id, images: $images) {\n    message\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation Delete_image_from_recommendation($imageId: String!) {\n  delete_image_from_recommendation(imageId: $imageId) {\n    message\n  }\n}"): (typeof documents)["mutation Delete_image_from_recommendation($imageId: String!) {\n  delete_image_from_recommendation(imageId: $imageId) {\n    message\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation Delete_recommendation($id: String!) {\n  delete_recommendation(id: $id) {\n    message\n  }\n}"): (typeof documents)["mutation Delete_recommendation($id: String!) {\n  delete_recommendation(id: $id) {\n    message\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query MyRecommendations {\n  profile {\n    recommendations {\n      id\n      title\n      description\n      favoritesCount\n      type\n      link\n      images {\n        id\n        url\n      }\n      created_at\n    }\n  }\n}"): (typeof documents)["query MyRecommendations {\n  profile {\n    recommendations {\n      id\n      title\n      description\n      favoritesCount\n      type\n      link\n      images {\n        id\n        url\n      }\n      created_at\n    }\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation Update_recommendation($id: String!, $payload: UpdateRecommendationInput!) {\n  update_recommendation(id: $id, payload: $payload) {\n    message\n  }\n}"): (typeof documents)["mutation Update_recommendation($id: String!, $payload: UpdateRecommendationInput!) {\n  update_recommendation(id: $id, payload: $payload) {\n    message\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

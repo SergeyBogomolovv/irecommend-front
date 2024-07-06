@@ -1,0 +1,8 @@
+mutation Update_recommendation(
+  $id: String!
+  $payload: UpdateRecommendationInput!
+) {
+  update_recommendation(id: $id, payload: $payload) {
+    message
+  }
+}

@@ -1,0 +1,17 @@
+query MyRecommendations {
+  profile {
+    recommendations {
+      id
+      title
+      description
+      favoritesCount
+      type
+      link
+      images {
+        id
+        url
+      }
+      created_at
+    }
+  }
+}
