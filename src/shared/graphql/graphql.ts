@@ -264,7 +264,7 @@ export type Query = {
   get_recommendation_by_id: Recommendation;
   last_recommendations: PaginatedRecommendationResponse;
   one_user: User;
-  profile: User;
+  profile?: Maybe<User>;
   refresh: AccessTokenResponse;
   search_recommendations: Array<Recommendation>;
   search_users_by_name: Array<User>;
@@ -381,7 +381,7 @@ export type VerifyResponse = {
 export type ViewerQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ViewerQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, email?: string | null, verified: boolean, profile: { __typename?: 'Profile', name: string, about?: string | null, logo?: string | null } } };
+export type ViewerQuery = { __typename?: 'Query', profile?: { __typename?: 'User', id: string, email?: string | null, verified: boolean, profile: { __typename?: 'Profile', name: string, about?: string | null, logo?: string | null } } | null };
 
 export type LoginMutationVariables = Exact<{
   input: LoginInput;
@@ -475,7 +475,7 @@ export type Add_To_FavoritesMutation = { __typename?: 'Mutation', add_to_favorit
 export type ViewersFavoritesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ViewersFavoritesQuery = { __typename?: 'Query', profile: { __typename?: 'User', favorites: Array<{ __typename?: 'Recommendation', id: string }> } };
+export type ViewersFavoritesQuery = { __typename?: 'Query', profile?: { __typename?: 'User', favorites: Array<{ __typename?: 'Recommendation', id: string }> } | null };
 
 export type Remove_From_FavoritesMutationVariables = Exact<{
   recommendationId: Scalars['String']['input'];
@@ -532,7 +532,7 @@ export type Last_RecommendationsQuery = { __typename?: 'Query', last_recommendat
 export type ProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProfileQuery = { __typename?: 'Query', profile: { __typename?: 'User', id: string, created_at: any, email?: string | null, password?: string | null, profile: { __typename?: 'Profile', name: string, about?: string | null, logo?: string | null, contacts: Array<{ __typename?: 'Contact', id: string, url?: string | null, type: Contacts, nickname: string }> } } };
+export type ProfileQuery = { __typename?: 'Query', profile?: { __typename?: 'User', id: string, created_at: any, email?: string | null, password?: string | null, profile: { __typename?: 'Profile', name: string, about?: string | null, logo?: string | null, contacts: Array<{ __typename?: 'Contact', id: string, url?: string | null, type: Contacts, nickname: string }> } } | null };
 
 
 export const ViewerDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Viewer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"verified"}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"about"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}}]}}]}}]} as unknown as DocumentNode<ViewerQuery, ViewerQueryVariables>;

@@ -10,7 +10,7 @@ export const useAddToFavorites = (recommendationId: string) => {
   const { data, loading: isQueryLoading } = useQuery(ViewersFavoritesDocument);
 
   let isInFavorites = false;
-  data?.profile.favorites.forEach((recommendation) => {
+  data?.profile?.favorites.forEach((recommendation) => {
     if (recommendation.id === recommendationId) {
       isInFavorites = true;
     }

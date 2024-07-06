@@ -1,14 +1,12 @@
 'use client';
 import { ViewerDocument } from '@/shared/graphql/graphql';
-import { NetworkStatus, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 export function useViewer() {
-  const { data, error, loading, networkStatus } = useQuery(ViewerDocument, {
-    refetchWritePolicy: 'overwrite',
-  });
+  const { data, error, loading } = useQuery(ViewerDocument);
   return {
     viewer: data?.profile,
-    notAuthenticated: !!error && networkStatus !== NetworkStatus.refetch,
-    loading: loading,
+    notAuthenticated: !!error || data?.profile === null,
+    loading,
   };
 }

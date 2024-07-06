@@ -3,7 +3,7 @@ import { Profile } from '@/shared/graphql/graphql';
 import { Card, CardBody, Skeleton } from '@nextui-org/react';
 interface Props {
   loading: boolean;
-  profile: Profile;
+  profile: Profile | null;
 }
 const Contacts = ({ loading, profile }: Props) => {
   return (
@@ -23,7 +23,7 @@ const Contacts = ({ loading, profile }: Props) => {
             </>
           ) : (
             <>
-              {profile.contacts.length ? (
+              {profile?.contacts.length ? (
                 <>
                   {profile.contacts.map((contact) => (
                     <Contact
