@@ -1,10 +1,15 @@
-import { RecommendationSkeleton } from '@/entities/recommendation';
-import { Recommendation } from '../../../shared/graphql/graphql';
-import { RecommendationCard } from '@/widgets/recommendation';
+import {
+  Recommendation,
+  RecommendationSkeleton,
+} from '@/entities/recommendation';
+import { FavoriteButton } from '@/features/favorite-button';
+import { Recommendation as IRecommendation } from '@/shared/graphql/graphql';
+import ImagesCarousel from '@/shared/ui/images-carousel';
+import { CommentsList } from '@/widgets/comments';
 import { Pagination } from '@nextui-org/react';
 
 interface Props {
-  recommendations: Recommendation[];
+  recommendations: IRecommendation[];
   loading?: boolean;
   onPageChange: (page: number) => void;
   pagesCount?: number;
@@ -19,7 +24,7 @@ const FeedContainer = ({
   emptyRender,
 }: Props) => {
   return (
-    <div className="flex flex-col sm:gap-y-6 gap-y-2 items-center justify-items-center sm:w-[524px]">
+    <div className="flex flex-col sm:gap-y-6 gap-y-2 items-center justify-items-center sm:w-[524px] mb-10">
       {loading ? (
         <>
           <RecommendationSkeleton />
@@ -31,9 +36,26 @@ const FeedContainer = ({
           {recommendations.length > 0 ? (
             <>
               {recommendations.map((recommendation) => (
-                <RecommendationCard
+                <Recommendation
                   key={recommendation.id}
-                  recommendation={recommendation}
+                  title={recommendation.title}
+                  description={recommendation.description}
+                  link={recommendation.link}
+                  username={recommendation.author.profile.name}
+                  avatar={recommendation.author.profile.logo}
+                  created_at={recommendation.created_at}
+                  loading={loading}
+                  actionButton={
+                    <FavoriteButton recommendation={recommendation} />
+                  }
+                  footer={<CommentsList recommendationId={recommendation.id} />}
+                  body={
+                    recommendation.images.length ? (
+                      <ImagesCarousel
+                        images={recommendation.images.map((image) => image.url)}
+                      />
+                    ) : null
+                  }
                 />
               ))}
             </>

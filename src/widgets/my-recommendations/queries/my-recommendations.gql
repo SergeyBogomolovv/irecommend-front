@@ -7,6 +7,9 @@ query MyRecommendations {
       favoritesCount
       type
       link
+      comments {
+        id
+      }
       images {
         id
         url
