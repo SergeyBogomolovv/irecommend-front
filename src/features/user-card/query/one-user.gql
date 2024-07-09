@@ -1,0 +1,21 @@
+query One_user($id: String!) {
+  one_user(id: $id) {
+    created_at
+    email
+    password
+    verified
+    profileId
+    profile {
+      name
+      about
+      logo
+      contacts {
+        id
+        url
+        nickname
+        type
+      }
+      id
+    }
+  }
+}

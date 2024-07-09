@@ -27,6 +27,7 @@ const Contacts = ({ loading, profile }: Props) => {
                 <>
                   {profile.contacts.map((contact) => (
                     <Contact
+                      editable
                       key={contact.id}
                       id={contact.id}
                       type={contact.type}

@@ -7,14 +7,7 @@ interface IContactType {
   title: string;
   type: Contacts;
   icon: IconType;
-  color:
-    | 'default'
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'warning'
-    | 'danger'
-    | undefined;
+  className: string;
 }
 
 export const contactTypes: IContactType[] = [
@@ -22,24 +15,24 @@ export const contactTypes: IContactType[] = [
     title: 'ВКонтакте',
     type: Contacts.Vk,
     icon: SlSocialVkontakte,
-    color: 'primary',
+    className: 'bg-[#0077FF]',
   },
   {
     title: 'Discord',
     type: Contacts.Discord,
     icon: FaDiscord,
-    color: 'default',
+    className: 'bg-[#36393E]',
   },
   {
     title: 'Instagram',
     type: Contacts.Instagram,
     icon: FaInstagram,
-    color: 'danger',
+    className: 'bg-[#E1306C]',
   },
   {
     title: 'Телеграм',
     type: Contacts.Telegram,
     icon: FaTelegram,
-    color: 'primary',
+    className: 'bg-[#24A1DE]',
   },
 ];
