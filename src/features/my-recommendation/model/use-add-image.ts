@@ -8,13 +8,10 @@ export const useAddImage = (recommendationId: string) => {
   const [addImage, { loading }] = useMutation(
     Add_Images_To_RecommendationDocument,
     {
-      refetchQueries: [
-        'Favorites',
-        'MyRecommendations',
-        'Favorites_recommendations',
-        'Last_recommendations',
-        'ViewersFavorites',
-      ],
+      onCompleted() {
+        toast.success('Картинка добавлена');
+      },
+      refetchQueries: ['MyRecommendations'],
       onError: () => {
         toast.error('Ошибка при добавлении картинки');
       },
@@ -25,5 +22,10 @@ export const useAddImage = (recommendationId: string) => {
       addImage({ variables: { images: e.target.files, id: recommendationId } });
     }
   };
-  return { handleUploadFile, loading, inputRef };
+  return {
+    handleUploadFile,
+    loading,
+    inputRef,
+    onAddImageClick: () => inputRef.current.click(),
+  };
 };

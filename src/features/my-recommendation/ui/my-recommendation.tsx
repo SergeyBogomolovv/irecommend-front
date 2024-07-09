@@ -1,12 +1,19 @@
 import { Recommendation as IRecommendation } from '@/shared/graphql/graphql';
-import { Button, Tooltip } from '@nextui-org/react';
-import DeleteButton from './delete-button';
-import { Recommendation } from '@/entities/recommendation';
-import ImagesCarousel from '@/shared/ui/images-carousel';
-import { MdEditNote } from 'react-icons/md';
 import { useViewer } from '@/entities/viewer';
 import { useUpdateRecommendationForm } from '../model/use-update-recommedation-form';
-import { EditMode } from './edit-mode';
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Link,
+} from '@nextui-org/react';
+import { User } from '@/entities/user';
+import { CommentsList } from '@/widgets/comments';
+import { ActionsButton } from './actions-button';
+import { formatDate } from '@/shared/lib/format-date';
+import { EditModeForm } from './edit-mode';
+import { ImagesCarousel } from '@/features/images';
 
 interface Props {
   recommendation: IRecommendation;
@@ -21,46 +28,58 @@ export const MyRecommendation = ({ recommendation }: Props) => {
     setEditMode,
     loading: updateLoading,
   } = useUpdateRecommendationForm(recommendation);
-
   return (
-    <Recommendation
-      editMode={editMode}
-      editModeRender={
-        <EditMode
-          form={form}
-          handleSubmit={handleSubmit}
-          setEditMode={setEditMode}
-          loading={updateLoading}
-        />
-      }
-      key={recommendation.id}
-      title={recommendation.title}
-      description={recommendation.description}
-      link={recommendation.link}
-      username={viewer?.profile.name}
-      avatar={viewer?.profile.logo}
-      created_at={recommendation.created_at}
-      loading={loading}
-      actionButton={
-        <Tooltip content="Редактировать">
-          <Button
-            onPress={() => setEditMode(true)}
-            isIconOnly
-            size="sm"
-            variant="light"
-          >
-            <MdEditNote className="size-6" />
-          </Button>
-        </Tooltip>
-      }
-      footer={<DeleteButton id={recommendation.id} />}
-      body={
-        recommendation.images.length ? (
-          <ImagesCarousel
-            images={recommendation.images.map((image) => image.url)}
+    <Card className="py-2 w-full">
+      <CardHeader className="pb-1 pt-2 px-4 flex-col items-start">
+        <div className="flex justify-between items-center w-full">
+          <User
+            name={viewer?.profile.name}
+            avatar={viewer?.profile.logo}
+            description={formatDate(recommendation.created_at)}
+            loading={loading}
           />
-        ) : null
-      }
-    />
+          <ActionsButton id={recommendation.id} setEditMode={setEditMode} />
+        </div>
+        <div className="mt-2 w-full">
+          {editMode ? (
+            <EditModeForm
+              recommendationId={recommendation.id}
+              form={form}
+              handleSubmit={handleSubmit}
+              setEditMode={setEditMode}
+              loading={updateLoading}
+            />
+          ) : (
+            <div className="flex flex-col">
+              <h4 className="font-bold text-large">{recommendation.title}</h4>
+              <small className="text-default-500">
+                {recommendation.description}
+              </small>
+              {recommendation.link && (
+                <Link
+                  className="max-w-[250px] truncate mt-2"
+                  showAnchorIcon
+                  size="sm"
+                  isExternal
+                  href={recommendation.link}
+                >
+                  Ссылка
+                </Link>
+              )}
+            </div>
+          )}
+        </div>
+      </CardHeader>
+
+      <CardBody className="overflow-visible">
+        {!!recommendation.images.length && (
+          <ImagesCarousel isEditable images={recommendation.images} />
+        )}
+      </CardBody>
+
+      <CardFooter>
+        <CommentsList recommendationId={recommendation.id} />
+      </CardFooter>
+    </Card>
   );
 };

@@ -1,20 +1,15 @@
 query MyRecommendations {
-  profile {
-    recommendations {
+  users_recommedations {
+    id
+    title
+    description
+    favoritesCount
+    type
+    link
+    images {
       id
-      title
-      description
-      favoritesCount
-      type
-      link
-      comments {
-        id
-      }
-      images {
-        id
-        url
-      }
-      created_at
+      url
     }
+    created_at
   }
 }

@@ -3,8 +3,8 @@ import {
   RecommendationSkeleton,
 } from '@/entities/recommendation';
 import { FavoriteButton } from '@/features/favorite-button';
+import { ImagesCarousel } from '@/features/images';
 import { Recommendation as IRecommendation } from '@/shared/graphql/graphql';
-import ImagesCarousel from '@/shared/ui/images-carousel';
 import { CommentsList } from '@/widgets/comments';
 import { Pagination } from '@nextui-org/react';
 
@@ -51,9 +51,7 @@ const FeedContainer = ({
                   footer={<CommentsList recommendationId={recommendation.id} />}
                   body={
                     recommendation.images.length ? (
-                      <ImagesCarousel
-                        images={recommendation.images.map((image) => image.url)}
-                      />
+                      <ImagesCarousel images={recommendation.images} />
                     ) : null
                   }
                 />

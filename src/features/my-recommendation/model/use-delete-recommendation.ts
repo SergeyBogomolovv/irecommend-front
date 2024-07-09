@@ -10,13 +10,7 @@ export const useDeleteRecommendation = (id: string) => {
       onCompleted(data) {
         toast.success(data.delete_recommendation.message);
       },
-      refetchQueries: [
-        'Favorites',
-        'MyRecommendations',
-        'Favorites_recommendations',
-        'Last_recommendations',
-        'ViewersFavorites',
-      ],
+      refetchQueries: ['MyRecommendations'],
       onError: () => {
         toast.error('Ошибка при удалении рекоммендации');
       },

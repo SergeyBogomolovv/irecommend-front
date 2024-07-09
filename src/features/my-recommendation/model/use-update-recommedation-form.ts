@@ -29,13 +29,7 @@ export const useUpdateRecommendationForm = (recommendation: Recommendation) => {
         setEditMode(false);
         toast.success(data.update_recommendation.message);
       },
-      refetchQueries: [
-        'Favorites',
-        'MyRecommendations',
-        'Favorites_recommendations',
-        'Last_recommendations',
-        'ViewersFavorites',
-      ],
+      refetchQueries: ['MyRecommendations'],
     },
   );
   return {

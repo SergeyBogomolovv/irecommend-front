@@ -7,14 +7,16 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from '@/shared/ui/carousel';
-import { ModalImage } from '@/shared/ui/modal-image';
+import { ModalImage } from '@/features/images/ui/modal-image';
 import { useEffect, useState } from 'react';
+import { Image } from '@/shared/graphql/graphql';
 
 interface Props {
-  images: string[];
+  images: Image[];
+  isEditable?: boolean;
 }
 
-const ImagesCarousel = ({ images }: Props) => {
+export const ImagesCarousel = ({ images, isEditable }: Props) => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 
@@ -32,9 +34,9 @@ const ImagesCarousel = ({ images }: Props) => {
     <div>
       <Carousel setApi={setApi}>
         <CarouselContent>
-          {images.map((src) => (
-            <CarouselItem key={src} className="aspect-auto">
-              <ModalImage src={src} />
+          {images.map((image) => (
+            <CarouselItem key={image.id} className="aspect-auto">
+              <ModalImage image={image} editable={isEditable} />
             </CarouselItem>
           ))}
         </CarouselContent>
@@ -53,5 +55,3 @@ const ImagesCarousel = ({ images }: Props) => {
     </div>
   );
 };
-
-export default ImagesCarousel;

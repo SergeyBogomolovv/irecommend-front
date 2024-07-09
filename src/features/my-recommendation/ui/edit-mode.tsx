@@ -10,27 +10,23 @@ import {
 import { Button, Input, Textarea } from '@nextui-org/react';
 import { UseFormReturn } from 'react-hook-form';
 import { BaseSyntheticEvent, Dispatch, SetStateAction } from 'react';
+import { UpdateRecommendation } from '../helpers/update-recommendation.schema';
+import { AddImageButton } from './add-image-button';
 
 interface Props {
-  form: UseFormReturn<
-    {
-      title?: string | undefined;
-      description?: string | undefined;
-      link?: string | undefined;
-    },
-    any,
-    undefined
-  >;
+  form: UseFormReturn<UpdateRecommendation>;
   loading: boolean;
   setEditMode: Dispatch<SetStateAction<boolean>>;
   handleSubmit: (e?: BaseSyntheticEvent) => Promise<void>;
+  recommendationId: string;
 }
 
-export const EditMode = ({
+export const EditModeForm = ({
   form,
   loading,
   setEditMode,
   handleSubmit,
+  recommendationId,
 }: Props) => {
   return (
     <Form {...form}>
@@ -85,7 +81,9 @@ export const EditMode = ({
             </FormItem>
           )}
         />
+
         <div className="flex w-full gap-x-3 mt-4">
+          <AddImageButton recommendationId={recommendationId} />
           <Button
             onPress={() => setEditMode(false)}
             className="w-full"

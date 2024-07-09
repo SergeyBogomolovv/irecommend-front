@@ -23,9 +23,9 @@ import {
   FormLabel,
   FormMessage,
 } from '@/shared/ui/form';
-import ImagesCarousel from '@/shared/ui/images-carousel';
 import { recommendationTypes } from '@/shared/constants/recommendations';
 import { GoPaperclip } from 'react-icons/go';
+import { ImagesCarousel } from '@/features/images';
 
 export function NewRecommendation() {
   const {
@@ -40,7 +40,6 @@ export function NewRecommendation() {
     previewImages,
     onAddImageClick,
   } = useCreateRecommendationForm();
-
   return (
     <>
       <TriggerButton onOpen={onOpen} />
@@ -61,7 +60,12 @@ export function NewRecommendation() {
                   </ModalHeader>
                   <ScrollShadow className="max-h-[700px]">
                     <ModalBody>
-                      <ImagesCarousel images={previewImages} />
+                      <ImagesCarousel
+                        images={previewImages.map((image) => ({
+                          id: image,
+                          url: image,
+                        }))}
+                      />
                       <FormField
                         disabled={loading}
                         control={form.control}

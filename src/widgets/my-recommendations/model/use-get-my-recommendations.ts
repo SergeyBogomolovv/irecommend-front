@@ -3,5 +3,5 @@ import { useQuery } from '@apollo/client';
 
 export const useGetMyRecommendations = () => {
   const { data, loading } = useQuery(MyRecommendationsDocument);
-  return { recommendations: data?.profile?.recommendations || [], loading };
+  return { recommendations: data?.users_recommedations || [], loading };
 };

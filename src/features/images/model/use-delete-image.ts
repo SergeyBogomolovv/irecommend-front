@@ -7,13 +7,7 @@ export const useDeleteImage = (imageId: string) => {
     Delete_Image_From_RecommendationDocument,
     {
       variables: { imageId },
-      refetchQueries: [
-        'Favorites',
-        'MyRecommendations',
-        'Favorites_recommendations',
-        'Last_recommendations',
-        'ViewersFavorites',
-      ],
+      refetchQueries: ['MyRecommendations'],
       onError: () => {
         toast.error('Ошибка при удалении картинки');
       },
