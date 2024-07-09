@@ -12,12 +12,7 @@ query Last_recommendations($type: RecommendationType, $page: Int) {
         id
         url
       }
-      author {
-        profile {
-          name
-          logo
-        }
-      }
+      authorId
     }
     pagesCount
   }

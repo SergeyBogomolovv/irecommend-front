@@ -1,5 +1,4 @@
 import { Recommendation as IRecommendation } from '@/shared/graphql/graphql';
-import { useViewer } from '@/entities/viewer';
 import { useUpdateRecommendationForm } from '../model/use-update-recommedation-form';
 import {
   Card,
@@ -8,19 +7,18 @@ import {
   CardHeader,
   Link,
 } from '@nextui-org/react';
-import { User } from '@/entities/user';
 import { CommentsList } from '@/widgets/comments';
 import { ActionsButton } from './actions-button';
 import { formatDate } from '@/shared/lib/format-date';
 import { EditModeForm } from './edit-mode';
 import { ImagesCarousel } from '@/features/images';
+import { UserCard } from '@/features/user-card';
 
 interface Props {
   recommendation: IRecommendation;
 }
 
 export const MyRecommendation = ({ recommendation }: Props) => {
-  const { viewer, loading } = useViewer();
   const {
     form,
     handleSubmit,
@@ -32,11 +30,9 @@ export const MyRecommendation = ({ recommendation }: Props) => {
     <Card className="py-2 w-full">
       <CardHeader className="pb-1 pt-2 px-4 flex-col items-start">
         <div className="flex justify-between items-center w-full">
-          <User
-            name={viewer?.profile.name}
-            avatar={viewer?.profile.logo}
+          <UserCard
+            id={recommendation.authorId}
             description={formatDate(recommendation.created_at)}
-            loading={loading}
           />
           <ActionsButton id={recommendation.id} setEditMode={setEditMode} />
         </div>

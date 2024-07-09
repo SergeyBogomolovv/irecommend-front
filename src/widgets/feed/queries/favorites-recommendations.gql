@@ -12,12 +12,7 @@ query Favorites_recommendations($page: Int) {
         id
         url
       }
-      author {
-        profile {
-          name
-          logo
-        }
-      }
+      authorId
     }
     pagesCount
   }

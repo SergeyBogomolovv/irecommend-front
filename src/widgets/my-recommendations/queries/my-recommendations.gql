@@ -10,6 +10,7 @@ query MyRecommendations {
       id
       url
     }
+    authorId
     created_at
   }
 }

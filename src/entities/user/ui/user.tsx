@@ -7,15 +7,23 @@ interface Props {
   avatar: Maybe<string>;
   description: string;
   loading?: boolean;
+  asButton?: boolean;
 }
 
-export const User = ({ name, description, loading, avatar }: Props) => {
+export const User = ({
+  name,
+  description,
+  loading,
+  avatar,
+  asButton,
+}: Props) => {
   return (
     <>
       {loading ? (
         <UserSkeleton />
       ) : (
         <UserCard
+          as={asButton ? 'button' : 'div'}
           name={name}
           description={description}
           avatarProps={{

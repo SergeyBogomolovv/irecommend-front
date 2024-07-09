@@ -1,4 +1,4 @@
-import { User } from '@/entities/user';
+import { UserCard } from '@/features/user-card';
 import { Maybe } from '@/shared/graphql/graphql';
 import { formatDate } from '@/shared/lib/format-date';
 import {
@@ -10,8 +10,7 @@ import {
 } from '@nextui-org/react';
 
 interface Props {
-  username: string | undefined;
-  avatar: Maybe<string> | undefined;
+  userId: string;
   created_at: string;
   loading?: boolean;
   title: string;
@@ -23,27 +22,20 @@ interface Props {
 }
 
 export const Recommendation = ({
-  username,
   actionButton,
   created_at,
   title,
   link,
-  loading,
-  avatar,
   body,
   description,
   footer,
+  userId,
 }: Props) => {
   return (
     <Card className="py-2 w-full">
       <CardHeader className="pb-1 pt-2 px-4 flex-col items-start">
         <div className="flex justify-between items-center w-full">
-          <User
-            name={username}
-            avatar={avatar}
-            description={formatDate(created_at)}
-            loading={loading}
-          />
+          <UserCard id={userId} description={formatDate(created_at)} />
           {actionButton}
         </div>
         <div className="flex flex-col mt-2">
