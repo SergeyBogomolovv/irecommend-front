@@ -1,0 +1,5 @@
+mutation Add_images_to_recommendation($id: String!, $images: [Upload!]!) {
+  add_images_to_recommendation(id: $id, images: $images) {
+    message
+  }
+}

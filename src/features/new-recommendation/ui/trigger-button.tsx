@@ -1,12 +1,17 @@
+'use client';
+import { useViewer } from '@/entities/viewer';
 import { Button, Tooltip } from '@nextui-org/react';
 import { CiBookmarkPlus } from 'react-icons/ci';
 interface Props {
   onOpen: () => void;
 }
 export function TriggerButton({ onOpen }: Props) {
+  const { notAuthenticated } = useViewer();
+
   return (
     <Tooltip content={'Создать рекомендацию'}>
       <Button
+        isDisabled={notAuthenticated}
         onPress={onOpen}
         isIconOnly
         radius="full"

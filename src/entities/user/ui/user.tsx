@@ -3,7 +3,7 @@ import { UserSkeleton } from './skeleton';
 import { Maybe } from 'graphql/jsutils/Maybe';
 
 interface Props {
-  name: string;
+  name: string | undefined;
   avatar: Maybe<string>;
   description: string;
   loading?: boolean;

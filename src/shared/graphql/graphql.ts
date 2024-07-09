@@ -61,16 +61,6 @@ export type CreateRecommendationInput = {
   type: RecommendationType;
 };
 
-export type FriendRequest = {
-  __typename?: 'FriendRequest';
-  created_at: Scalars['DateTime']['output'];
-  id: Scalars['ID']['output'];
-  recipient: User;
-  recipientId: Scalars['String']['output'];
-  sender: User;
-  senderId: Scalars['String']['output'];
-};
-
 export type Image = {
   __typename?: 'Image';
   id: Scalars['ID']['output'];
@@ -95,15 +85,12 @@ export type MessageResponse = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  accept_friend_request: MessageResponse;
   add_contact: MessageResponse;
   add_images_to_recommendation: MessageResponse;
   add_to_favorites: MessageResponse;
   create_comment: Comment;
   create_recommendation: MessageResponse;
-  decline_friend_request: MessageResponse;
   delete_comment: MessageResponse;
-  delete_friend: MessageResponse;
   delete_image_from_recommendation: MessageResponse;
   delete_recommendation: MessageResponse;
   edit_comment: MessageResponse;
@@ -114,15 +101,9 @@ export type Mutation = {
   register: VerifyResponse;
   remove_contact: MessageResponse;
   remove_from_favorites: MessageResponse;
-  send_friend_request: FriendRequest;
   update_profile: User;
   update_recommendation: MessageResponse;
   verify_account: AccessTokenResponse;
-};
-
-
-export type MutationAccept_Friend_RequestArgs = {
-  requestId: Scalars['String']['input'];
 };
 
 
@@ -154,18 +135,8 @@ export type MutationCreate_RecommendationArgs = {
 };
 
 
-export type MutationDecline_Friend_RequestArgs = {
-  requestId: Scalars['String']['input'];
-};
-
-
 export type MutationDelete_CommentArgs = {
   id: Scalars['String']['input'];
-};
-
-
-export type MutationDelete_FriendArgs = {
-  friendId: Scalars['String']['input'];
 };
 
 
@@ -212,11 +183,6 @@ export type MutationRemove_ContactArgs = {
 
 export type MutationRemove_From_FavoritesArgs = {
   id: Scalars['String']['input'];
-};
-
-
-export type MutationSend_Friend_RequestArgs = {
-  friendId: Scalars['String']['input'];
 };
 
 
@@ -268,6 +234,7 @@ export type Query = {
   refresh: AccessTokenResponse;
   search_recommendations: Array<Recommendation>;
   search_users_by_name: Array<User>;
+  users_recommedations: Array<Recommendation>;
 };
 
 
@@ -356,14 +323,11 @@ export type User = {
   created_at: Scalars['DateTime']['output'];
   email?: Maybe<Scalars['String']['output']>;
   favorites: Array<Recommendation>;
-  friends: Array<User>;
   id: Scalars['ID']['output'];
   password?: Maybe<Scalars['String']['output']>;
   profile: Profile;
   profileId: Scalars['String']['output'];
-  receivedFriendRequests: Array<FriendRequest>;
   recommendations: Array<Recommendation>;
-  sendedFriendRequests: Array<FriendRequest>;
   verified: Scalars['Boolean']['output'];
 };
 
@@ -484,6 +448,36 @@ export type Remove_From_FavoritesMutationVariables = Exact<{
 
 export type Remove_From_FavoritesMutation = { __typename?: 'Mutation', remove_from_favorites: { __typename?: 'MessageResponse', message: string } };
 
+export type Add_Images_To_RecommendationMutationVariables = Exact<{
+  id: Scalars['String']['input'];
+  images: Array<Scalars['Upload']['input']> | Scalars['Upload']['input'];
+}>;
+
+
+export type Add_Images_To_RecommendationMutation = { __typename?: 'Mutation', add_images_to_recommendation: { __typename?: 'MessageResponse', message: string } };
+
+export type Delete_Image_From_RecommendationMutationVariables = Exact<{
+  imageId: Scalars['String']['input'];
+}>;
+
+
+export type Delete_Image_From_RecommendationMutation = { __typename?: 'Mutation', delete_image_from_recommendation: { __typename?: 'MessageResponse', message: string } };
+
+export type Delete_RecommendationMutationVariables = Exact<{
+  id: Scalars['String']['input'];
+}>;
+
+
+export type Delete_RecommendationMutation = { __typename?: 'Mutation', delete_recommendation: { __typename?: 'MessageResponse', message: string } };
+
+export type Update_RecommendationMutationVariables = Exact<{
+  id: Scalars['String']['input'];
+  payload: UpdateRecommendationInput;
+}>;
+
+
+export type Update_RecommendationMutation = { __typename?: 'Mutation', update_recommendation: { __typename?: 'MessageResponse', message: string } };
+
 export type Create_RecommendationMutationVariables = Exact<{
   payload: CreateRecommendationInput;
   images?: InputMaybe<Array<Scalars['Upload']['input']> | Scalars['Upload']['input']>;
@@ -529,6 +523,11 @@ export type Last_RecommendationsQueryVariables = Exact<{
 
 export type Last_RecommendationsQuery = { __typename?: 'Query', last_recommendations: { __typename?: 'PaginatedRecommendationResponse', pagesCount: number, recommendations: Array<{ __typename?: 'Recommendation', id: string, title: string, description: string, favoritesCount: number, type: RecommendationType, link?: string | null, created_at: any, images: Array<{ __typename?: 'Image', id: string, url: string }>, author: { __typename?: 'User', profile: { __typename?: 'Profile', name: string, logo?: string | null } } }> } };
 
+export type MyRecommendationsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MyRecommendationsQuery = { __typename?: 'Query', users_recommedations: Array<{ __typename?: 'Recommendation', id: string, title: string, description: string, favoritesCount: number, type: RecommendationType, link?: string | null, created_at: any, images: Array<{ __typename?: 'Image', id: string, url: string }> }> };
+
 export type ProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -551,10 +550,15 @@ export const Delete_ContactDocument = {"kind":"Document","definitions":[{"kind":
 export const Add_To_FavoritesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Add_to_favorites"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"recommendationId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"add_to_favorites"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"recommendationId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<Add_To_FavoritesMutation, Add_To_FavoritesMutationVariables>;
 export const ViewersFavoritesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ViewersFavorites"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"favorites"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<ViewersFavoritesQuery, ViewersFavoritesQueryVariables>;
 export const Remove_From_FavoritesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Remove_from_favorites"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"recommendationId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"remove_from_favorites"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"recommendationId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<Remove_From_FavoritesMutation, Remove_From_FavoritesMutationVariables>;
+export const Add_Images_To_RecommendationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Add_images_to_recommendation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"images"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Upload"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"add_images_to_recommendation"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"images"},"value":{"kind":"Variable","name":{"kind":"Name","value":"images"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<Add_Images_To_RecommendationMutation, Add_Images_To_RecommendationMutationVariables>;
+export const Delete_Image_From_RecommendationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Delete_image_from_recommendation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"imageId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_image_from_recommendation"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"imageId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"imageId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<Delete_Image_From_RecommendationMutation, Delete_Image_From_RecommendationMutationVariables>;
+export const Delete_RecommendationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Delete_recommendation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_recommendation"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<Delete_RecommendationMutation, Delete_RecommendationMutationVariables>;
+export const Update_RecommendationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Update_recommendation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"payload"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateRecommendationInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_recommendation"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"payload"},"value":{"kind":"Variable","name":{"kind":"Name","value":"payload"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<Update_RecommendationMutation, Update_RecommendationMutationVariables>;
 export const Create_RecommendationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Create_recommendation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"payload"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateRecommendationInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"images"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Upload"}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"create_recommendation"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"payload"},"value":{"kind":"Variable","name":{"kind":"Name","value":"payload"}}},{"kind":"Argument","name":{"kind":"Name","value":"images"},"value":{"kind":"Variable","name":{"kind":"Name","value":"images"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<Create_RecommendationMutation, Create_RecommendationMutationVariables>;
 export const Edit_ProfileDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Edit_profile"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"payload"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateProfileDto"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_profile"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"payload"},"value":{"kind":"Variable","name":{"kind":"Name","value":"payload"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"about"}}]}}]}}]}}]} as unknown as DocumentNode<Edit_ProfileMutation, Edit_ProfileMutationVariables>;
 export const Update_AvatarDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Update_avatar"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"image"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Upload"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_profile"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"image"},"value":{"kind":"Variable","name":{"kind":"Name","value":"image"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<Update_AvatarMutation, Update_AvatarMutationVariables>;
 export const Get_CommentsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Get_comments"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"recommendationId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"count"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"get_comments"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"recommendationId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"recommendationId"}}},{"kind":"Argument","name":{"kind":"Name","value":"count"},"value":{"kind":"Variable","name":{"kind":"Name","value":"count"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalCount"}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<Get_CommentsQuery, Get_CommentsQueryVariables>;
 export const Favorites_RecommendationsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Favorites_recommendations"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"page"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"favorites_recommendations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"page"},"value":{"kind":"Variable","name":{"kind":"Name","value":"page"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"recommendations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"favoritesCount"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"images"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pagesCount"}}]}}]}}]} as unknown as DocumentNode<Favorites_RecommendationsQuery, Favorites_RecommendationsQueryVariables>;
 export const Last_RecommendationsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Last_recommendations"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"type"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"RecommendationType"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"page"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"last_recommendations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"type"},"value":{"kind":"Variable","name":{"kind":"Name","value":"type"}}},{"kind":"Argument","name":{"kind":"Name","value":"page"},"value":{"kind":"Variable","name":{"kind":"Name","value":"page"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"recommendations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"favoritesCount"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"images"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pagesCount"}}]}}]}}]} as unknown as DocumentNode<Last_RecommendationsQuery, Last_RecommendationsQueryVariables>;
+export const MyRecommendationsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MyRecommendations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users_recommedations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"favoritesCount"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"images"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}}]}}]}}]} as unknown as DocumentNode<MyRecommendationsQuery, MyRecommendationsQueryVariables>;
 export const ProfileDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"password"}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"about"}},{"kind":"Field","name":{"kind":"Name","value":"logo"}},{"kind":"Field","name":{"kind":"Name","value":"contacts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"nickname"}}]}}]}}]}}]}}]} as unknown as DocumentNode<ProfileQuery, ProfileQueryVariables>;

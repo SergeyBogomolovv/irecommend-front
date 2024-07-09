@@ -1,0 +1,15 @@
+query MyRecommendations {
+  users_recommedations {
+    id
+    title
+    description
+    favoritesCount
+    type
+    link
+    images {
+      id
+      url
+    }
+    created_at
+  }
+}

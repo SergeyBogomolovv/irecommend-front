@@ -65,7 +65,7 @@ export const useCreateRecommendationForm = () => {
       onError: () => {
         toast.error('Ошибка при создании рекомендации');
       },
-      refetchQueries: ['Last_recommendations'],
+      refetchQueries: ['Last_recommendations', 'MyRecommendations'],
     },
   );
 

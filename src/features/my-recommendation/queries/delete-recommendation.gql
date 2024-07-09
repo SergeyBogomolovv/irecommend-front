@@ -1,0 +1,5 @@
+mutation Delete_recommendation($id: String!) {
+  delete_recommendation(id: $id) {
+    message
+  }
+}
