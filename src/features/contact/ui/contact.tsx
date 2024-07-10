@@ -27,6 +27,7 @@ export const Contact = ({ type, href, id, nickname, editable }: Props) => {
           className={contact.className}
           classNames={{
             content: 'flex items-center gap-x-1 text-white',
+            closeButton: 'text-stone-300',
           }}
         >
           <Icon className="size-5 text-white" />
