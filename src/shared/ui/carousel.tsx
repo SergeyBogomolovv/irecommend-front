@@ -4,8 +4,7 @@ import * as React from 'react';
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from 'embla-carousel-react';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-
+import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md';
 import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/button';
 
@@ -197,26 +196,24 @@ CarouselItem.displayName = 'CarouselItem';
 const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ className, variant = 'outline', size = 'icon', ...props }, ref) => {
+>(({ className }, ref) => {
   const { scrollPrev, canScrollPrev } = useCarousel();
 
   return (
-    <Button
+    <button
       ref={ref}
-      variant={variant}
-      size={size}
       className={cn(
-        'absolute size-8 rounded-full left-2 top-1/2 -translate-y-1/2 group-hover:flex hidden',
+        'absolute size-8 rounded-full left-2 top-1/2 -translate-y-1/2 flex bg-black/30 items-center justify-center backdrop:blur-xl hover:bg-black/40',
         className,
+        !canScrollPrev && 'bg-black/10',
       )}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
-      {...props}
       type="button"
     >
-      <ArrowLeft className="h-4 w-4" />
+      <MdNavigateBefore className="size-5" />
       <span className="sr-only">Previous slide</span>
-    </Button>
+    </button>
   );
 });
 CarouselPrevious.displayName = 'CarouselPrevious';
@@ -224,26 +221,24 @@ CarouselPrevious.displayName = 'CarouselPrevious';
 const CarouselNext = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ className, variant = 'outline', size = 'icon', ...props }, ref) => {
+>(({ className }, ref) => {
   const { scrollNext, canScrollNext } = useCarousel();
 
   return (
-    <Button
+    <button
       ref={ref}
-      variant={variant}
-      size={size}
       className={cn(
-        'absolute size-8 rounded-full right-2 top-1/2 -translate-y-1/2 group-hover:flex hidden',
+        'absolute size-8 rounded-full right-2 top-1/2 -translate-y-1/2 flex bg-black/30 items-center justify-center backdrop:blur-xl hover:bg-black/40',
         className,
+        !canScrollNext && 'bg-black/10',
       )}
       disabled={!canScrollNext}
       onClick={scrollNext}
-      {...props}
       type="button"
     >
-      <ArrowRight className="h-4 w-4" />
+      <MdNavigateNext className="size-5" />
       <span className="sr-only">Next slide</span>
-    </Button>
+    </button>
   );
 });
 CarouselNext.displayName = 'CarouselNext';
