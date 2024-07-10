@@ -203,7 +203,7 @@ const CarouselPrevious = React.forwardRef<
     <button
       ref={ref}
       className={cn(
-        'absolute size-8 rounded-full left-2 top-1/2 -translate-y-1/2 flex bg-black/30 items-center justify-center backdrop:blur-xl hover:bg-black/40',
+        'absolute sm:size-8 size-7 rounded-full left-2 top-1/2 -translate-y-1/2 flex bg-black/30 items-center justify-center backdrop:blur-xl hover:bg-black/40',
         className,
         !canScrollPrev && 'bg-black/10',
       )}
@@ -211,7 +211,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       type="button"
     >
-      <MdNavigateBefore className="size-5" />
+      <MdNavigateBefore className="sm:size-5 size-4" />
       <span className="sr-only">Previous slide</span>
     </button>
   );
@@ -228,7 +228,7 @@ const CarouselNext = React.forwardRef<
     <button
       ref={ref}
       className={cn(
-        'absolute size-8 rounded-full right-2 top-1/2 -translate-y-1/2 flex bg-black/30 items-center justify-center backdrop:blur-xl hover:bg-black/40',
+        'absolute sm:size-8 size-7 rounded-full right-2 top-1/2 -translate-y-1/2 flex bg-black/30 items-center justify-center backdrop:blur-xl hover:bg-black/40',
         className,
         !canScrollNext && 'bg-black/10',
       )}
@@ -236,7 +236,7 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       type="button"
     >
-      <MdNavigateNext className="size-5" />
+      <MdNavigateNext className="sm:size-5 size-4" />
       <span className="sr-only">Next slide</span>
     </button>
   );
