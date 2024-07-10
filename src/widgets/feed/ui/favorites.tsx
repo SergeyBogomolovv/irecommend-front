@@ -23,7 +23,9 @@ export function Favorites() {
             width={500}
             height={500}
           />
-          <p className="text-xl font-semibold">В избранном пока что пусто.</p>
+          <p className="text-xl font-semibold text-center">
+            В избранном пока что пусто.
+          </p>
           <Link href="/">Смотреть рекомендации</Link>
         </div>
       }

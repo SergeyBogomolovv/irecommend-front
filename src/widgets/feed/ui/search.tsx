@@ -19,7 +19,7 @@ export const SearchByParams = () => {
             width={500}
             height={500}
           />
-          <p className="text-xl font-semibold">
+          <p className="text-xl font-semibold text-center">
             По данному запросу ничего не найдено.
           </p>
           <Link href="/">На главную</Link>

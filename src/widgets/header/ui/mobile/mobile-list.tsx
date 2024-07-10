@@ -30,7 +30,7 @@ export default function MobileList({ setIsMenuOpen }: Props) {
   return (
     <NavbarMenu>
       <NavbarMenuItem>
-        <Search />
+        <Search onSearch={() => setIsMenuOpen(false)} />
       </NavbarMenuItem>
       <div className="w-full flex gap-4 items-center justify-center py-3 max-w-screen flex-wrap">
         {recommendationTypes.map((recommendationType) => (
