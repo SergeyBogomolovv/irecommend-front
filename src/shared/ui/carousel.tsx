@@ -211,7 +211,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       type="button"
     >
-      <MdNavigateBefore className="sm:size-5 size-4" />
+      <MdNavigateBefore className="sm:size-5 size-4 text-white" />
       <span className="sr-only">Previous slide</span>
     </button>
   );
@@ -236,7 +236,7 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       type="button"
     >
-      <MdNavigateNext className="sm:size-5 size-4" />
+      <MdNavigateNext className="sm:size-5 size-4 text-white" />
       <span className="sr-only">Next slide</span>
     </button>
   );
