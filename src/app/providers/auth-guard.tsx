@@ -51,5 +51,5 @@ export default function AuthGuard({ children }: Props) {
     }
   }, [pathname, notAuthenticated]);
 
-  return <>{!cannotBeOnAuth && !cannotBeOnPrivate && <>{children}</>}</>;
+  return <>{children}</>;
 }
