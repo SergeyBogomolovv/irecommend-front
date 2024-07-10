@@ -1,0 +1,16 @@
+query Search_recommendations($query: String!) {
+  search_recommendations(query: $query) {
+    id
+    title
+    description
+    favoritesCount
+    type
+    link
+    created_at
+    images {
+      id
+      url
+    }
+    authorId
+  }
+}
