@@ -40,6 +40,7 @@ const documents = {
     "query Get_comments($recommendationId: String!, $count: Int) {\n  get_comments(recommendationId: $recommendationId, count: $count) {\n    totalCount\n    comments {\n      id\n      content\n      created_at\n      author {\n        id\n        profile {\n          name\n          logo\n        }\n      }\n    }\n  }\n}": types.Get_CommentsDocument,
     "query Favorites_recommendations($page: Int) {\n  favorites_recommendations(page: $page) {\n    recommendations {\n      id\n      title\n      description\n      favoritesCount\n      type\n      link\n      created_at\n      images {\n        id\n        url\n      }\n      authorId\n    }\n    pagesCount\n  }\n}": types.Favorites_RecommendationsDocument,
     "query Last_recommendations($type: RecommendationType, $page: Int) {\n  last_recommendations(type: $type, page: $page) {\n    recommendations {\n      id\n      title\n      description\n      favoritesCount\n      type\n      link\n      created_at\n      images {\n        id\n        url\n      }\n      authorId\n    }\n    pagesCount\n  }\n}": types.Last_RecommendationsDocument,
+    "query Search_recommendations($query: String!) {\n  search_recommendations(query: $query) {\n    id\n    title\n    description\n    favoritesCount\n    type\n    link\n    created_at\n    images {\n      id\n      url\n    }\n    authorId\n  }\n}": types.Search_RecommendationsDocument,
     "query MyRecommendations {\n  users_recommedations {\n    id\n    title\n    description\n    favoritesCount\n    type\n    link\n    images {\n      id\n      url\n    }\n    authorId\n    created_at\n  }\n}": types.MyRecommendationsDocument,
     "query Profile {\n  profile {\n    id\n    created_at\n    email\n    password\n    profile {\n      name\n      about\n      logo\n      contacts {\n        id\n        url\n        type\n        nickname\n      }\n    }\n  }\n}": types.ProfileDocument,
 };
@@ -166,6 +167,10 @@ export function graphql(source: "query Favorites_recommendations($page: Int) {\n
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query Last_recommendations($type: RecommendationType, $page: Int) {\n  last_recommendations(type: $type, page: $page) {\n    recommendations {\n      id\n      title\n      description\n      favoritesCount\n      type\n      link\n      created_at\n      images {\n        id\n        url\n      }\n      authorId\n    }\n    pagesCount\n  }\n}"): (typeof documents)["query Last_recommendations($type: RecommendationType, $page: Int) {\n  last_recommendations(type: $type, page: $page) {\n    recommendations {\n      id\n      title\n      description\n      favoritesCount\n      type\n      link\n      created_at\n      images {\n        id\n        url\n      }\n      authorId\n    }\n    pagesCount\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query Search_recommendations($query: String!) {\n  search_recommendations(query: $query) {\n    id\n    title\n    description\n    favoritesCount\n    type\n    link\n    created_at\n    images {\n      id\n      url\n    }\n    authorId\n  }\n}"): (typeof documents)["query Search_recommendations($query: String!) {\n  search_recommendations(query: $query) {\n    id\n    title\n    description\n    favoritesCount\n    type\n    link\n    created_at\n    images {\n      id\n      url\n    }\n    authorId\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

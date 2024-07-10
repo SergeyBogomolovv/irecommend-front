@@ -11,7 +11,7 @@ import { Pagination } from '@nextui-org/react';
 interface Props {
   recommendations: IRecommendation[];
   loading?: boolean;
-  onPageChange: (page: number) => void;
+  onPageChange?: (page: number) => void;
   pagesCount?: number;
   emptyRender?: React.ReactNode;
 }

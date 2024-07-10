@@ -1,3 +1,10 @@
+import { SearchByParams } from '@/widgets/feed';
+import { Suspense } from 'react';
+
 export const SearchPage = () => {
-  return <main>search results</main>;
+  return (
+    <Suspense>
+      <SearchByParams />
+    </Suspense>
+  );
 };
