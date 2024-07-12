@@ -22,6 +22,7 @@ export function Header() {
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
       isBordered
+      isBlurred={false}
       position="sticky"
     >
       <NavbarContent justify="start">
