@@ -46,7 +46,9 @@ export const UserCard = ({ id, description }: Props) => {
             </Avatar>
             <div className="flex-col flex-grow">
               <p className="text-sm font-semibold">{user?.profile.name}</p>
-              <p className="text-xs text-default-500">{user?.profile.about}</p>
+              <p className="text-xs text-default-500">
+                {user?.profile.about || 'Тут пока ничего нет'}
+              </p>
             </div>
           </CardHeader>
           <Divider />
