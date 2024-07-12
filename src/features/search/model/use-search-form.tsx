@@ -21,7 +21,7 @@ export const useSearchForm = (onSearch?: () => any) => {
       if (onSearch) onSearch();
       if (query) {
         params.set('query', query);
-        replace(`search?${params.toString()}`);
+        replace(`/search?${params.toString()}`);
       } else {
         push('/');
       }
