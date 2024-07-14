@@ -17,8 +17,8 @@ export function Comment({ comment }: Props) {
   const [editMode, setEditMode] = useState(false);
   return (
     <div className="flex gap-x-2 items-start">
-      <UserCard id={comment.author.id}>
-        <Avatar className="size-10 cursor-pointer">
+      <Avatar className="size-10 cursor-pointer">
+        <UserCard id={comment.author.id}>
           <AvatarImage
             src={comment.author.profile.logo || ''}
             className="aspect-square object-cover"
@@ -26,8 +26,8 @@ export function Comment({ comment }: Props) {
           <AvatarFallback>
             <FaUser className="size-6" />
           </AvatarFallback>
-        </Avatar>
-      </UserCard>
+        </UserCard>
+      </Avatar>
       <div className="flex-col flex-grow">
         <div className="flex gap-x-2 items-center">
           <p className="text-sm">{comment.author.profile.name}</p>
