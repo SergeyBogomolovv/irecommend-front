@@ -19,7 +19,7 @@ export const TriggerButton = ({
 }: Props) => {
   return (
     <PopoverTrigger>
-      <div className="transition-transform">
+      <div className="transition-transform w-full">
         {customChildren ? (
           customChildren
         ) : (
