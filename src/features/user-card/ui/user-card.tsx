@@ -37,7 +37,7 @@ export const UserCard = ({ id, description, children }: Props) => {
           shadow="none"
         >
           <CardHeader className="flex gap-x-2 items-start">
-            <Avatar className="size-16">
+            <Avatar className="size-12">
               <AvatarImage
                 src={user?.profile.logo || ''}
                 className="aspect-square object-cover"
@@ -48,7 +48,7 @@ export const UserCard = ({ id, description, children }: Props) => {
             </Avatar>
             <div className="flex-col flex-grow">
               <p className="text-sm font-semibold">{user?.profile.name}</p>
-              <p className="text-xs text-default-500">
+              <p className="text-sm text-default-500">
                 {user?.profile.about || 'Тут пока ничего нет'}
               </p>
             </div>
