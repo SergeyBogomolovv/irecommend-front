@@ -75,7 +75,7 @@ export function NewRecommendation() {
                             <FormControl>
                               <input
                                 type="file"
-                                accept=".png,.jpeg,.jpg,.webp"
+                                accept=".png,.jpeg,.jpg,.webp,.heic"
                                 multiple
                                 {...fileInputProps}
                                 hidden
@@ -166,7 +166,11 @@ export function NewRecommendation() {
                           render={({ field }) => (
                             <FormItem className="w-full">
                               <FormControl>
-                                <Input placeholder="Ссылка" {...field} />
+                                <Input
+                                  type="url"
+                                  placeholder="Ссылка"
+                                  {...field}
+                                />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
