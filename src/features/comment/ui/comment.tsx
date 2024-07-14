@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { FaUser } from 'react-icons/fa';
 import { CommentActions } from './comment-actions';
 import { EditCommentForm } from './edit-comment-form';
+import { UserCard } from '@/features/user-card';
 
 interface Props {
   comment: IComment;
@@ -16,15 +17,17 @@ export function Comment({ comment }: Props) {
   const [editMode, setEditMode] = useState(false);
   return (
     <div className="flex gap-x-2 items-start">
-      <Avatar className="size-10">
-        <AvatarImage
-          src={comment.author.profile.logo || ''}
-          className="aspect-square object-cover"
-        />
-        <AvatarFallback>
-          <FaUser className="size-6" />
-        </AvatarFallback>
-      </Avatar>
+      <UserCard id={comment.author.id}>
+        <Avatar className="size-10 cursor-pointer">
+          <AvatarImage
+            src={comment.author.profile.logo || ''}
+            className="aspect-square object-cover"
+          />
+          <AvatarFallback>
+            <FaUser className="size-6" />
+          </AvatarFallback>
+        </Avatar>
+      </UserCard>
       <div className="flex-col flex-grow">
         <div className="flex gap-x-2 items-center">
           <p className="text-sm">{comment.author.profile.name}</p>

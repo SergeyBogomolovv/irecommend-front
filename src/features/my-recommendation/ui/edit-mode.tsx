@@ -75,7 +75,7 @@ export const EditModeForm = ({
             <FormItem className="w-full">
               <FormLabel>Ссылка</FormLabel>
               <FormControl>
-                <Input placeholder="https://..." {...field} />
+                <Input type="url" placeholder="https://..." {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
