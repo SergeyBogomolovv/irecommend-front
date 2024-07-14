@@ -4,9 +4,10 @@ import { PopoverTrigger } from '@nextui-org/react';
 
 interface Props {
   name?: string;
-  description: string;
+  description?: string;
   loading: boolean;
   avatarUrl?: Maybe<string>;
+  customChildren?: React.ReactNode;
 }
 
 export const TriggerButton = ({
@@ -14,17 +15,22 @@ export const TriggerButton = ({
   description,
   loading,
   avatarUrl,
+  customChildren,
 }: Props) => {
   return (
     <PopoverTrigger>
       <div className="transition-transform">
-        <User
-          asButton
-          avatar={avatarUrl}
-          loading={loading}
-          description={description}
-          name={name}
-        />
+        {customChildren ? (
+          customChildren
+        ) : (
+          <User
+            asButton
+            avatar={avatarUrl}
+            loading={loading}
+            description={description}
+            name={name}
+          />
+        )}
       </div>
     </PopoverTrigger>
   );

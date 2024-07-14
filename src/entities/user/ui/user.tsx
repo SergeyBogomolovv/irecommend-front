@@ -5,7 +5,7 @@ import { Maybe } from 'graphql/jsutils/Maybe';
 interface Props {
   name: string | undefined;
   avatar: Maybe<string>;
-  description: string;
+  description?: string;
   loading?: boolean;
   asButton?: boolean;
 }

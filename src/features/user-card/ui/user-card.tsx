@@ -16,10 +16,11 @@ import { FaUser } from 'react-icons/fa';
 
 interface Props {
   id: string;
-  description: string;
+  description?: string;
+  children?: React.ReactNode;
 }
 
-export const UserCard = ({ id, description }: Props) => {
+export const UserCard = ({ id, description, children }: Props) => {
   const { user, loading } = useGetUser(id);
   return (
     <Popover placement="bottom" backdrop="opaque">
@@ -28,6 +29,7 @@ export const UserCard = ({ id, description }: Props) => {
         description={description}
         avatarUrl={user?.profile.logo}
         loading={loading}
+        customChildren={children}
       />
       <PopoverContent className="p-0">
         <Card
