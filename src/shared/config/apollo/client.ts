@@ -19,7 +19,7 @@ export const uploadLink = createUploadLink({
   headers: {
     'Apollo-Require-Preflight': 'true',
   },
-  uri: `${process.env.NEXT_PUBLIC_SERVER_URL}/graphql`,
+  uri: `/graphql`,
   credentials: 'include',
 });
 
