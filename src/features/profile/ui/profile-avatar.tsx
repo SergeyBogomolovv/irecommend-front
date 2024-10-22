@@ -25,7 +25,7 @@ export const ProfileAvatar = ({ name, src }: Props) => {
           />
           <input
             disabled={loading}
-            accept=".png,.jpeg,.jpg,.webp"
+            accept="image/*"
             type="file"
             ref={inputRef}
             onChange={handleUploadFile}

@@ -14,7 +14,7 @@ export const AddImageButton = ({ recommendationId }: Props) => {
       <input
         multiple
         disabled={loading}
-        accept=".png,.jpeg,.jpg,.webp"
+        accept="image/*"
         type="file"
         ref={inputRef}
         onChange={handleUploadFile}

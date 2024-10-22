@@ -75,7 +75,7 @@ export function NewRecommendation() {
                             <FormControl>
                               <input
                                 type="file"
-                                accept=".png,.jpeg,.jpg,.webp,.heic"
+                                accept="image/*"
                                 multiple
                                 {...fileInputProps}
                                 hidden
